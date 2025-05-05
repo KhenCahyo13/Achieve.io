@@ -5,14 +5,14 @@ namespace Modules\Master\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MasterController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('master::index');
+        return view('master::pages.department.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class MasterController extends Controller
      */
     public function create()
     {
-        return view('master::create');
+        // 
     }
 
     /**
@@ -33,7 +33,7 @@ class MasterController extends Controller
      */
     public function show($id)
     {
-        return view('master::show');
+        // 
     }
 
     /**
@@ -41,7 +41,7 @@ class MasterController extends Controller
      */
     public function edit($id)
     {
-        return view('master::edit');
+        // 
     }
 
     /**

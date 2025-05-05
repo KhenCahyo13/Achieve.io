@@ -5,11 +5,11 @@
         class="flex items-center gap-2 pt-8 sidebar-header pb-7">
         <a href="index.html">
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-                <img class="dark:hidden" src="./images/logo/logo.svg" alt="Logo" />
-                <img class="hidden dark:block" src="./images/logo/logo-dark.svg" alt="Logo" />
+                <img class="dark:hidden" src="{{ asset('images/logo/logo.svg') }}" alt="Logo" />
+                <img class="hidden dark:block" src="{{ asset('images/logo/logo-dark.svg') }}" alt="Logo" />
             </span>
 
-            <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="./images/logo/logo-icon.svg"
+            <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{ asset('images/logo/logo-icon.svg') }}"
                 alt="Logo" />
         </a>
     </div>
@@ -41,9 +41,9 @@
                             class="menu-item group"
                             :class="(selected === 'Department') ? 'menu-item-active' :
                             'menu-item-inactive'">
-                            <i class="fa-solid fa-school"></i>
+                            <x-ri-school-line class="h-5 w-5" />
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
-                                Department
+                                Jurusan
                             </span>
                         </a>
                     </li>
