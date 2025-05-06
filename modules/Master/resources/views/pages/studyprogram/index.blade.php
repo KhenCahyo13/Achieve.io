@@ -8,10 +8,12 @@
         isShowNotification: false,
         notificationMessage: '',
     }" class="relative"
-        x-on:department-deleted.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
-        x-on:department-created.window="isShowNotification = true; isCreateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
-        x-on:department-updated.window="isShowNotification = true; isUpdateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
-        x-on:department-show-update-modal.window="isUpdateModalOpen = true;">
+        x-on:studyprogram-deleted.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
+        x-on:studyprogram-created.window="isShowNotification = true; isCreateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
+        x-on:studyprogram-updated.window="isShowNotification = true; isUpdateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
+        x-on:studyprogram-show-update-modal.window="isUpdateModalOpen = true;">
         <livewire:master::study-program.table />
+        <livewire:master::study-program.create />
+        <livewire:core::components.notification type="success" />
     </div>
 @endsection

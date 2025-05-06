@@ -16,9 +16,7 @@ class Table extends DataTable
             $this->sorts
         );
 
-        return view('master::livewire.department.table', [
-            'departments' => $departments
-        ]);
+        return view('master::livewire.department.table', compact('departments'));
     }
 
     public function delete(string $id)

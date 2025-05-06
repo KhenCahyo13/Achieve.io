@@ -121,7 +121,7 @@
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
                                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            {{ $department->created_at->locale('id')->translatedFormat('d F Y H:i') }}
+                                            {{ $studyprogram->created_at->locale('id')->translatedFormat('d F Y H:i') }}
                                         </p>
                                     </div>
                                 </td>
@@ -135,15 +135,15 @@
                                                     d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                             </svg>
                                         </button>
-                                        <div x-show="openDropDown" x-on:department-deleted.window="openDropDown = false"
+                                        <div x-show="openDropDown" x-on:studyprogram-deleted.window="openDropDown = false"
                                             @click.outside="openDropDown = false"
                                             class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
                                             style="display: none;">
-                                            <button wire:click="showUpdateModal('{{ $department->id }}')"
+                                            <button wire:click="showUpdateModal('{{ $studyprogram->id }}')"
                                                 class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
                                                 Update
                                             </button>
-                                            <button wire:click="delete('{{ $department->id }}')"
+                                            <button wire:click="delete('{{ $studyprogram->id }}')"
                                                 class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
                                                 Delete
                                             </button>

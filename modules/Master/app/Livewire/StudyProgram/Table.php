@@ -33,8 +33,9 @@ class Table extends DataTable
         $this->dispatch('studyprogram-show-update-modal', id: $id);
     }
 
-    #[On('department-updated')]
-    public function onStudyProgramUpdated()
+    #[On('studyprogram-created')]
+    #[On('studyprogram-updated')]
+    public function onAction()
     {
         $this->resetPage();
     }
