@@ -14,6 +14,7 @@
         x-on:studyprogram-show-update-modal.window="isUpdateModalOpen = true;">
         <livewire:master::study-program.table />
         <livewire:master::study-program.create />
+        <livewire:master::study-program.update />
         <livewire:core::components.notification type="success" />
     </div>
 @endsection

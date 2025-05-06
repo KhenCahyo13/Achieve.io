@@ -32,7 +32,8 @@ class Table extends DataTable
     }
 
     #[On('department-updated')]
-    public function onDepartmentUpdated()
+    #[On('department-created')]
+    public function onAction()
     {
         $this->resetPage();
     }
