@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignUuid('period_id')->nullable()->references('id')->on('periods')->onDelete('set null')->onUpdate('set null');
             $table->string('title', 150);
             $table->string('description');
-            $table->enum('verification_status', ['Proses', 'Disetujui', 'Ditolak']);
+            $table->enum('verification_status', ['On Process', 'Approved', 'Rejected'])->default('On Process');
             $table->timestamps();
         });
     }
