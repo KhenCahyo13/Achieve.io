@@ -2,6 +2,7 @@
 
 namespace Modules\Master\Livewire\Department;
 
+use Livewire\Attributes\On;
 use Modules\Core\Abstracts\DataTable;
 use Modules\Master\Models\Department;
 
@@ -20,9 +21,21 @@ class Table extends DataTable
         ]);
     }
 
-    public function delete(string $id) {
+    public function delete(string $id)
+    {
         Department::destroy($id);
 
         $this->dispatch('department-deleted', message: 'Jurusan berhasil dihapus!');
+    }
+
+    public function showUpdateModal(string $id)
+    {
+        $this->dispatch('department-show-update-modal', id: $id);
+    }
+
+    #[On('department-updated')]
+    public function onDepartmentUpdated()
+    {
+        $this->resetPage();
     }
 }
