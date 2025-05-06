@@ -1,6 +1,6 @@
 @extends('core::layouts.app')
 
-@section('title', 'Jurusan')
+@section('title', 'Program Studi')
 @section('content')
     <div x-data="{
         isCreateModalOpen: false,
@@ -12,10 +12,6 @@
         x-on:department-created.window="isShowNotification = true; isCreateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
         x-on:department-updated.window="isShowNotification = true; isUpdateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
         x-on:department-show-update-modal.window="isUpdateModalOpen = true;">
-        <livewire:core::components.breadcrumb pageName="Jurusan" />
-        <livewire:master::department.table />
-        <livewire:master::department.create />
-        <livewire:master::department.update />
-        <livewire:core::components.notification type="success" />
+        <livewire:master::study-program.table />
     </div>
 @endsection

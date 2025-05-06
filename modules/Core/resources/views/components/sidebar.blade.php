@@ -2,14 +2,14 @@
     class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 transition-all duration-300 ease-in-out dark:border-gray-800 dark:bg-black lg:static lg:translate-x-0">
     <!-- SIDEBAR HEADER -->
     <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
-        class="flex items-center gap-2 pt-8 sidebar-header pb-7">
+        class="flex items-center gap-2 pt-4 sidebar-header pb-7">
         <a href="index.html">
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-                <img class="w-44 dark:hidden" src="{{ asset('images/logo/logo-light.png') }}" alt="Logo" />
-                <img class="w-44 hidden dark:block" src="{{ asset('images/logo/logo-dark.png') }}" alt="Logo" />
+                <img class="w-40 dark:hidden" src="{{ asset('images/logo/logo-light.png') }}" alt="Logo" />
+                <img class="w-40 hidden dark:block" src="{{ asset('images/logo/logo-dark.png') }}" alt="Logo" />
             </span>
 
-            <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'"
+            <img class="w-10 logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'"
                 src="{{ asset('images/logo/logo-icon.png') }}" alt="Logo" />
         </a>
     </div>
@@ -34,8 +34,8 @@
                     </svg>
                 </h3>
 
-                <ul class="flex flex-col gap-4 mb-6">
-                    <!-- Menu Item Calendar -->
+                <ul class="flex flex-col gap-3 mb-6">
+                    <!-- Department -->
                     <li>
                         <a href="{{ route('master.department.index') }}"
                             @click="selected = (selected === 'Department' ? '':'Department')" class="menu-item group"
@@ -51,7 +51,22 @@
                             </span>
                         </a>
                     </li>
-                    <!-- Menu Item Calendar -->
+                    <!-- Study Program -->
+                    <li>
+                        <a href="{{ route('master.studyprogram.index') }}"
+                            @click="selected = (selected === 'StudyProgram' ? '':'StudyProgram')" class="menu-item group"
+                            :class="(selected === 'StudyProgram') ? 'menu-item-active' :
+                            'menu-item-inactive'">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                            </svg>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
+                                Program Studi
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
