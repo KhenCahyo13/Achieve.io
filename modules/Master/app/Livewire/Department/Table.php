@@ -2,18 +2,11 @@
 
 namespace Modules\Master\Livewire\Department;
 
-use Livewire\Component;
-use Livewire\WithPagination;
+use Modules\Core\Abstracts\DataTable;
 use Modules\Master\Models\Department;
 
-class Table extends Component
+class Table extends DataTable
 {
-    use WithPagination;
-
-    public string $search = '';
-    public int $perPage = 10;
-    public array $sorts = [];
-
     public function render()
     {
         $departments = Department::getAll(
@@ -27,12 +20,9 @@ class Table extends Component
         ]);
     }
 
-    public function sortBy(string $field)
-    {
-        if (isset($this->sorts[$field])) {
-            $this->sorts[$field] = $this->sorts[$field] === 'asc' ? 'desc' : 'asc';
-        } else {
-            $this->sorts[$field] = 'asc';
-        }
+    public function delete(string $id) {
+        Department::destroy($id);
+
+        $this->dispatch('department-deleted', message: 'Jurusan berhasil dihapus!');
     }
 }

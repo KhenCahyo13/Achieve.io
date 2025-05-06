@@ -28,8 +28,7 @@
             <input type="text" placeholder="Cari jurusan..." class="text-input"
                 wire:model.live.debounce.300ms="search" />
             {{-- Create Data Button --}}
-            <button
-                class="btn-icon-primary" @click="isCreateModalOpen = true">
+            <button class="btn-icon-primary" @click="isCreateModalOpen = true">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -58,9 +57,12 @@
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                         Nama
                                     </p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-500 dark:text-gray-400">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                    </svg>                                      
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="size-5 text-gray-500 dark:text-gray-400">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
                                 </div>
                             </th>
                             <th wire:click="sortBy('created_at')" class="cursor-pointer px-5 py-3 sm:px-6">
@@ -68,9 +70,12 @@
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                         Dibuat pada
                                     </p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-500 dark:text-gray-400">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                    </svg>                                      
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="size-5 text-gray-500 dark:text-gray-400">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
                                 </div>
                             </th>
                         </tr>
@@ -98,6 +103,27 @@
                                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">
                                             {{ $department->created_at->locale('id')->translatedFormat('d F Y H:i') }}
                                         </p>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <div x-data="{ openDropDown: false }" class="relative">
+                                        <button @click="openDropDown = !openDropDown"
+                                            class="text-gray-500 dark:text-gray-400">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                            </svg>
+                                        </button>
+                                        <div x-show="openDropDown" x-on:department-deleted.window="openDropDown = false"
+                                            @click.outside="openDropDown = false"
+                                            class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
+                                            style="display: none;">
+                                            <button wire:click="delete('{{ $department->id }}')"
+                                                class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
+                                                Delete
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
