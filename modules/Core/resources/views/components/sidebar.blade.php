@@ -5,12 +5,12 @@
         class="flex items-center gap-2 pt-8 sidebar-header pb-7">
         <a href="index.html">
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-                <img class="dark:hidden" src="{{ asset('images/logo/logo.svg') }}" alt="Logo" />
-                <img class="hidden dark:block" src="{{ asset('images/logo/logo-dark.svg') }}" alt="Logo" />
+                <img class="w-44 dark:hidden" src="{{ asset('images/logo/logo-light.png') }}" alt="Logo" />
+                <img class="w-44 hidden dark:block" src="{{ asset('images/logo/logo-dark.png') }}" alt="Logo" />
             </span>
 
             <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'"
-                src="{{ asset('images/logo/logo-icon.svg') }}" alt="Logo" />
+                src="{{ asset('images/logo/logo-icon.png') }}" alt="Logo" />
         </a>
     </div>
     <!-- SIDEBAR HEADER -->

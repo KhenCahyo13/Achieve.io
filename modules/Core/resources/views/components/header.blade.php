@@ -33,8 +33,8 @@
             <!-- Hamburger Toggle BTN -->
 
             <a href="index.html" class="lg:hidden">
-                <img class="dark:hidden" src="{{ asset('images/logo/logo.svg') }}" alt="Logo" />
-                <img class="hidden dark:block" src="{{ asset('images/logo/logo-dark.svg') }}" alt="Logo" />
+                <img class="w-36 dark:hidden" src="{{ asset('images/logo/logo-light.png') }}" alt="Logo" />
+                <img class="w-36 hidden dark:block" src="{{ asset('images/logo/logo-dark.png') }}" alt="Logo" />
             </a>
 
             <!-- Application nav menu button -->
