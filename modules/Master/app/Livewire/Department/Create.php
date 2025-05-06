@@ -22,6 +22,7 @@ class Create extends Component
         ]);
 
         $this->form->reset();
-        return $this->redirect(route('master.department.index'));
+
+        $this->dispatch('department-created', message: 'Jurusan berhasil dibuat!');
     }
 }
