@@ -23,6 +23,6 @@ class Create extends Component
 
         $this->form->reset();
 
-        $this->dispatch('department-created', message: 'Jurusan berhasil dibuat!');
+        $this->dispatch('department-created', message: 'Department created successfully!');
     }
 }

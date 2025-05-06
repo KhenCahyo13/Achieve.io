@@ -19,7 +19,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
             </svg>
-            <span class="hidden sm:inline">Sebelumnya</span>
+            <span class="hidden sm:inline">Previous</span>
         </button>
 
         <span class="block text-sm font-medium text-gray-700 sm:hidden dark:text-gray-400">
@@ -65,7 +65,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
             x-on:click="{{ $scrollIntoViewJsSnippet }}"
             dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
             class="text-theme-sm shadow-theme-xs flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-2 py-2 font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-800 sm:px-3.5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
-            <span class="hidden sm:inline">Selanjutnya</span>
+            <span class="hidden sm:inline">Next</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
             </svg>

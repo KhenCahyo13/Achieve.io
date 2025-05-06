@@ -3,7 +3,7 @@
         class="flex flex-col gap-y-4 px-5 py-4 sm:px-6 sm:py-5 md:flex-row md:justify-between md:items-center md:gap-y-0">
         {{-- Rows per Page --}}
         <div class="flex items-center gap-x-4 lg:w-1/2">
-            <span class="text-gray-800 dark:text-white/90">Menampilkan</span>
+            <span class="text-gray-800 dark:text-white/90">Showing</span>
             {{-- Rows per Page --}}
             <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
                 <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
@@ -20,12 +20,12 @@
                     </svg>
                 </span>
             </div>
-            <span class="text-gray-800 dark:text-white/90">data</span>
+            <span class="text-gray-800 dark:text-white/90">entires</span>
         </div>
         {{-- Table Filter --}}
         <div class="flex flex-col gap-y-2 md:flex-row md:gap-y-0 md:gap-x-2 lg:w-1/2">
             {{-- Search --}}
-            <input type="text" placeholder="Cari program studi..." class="text-input"
+            <input type="text" placeholder="Search study program..." class="text-input"
                 wire:model.live.debounce.300ms="search" />
             {{-- Create Data Button --}}
             <button class="btn-icon-primary" @click="isCreateModalOpen = true">
@@ -33,7 +33,7 @@
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
-                <span class="text-nowrap">Tambah Data</span>
+                <span class="text-nowrap">Add New</span>
             </button>
         </div>
     </div>
@@ -55,7 +55,7 @@
                             <th wire:click="sortBy('name')" class="cursor-pointer px-5 py-3 sm:px-6">
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Nama
+                                        Name
                                     </p>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor"
@@ -68,7 +68,7 @@
                             <th wire:click="sortBy('department_id')" class="cursor-pointer px-5 py-3 sm:px-6">
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Jurusan
+                                        Department
                                     </p>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor"
@@ -81,7 +81,7 @@
                             <th wire:click="sortBy('created_at')" class="cursor-pointer px-5 py-3 sm:px-6">
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Dibuat pada
+                                        Created at
                                     </p>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor"

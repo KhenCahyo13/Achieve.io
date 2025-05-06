@@ -23,7 +23,7 @@ class Table extends DataTable
     {
         Department::destroy($id);
 
-        $this->dispatch('department-deleted', message: 'Jurusan berhasil dihapus!');
+        $this->dispatch('department-deleted', message: 'Department deleted successfully!');
     }
 
     public function showUpdateModal(string $id)

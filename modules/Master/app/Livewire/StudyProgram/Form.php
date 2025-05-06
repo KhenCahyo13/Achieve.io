@@ -7,11 +7,11 @@ use Livewire\Attributes\Validate;
 
 class StudyProgramForm extends Form
 {
-    #[Validate('required', message: 'Nama wajib diisi')]
-    #[Validate('max:50', message: 'Maksimal 50 karakter')]
+    #[Validate('required', message: 'Name is required')]
+    #[Validate('max:50', message: 'Name must be less than 50 characters')]
     public string $name = '';
     
-    #[Validate('required', message: 'Department wajib diisi')]
-    #[Validate('max:36', message: 'Maksimal 36 karakter')]
+    #[Validate('required', message: 'Department is required')]
+    #[Validate('max:36', message: 'Department must be less than 36 characters')]
     public string $departmentId = '';
 }

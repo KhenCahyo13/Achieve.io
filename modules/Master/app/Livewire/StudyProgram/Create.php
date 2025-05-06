@@ -27,6 +27,6 @@ class Create extends Component
 
         $this->form->reset();
 
-        $this->dispatch('studyprogram-created', message: 'Program studi berhasil dibuat!');
+        $this->dispatch('studyprogram-created', message: 'Study program created successfully!');
     }
 }

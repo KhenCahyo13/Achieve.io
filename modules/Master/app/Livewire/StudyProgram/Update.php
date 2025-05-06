@@ -32,7 +32,7 @@ class Update extends Component
 
         $this->form->reset();
 
-        $this->dispatch('studyprogram-updated', message: 'Program studi berhasil diupdate!');
+        $this->dispatch('studyprogram-updated', message: 'Study program updated successfully!');
     }
 
     #[On('studyprogram-show-update-modal')]

@@ -25,7 +25,7 @@ class Table extends DataTable
     {
         StudyProgram::destroy($id);
 
-        $this->dispatch('studyprogram-deleted', message: 'Program studi berhasil dihapus!');
+        $this->dispatch('studyprogram-deleted', message: 'Study program deleted successfully!');
     }
 
     public function showUpdateModal(string $id)

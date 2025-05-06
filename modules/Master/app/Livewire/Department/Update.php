@@ -28,7 +28,7 @@ class Update extends Component
 
         $this->form->reset();
 
-        $this->dispatch('department-updated', message: 'Jurusan berhasil diupdate!');
+        $this->dispatch('department-updated', message: 'Department updated successfully!');
     }
 
     #[On('department-show-update-modal')]

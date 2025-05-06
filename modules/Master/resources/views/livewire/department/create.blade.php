@@ -21,13 +21,13 @@
 
         <form wire:submit="save">
             <h4 class="mb-6 text-lg font-medium text-gray-800 dark:text-white/90">
-                Tambah Data Jurusan
+                Add New Department
             </h4>
             {{-- Form --}}
             <div class="grid grid-cols-1 gap-x-6 gap-y-5">
                 <div class="flex flex-col gap-y-2">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">
-                        Nama
+                        Name
                     </label>
                     <input type="text" placeholder="Nama Jurusan" class="text-input" wire:model="form.name">
                     @error('form.name')
@@ -41,11 +41,11 @@
             <div class="flex items-center justify-end w-full gap-3 mt-6">
                 <button @click="isCreateModalOpen = false" type="button"
                     class="flex w-full justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs transition-colors hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 sm:w-auto">
-                    Tutup
+                    Close
                 </button>
                 <button type="submit"
                     class="flex justify-center w-full px-4 py-3 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 sm:w-auto">
-                    Simpan
+                    Save
                 </button>
             </div>
         </form>
