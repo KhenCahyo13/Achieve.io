@@ -7,7 +7,7 @@ use Modules\Master\Models\Department;
 
 class Create extends Component
 {
-    public DepartmentForm $form;
+    public Form $form;
 
     public function render()
     {

@@ -18,6 +18,7 @@
     "autoload": {
         "psr-4": {
             "Modules\\Master\\": "app/",
+            "Modules\\Core\\Livewire\\": "app/Livewire/",
             "Modules\\Master\\Database\\Factories\\": "database/factories/",
             "Modules\\Master\\Database\\Seeders\\": "database/seeders/"
         }

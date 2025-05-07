@@ -9,7 +9,7 @@ use Modules\Master\Models\StudyProgram;
 
 class Update extends Component
 {
-    public StudyProgramForm $form;
+    public Form $form;
 
     public $id = '';
 

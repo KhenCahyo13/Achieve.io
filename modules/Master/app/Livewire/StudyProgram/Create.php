@@ -8,7 +8,7 @@ use Modules\Master\Models\StudyProgram;
 
 class Create extends Component
 {
-    public StudyProgramForm $form;
+    public Form $form;
 
     public function render()
     {

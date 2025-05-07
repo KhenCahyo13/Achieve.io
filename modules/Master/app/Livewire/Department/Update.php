@@ -8,7 +8,7 @@ use Modules\Master\Models\Department;
 
 class Update extends Component
 {
-    public DepartmentForm $form;
+    public Form $form;
 
     public string $id = '';
 
