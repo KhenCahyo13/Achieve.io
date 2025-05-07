@@ -2,12 +2,19 @@
 
 namespace Modules\Achievement\Livewire\Competition;
 
+use Modules\Achievement\Models\Competition;
 use Modules\Core\Abstracts\DataTable;
 
 class Table extends DataTable
 {
     public function render()
     {
-        return view('achievement::livewire.competition.table');
+        $competitions = Competition::getAll(
+            $this->perPage ?? 10,
+            $this->search,
+            $this->sorts
+        );
+
+        return view('achievement::livewire.competition.table', compact('competitions'));
     }
 }
