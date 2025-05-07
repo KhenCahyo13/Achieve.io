@@ -15,6 +15,13 @@
 
 @section('title', 'Competition')
 @section('content')
-    <livewire:core::components.breadcrumb pageName="Create" :urls="$urls" />
-    <livewire:achievement::competition.create />
+    <div class="relative" x-data="{
+        isShowNotification: false,
+        notificationMessage: '',
+    }"
+        x-on:competition-created.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);">
+        <livewire:core::components.breadcrumb pageName="Create" :urls="$urls" />
+        <livewire:achievement::competition.create />
+        <livewire:core::components.notification type="success" />
+    </div>
 @endsection
