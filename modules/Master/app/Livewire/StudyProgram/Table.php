@@ -17,7 +17,7 @@ class Table extends DataTable
         );
 
         return view('master::livewire.studyprogram.table', [
-            'studyprograms' => $departments
+            'studyprograms' => $departments,
         ]);
     }
 

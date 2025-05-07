@@ -17,12 +17,13 @@ class Create extends Component
         return view('master::livewire.studyprogram.create', compact('departments'));
     }
 
-    public function save() {
+    public function save()
+    {
         $this->validate();
 
         StudyProgram::create([
             'department_id' => $this->form->departmentId,
-            'name' => $this->form->name
+            'name' => $this->form->name,
         ]);
 
         $this->form->reset();

@@ -7,9 +7,11 @@ use Livewire\Component;
 class Breadcrumb extends Component
 {
     public string $pageName;
+
     public array $urls;
 
-    public function mount(string $pageName, array $urls) {
+    public function mount(string $pageName, array $urls)
+    {
         $this->pageName = $pageName;
         $this->urls = $urls;
     }

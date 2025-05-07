@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->references('id')->on('users')->onDelete('set null')->onUpdate('set null');
             $table->string('name', 150);
-            $table->string('description');
+            $table->text('description');
             $table->enum('level', ['Local', 'National', 'International']);
             $table->enum('category', ['Individual', 'Team']);
             $table->date('start_reg_date');

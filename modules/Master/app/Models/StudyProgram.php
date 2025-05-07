@@ -3,8 +3,8 @@
 namespace Modules\Master\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 // use Modules\Master\Database\Factories\StudyProgramFactory;
@@ -17,14 +17,15 @@ class StudyProgram extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'study_programs';
+
     protected $fillable = [
         'department_id',
-        'name'
+        'name',
     ];
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('department')->where('name', 'like', '%' . $search . '%');
+        $query = self::with('department')->where('name', 'like', '%'.$search.'%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);

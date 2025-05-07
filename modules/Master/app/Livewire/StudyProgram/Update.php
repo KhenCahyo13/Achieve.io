@@ -10,7 +10,9 @@ use Modules\Master\Models\StudyProgram;
 class Update extends Component
 {
     public StudyProgramForm $form;
+
     public $id = '';
+
     public function render()
     {
         $departments = Department::all();
@@ -18,7 +20,8 @@ class Update extends Component
         return view('master::livewire.studyprogram.update', compact('departments'));
     }
 
-    public function save() {
+    public function save()
+    {
         $this->validate();
 
         $studyprogram = StudyProgram::find($this->id);
@@ -26,7 +29,7 @@ class Update extends Component
         if ($studyprogram) {
             $studyprogram->update([
                 'name' => $this->form->name,
-                'department_id' => $this->form->departmentId
+                'department_id' => $this->form->departmentId,
             ]);
         }
 
@@ -36,11 +39,12 @@ class Update extends Component
     }
 
     #[On('studyprogram-show-update-modal')]
-    public function setupForm($id) {
+    public function setupForm($id)
+    {
         $studyprogram = StudyProgram::find($id);
-        
+
         $this->id = $id;
         $this->form->name = $studyprogram->name;
         $this->form->departmentId = $studyprogram->department->id;
-    } 
+    }
 }

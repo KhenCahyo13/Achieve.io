@@ -14,11 +14,12 @@ class Create extends Component
         return view('master::livewire.department.create');
     }
 
-    public function save() {
+    public function save()
+    {
         $this->validate();
 
         Department::create([
-            'name' => $this->form->name
+            'name' => $this->form->name,
         ]);
 
         $this->form->reset();

@@ -2,8 +2,8 @@
 
 namespace Modules\Master\Livewire\Department;
 
+use Livewire\Attributes\Validate;
 use Livewire\Form;
-use Livewire\Attributes\Validate; 
 
 class DepartmentForm extends Form
 {

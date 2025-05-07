@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('competition_participants', function (Blueprint $table) {            
+        Schema::create('competition_participants', function (Blueprint $table) {
             $table->foreignUuid('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignUuid('competition_id')->references('id')->on('competitions')->onDelete('cascade')->onUpdate('cascade');
         });

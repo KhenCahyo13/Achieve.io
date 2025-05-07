@@ -3,8 +3,9 @@
 namespace Modules\Achievement\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 // use Modules\Achievement\Database\Factories\CompetitionFactory;
 
 class Competition extends Model
@@ -15,6 +16,7 @@ class Competition extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'competitions';
+
     protected $fillable = [
         'user_id',
         'name',

@@ -20,7 +20,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        // 
+        //
     }
 
     /**
@@ -33,7 +33,7 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        // 
+        //
     }
 
     /**
@@ -41,7 +41,7 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        // 
+        //
     }
 
     /**

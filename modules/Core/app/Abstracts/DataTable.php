@@ -10,7 +10,9 @@ class DataTable extends Component
     use WithPagination;
 
     public string $search = '';
+
     public int $perPage = 10;
+
     public array $sorts = [];
 
     public function sortBy(string $field)

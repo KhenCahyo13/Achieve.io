@@ -9,20 +9,23 @@ use Modules\Master\Models\Department;
 class Update extends Component
 {
     public DepartmentForm $form;
+
     public string $id = '';
+
     public function render()
     {
         return view('master::livewire.department.update');
     }
 
-    public function save() {
+    public function save()
+    {
         $this->validate();
 
         $department = Department::find($this->id);
 
         if ($department) {
             $department->update([
-                'name' => $this->form->name
+                'name' => $this->form->name,
             ]);
         }
 
@@ -32,10 +35,11 @@ class Update extends Component
     }
 
     #[On('department-show-update-modal')]
-    public function setupForm($id) {
+    public function setupForm($id)
+    {
         $department = Department::find($id);
-        
+
         $this->id = $id;
         $this->form->name = $department->name;
-    }    
+    }
 }
