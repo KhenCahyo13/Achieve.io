@@ -29,7 +29,7 @@
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">
                         Name
                     </label>
-                    <input type="text" placeholder="Nama Jurusan" class="text-input" wire:model="form.name">
+                    <input type="text" placeholder="Study program name" class="text-input" wire:model="form.name">
                     @error('form.name')
                         <span class="text-theme-xs text-error-500">
                             {{ $message }}
