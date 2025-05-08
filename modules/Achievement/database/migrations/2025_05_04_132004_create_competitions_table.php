@@ -16,10 +16,6 @@ return new class extends Migration
             $table->string('name', 150);
             $table->enum('level', ['Local', 'National', 'International']);
             $table->enum('category', ['Individual', 'Team']);
-            $table->date('start_reg_date');
-            $table->date('end_reg_date');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->enum('verification_status', ['On Process', 'Approved', 'Rejected'])->default('On Process');
             $table->foreignUuid('created_by')->nullable()->references('id')->on('users')->onDelete('set null')->onUpdate('set null');
             $table->timestamps();

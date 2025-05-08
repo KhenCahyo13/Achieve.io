@@ -15,12 +15,6 @@
                         {{ $competition->name }}
                     </h4>
 
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                        Registration Date:
-                        {{ \Carbon\Carbon::parse($competition->start_reg_date)->translatedFormat('d F Y') }} -
-                        {{ \Carbon\Carbon::parse($competition->end_reg_date)->translatedFormat('d F Y') }}
-                    </p>
-
                     <div class="mt-4 flex flex-wrap gap-x-1">
                         <livewire:core::components.badge type="light" text="{{ $competition->level }}" />
                         <livewire:core::components.badge type="light"

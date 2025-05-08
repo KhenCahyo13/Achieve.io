@@ -22,20 +22,6 @@ class Form extends LivewireForm
     #[Validate('in:Team,Individual', message: 'Category must be one of the predefined values')]
     public string $category = '';
 
-    #[Validate('required', message: 'Start Registration Date is required')]
-    public string $start_reg_date = '';
-
-    #[Validate('required', message: 'End Registration Date is required')]
-    #[Validate('after:start_reg_date', message: 'End Registration Date must be after Start Registration Date')]
-    public string $end_reg_date = '';
-
-    #[Validate('required', message: 'Start Competition Date is required')]
-    public string $start_date = '';
-
-    #[Validate('required', message: 'End Competition Date is required')]
-    #[Validate('after:start_date', message: 'End Competition Date must be after Start Competition Date')]
-    public string $end_date = '';
-
     #[Validate('required', message: 'Poster is required')]
     #[Validate('image', message: 'Poster must be an image file')]
     public $poster;
