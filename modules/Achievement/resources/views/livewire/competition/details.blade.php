@@ -24,7 +24,7 @@
                 </div>
                 <div class="flex flex-col">
                     {!! $competition->description !!}
-                    <button class="btn-primary w-fit mt-4">Register Now</button>
+                    <button class="btn-primary w-fit mt-4 lg:mt-8">Register Now</button>
                 </div>
             </div>
         </div>

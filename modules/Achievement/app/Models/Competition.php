@@ -46,12 +46,16 @@ class Competition extends Model implements HasMedia
         return $query->paginate($perPage);
     }
 
-    public static function getAvailable(int $perPage, string $search, array $sorts)
+    public static function getAvailable(int $perPage, string $search, array $sorts, array $filters)
     {
         $query = self::where('name', 'like', '%'.$search.'%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);
+        }
+
+        foreach ($filters as $field => $value) {
+            $query->where($field, $value);
         }
 
         return $query->paginate($perPage);

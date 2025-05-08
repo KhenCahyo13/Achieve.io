@@ -13,7 +13,8 @@ class Available extends DataTable
         $competitions = Competition::getAvailable(
             $this->perPage ?? 10,
             $this->search,
-            $this->sorts
+            $this->sorts,
+            $this->filters
         );
 
         return view('achievement::livewire.competition.available', compact('competitions'));

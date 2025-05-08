@@ -15,12 +15,23 @@ class DataTable extends Component
 
     public array $sorts = [];
 
+    public array $filters = [];
+
     public function sortBy(string $field)
     {
         if (isset($this->sorts[$field])) {
             $this->sorts[$field] = $this->sorts[$field] === 'asc' ? 'desc' : 'asc';
         } else {
             $this->sorts[$field] = 'asc';
+        }
+    }
+
+    public function setFilters(string $field, $value)
+    {
+        if (empty($value)) {
+            unset($this->filters[$field]);
+        } else {
+            $this->filters[$field] = $value;
         }
     }
 }

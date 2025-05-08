@@ -18,7 +18,7 @@
         <livewire:achievement::competition.details />
         {{-- Page Content by Tab --}}
         <div class="card" x-data="{
-            activeTab: 'available'
+            activeTab: 'all'
         }">
             <div class="px-5 py-4 sm:px-6 sm:py-5">
                 <nav
