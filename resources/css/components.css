@@ -33,6 +33,10 @@
         @apply inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600;
     }
 
+    .btn-icon-primary-transparent {
+        @apply inline-flex items-center gap-1.5 text-sm text-brand-500 hover:text-brand-600;
+    }
+
     .btn-primary {
         @apply inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600;
     }

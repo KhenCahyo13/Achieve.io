@@ -50,6 +50,17 @@ class Competition extends Model implements HasMedia
         return $query->paginate($perPage);
     }
 
+    public static function getAvailable(int $perPage, string $search, array $sorts)
+    {
+        $query = self::where('name', 'like', '%'.$search.'%');
+
+        foreach ($sorts as $field => $direction) {
+            $query->orderBy($field, $direction);
+        }
+
+        return $query->paginate($perPage);
+    }
+
     public function createdBy(): BelongsTo {
         return $this->belongsTo(User::class, 'created_by');
     }
