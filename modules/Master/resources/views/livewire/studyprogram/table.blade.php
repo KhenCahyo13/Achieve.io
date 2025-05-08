@@ -41,7 +41,7 @@
     <div class="p-5 border-t border-gray-100 dark:border-gray-800 sm:p-6">
         <div
             class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="max-w-full overflow-x-auto">
+            <div class="custom-scrollbar max-w-full overflow-x-auto">
                 <table class="min-w-full">
                     <thead>
                         <tr class="border-b border-gray-100 dark:border-gray-800">

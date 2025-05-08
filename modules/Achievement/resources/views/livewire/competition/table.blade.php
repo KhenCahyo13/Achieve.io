@@ -41,7 +41,7 @@
     <div class="border-t border-gray-100 dark:border-gray-800">
         <div
             class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="max-w-full overflow-x-auto">
+            <div class="custom-scrollbar max-w-full overflow-x-auto">
                 <table class="min-w-full">
                     <thead>
                         <tr class="border-b border-gray-100 dark:border-gray-800">
@@ -137,7 +137,7 @@
                                             </svg>
                                         </button>
                                         <div x-show="openDropDown"
-                                            x-on:department-deleted.window="openDropDown = false"
+                                            x-on:competition-deleted.window="openDropDown = false"
                                             @click.outside="openDropDown = false"
                                             class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
                                             style="display: none;">
