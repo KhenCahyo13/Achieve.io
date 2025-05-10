@@ -77,7 +77,7 @@
                 <label class="form-label">
                     Description <span class="text-red-500">*</span>
                 </label>
-                <x-trix-input id="description" name="description" />
+                <x-trix-input id="description" name="description" value="{!! $form->description !!}" />
                 @error('form.description')
                     <span class="text-theme-xs text-error-500">
                         {{ $message }}
@@ -89,15 +89,19 @@
                 <label class="form-label">
                     Poster <span class="text-red-500">*</span>
                 </label>
-                <div
-                    @class([
-                        'relative overflow-hidden p-8 flex w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white/30',
-                        'text-white/80' => $form->poster
-                    ])>
+                <div @class([
+                    'relative overflow-hidden p-8 flex w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white/30',
+                    'text-white/80' => $form->poster,
+                ])>
                     @if ($form->poster)
                         <div class="absolute z-30">
                             <div class="absolute flex h-full w-full items-center justify-center bg-black/60"></div>
                             <img src="{{ $form->poster->temporaryUrl() }}" alt="Poster">
+                        </div>
+                    @else
+                        <div class="absolute z-30">
+                            <div class="absolute flex h-full w-full items-center justify-center bg-black/60"></div>
+                            <img src="{{ $oldPoster }}" alt="Poster">
                         </div>
                     @endif
                     <div class="flex flex-col items-center gap-y-2 z-40">
@@ -106,8 +110,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
                         </svg>
-                        <label for="posterFile"
-                            class="font-medium cursor-pointer hover:underline">
+                        <label for="posterFile" class="font-medium cursor-pointer hover:underline">
                             <input id="posterFile" type="file" class="sr-only" aria-describedby="validFileFormats"
                                 wire:model="form.poster" />
                             Upload or change file here

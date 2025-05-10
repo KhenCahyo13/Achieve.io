@@ -23,6 +23,5 @@ class Form extends LivewireForm
     public string $category = '';
 
     #[Validate('required', message: 'Poster is required')]
-    #[Validate('image', message: 'Poster must be an image file')]
     public $poster;
 }

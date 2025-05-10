@@ -12,6 +12,7 @@ Route::prefix('achievement')->group(function () {
         Route::controller(CompetitionController::class)->group(function () {
             Route::get('', 'index')->name('achievement.competition.index');
             Route::get('create', 'create')->name('achievement.competition.create');
+            Route::get('edit/{id}', 'edit')->name('achievement.competition.edit');
         });
     });
 });

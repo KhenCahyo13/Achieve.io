@@ -41,7 +41,7 @@ class CompetitionController extends Controller
      */
     public function edit($id)
     {
-        return view('achievement::edit');
+        return view('achievement::pages.competition.edit', compact('id'));
     }
 
     /**
