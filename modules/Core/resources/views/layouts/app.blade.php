@@ -9,7 +9,6 @@
     <title>
         Achieve.io - @yield('title')
     </title>
-    <script src="https://kit.fontawesome.com/255fd51aa4.js" crossorigin="anonymous"></script>
     @vite([
         'resources/css/app.css',
         'resources/js/app.js'
