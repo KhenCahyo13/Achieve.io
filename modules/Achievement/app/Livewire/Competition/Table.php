@@ -17,4 +17,12 @@ class Table extends DataTable
 
         return view('achievement::livewire.competition.table', compact('competitions'));
     }
+
+    public function delete(string $id)
+    {
+        $competition = Competition::find($id);
+        $competition->delete();
+
+        $this->dispatch('competition-deleted', message: 'Competition deleted successfully!');
+    }
 }

@@ -11,10 +11,15 @@
 
 @section('title', 'Competition')
 @section('content')
-    <div x-data="{
+    <div class="relative" x-data="{
         isDetailsModalOpen: false,
-    }" x-on:competition-show-details-modal.window="isDetailsModalOpen = true;">
+        isShowNotification: false,
+        notificationMessage: '',
+    }" x-on:competition-show-details-modal.window="isDetailsModalOpen = true;"
+        x-on:competition-deleted.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);">
         <livewire:core::components.breadcrumb pageName="Competition" :urls="$urls" />
+        <livewire:core::components.notification type="success" />
+        {{-- Competition Details --}}
         <livewire:achievement::competition.details />
         {{-- Page Content by Tab --}}
         <div class="card" x-data="{
