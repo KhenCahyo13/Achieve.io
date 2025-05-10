@@ -2,15 +2,15 @@
     class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 transition-all duration-300 ease-in-out dark:border-gray-800 dark:bg-black lg:static lg:translate-x-0">
     <!-- SIDEBAR HEADER -->
     <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
-        class="flex items-center gap-2 pt-4 sidebar-header pb-7">
+        class="flex items-center gap-2 pt-6 sidebar-header pb-8">
         <a href="index.html">
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-                <img class="w-36 dark:hidden" src="{{ asset('images/logo/logo-light.png') }}" alt="Logo" />
-                <img class="w-36 hidden dark:block" src="{{ asset('images/logo/logo-dark.png') }}" alt="Logo" />
+                <img class="w-40 dark:hidden" src="{{ asset('images/logo/logo-light.svg') }}" alt="Logo" />
+                <img class="w-40 hidden dark:block" src="{{ asset('images/logo/logo-dark.svg') }}" alt="Logo" />
             </span>
 
             <img class="w-9 logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'"
-                src="{{ asset('images/logo/logo-icon.png') }}" alt="Logo" />
+                src="{{ asset('images/logo/logo-icon.svg') }}" alt="Logo" />
         </a>
     </div>
     <!-- SIDEBAR HEADER -->
