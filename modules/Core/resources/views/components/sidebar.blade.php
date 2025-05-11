@@ -87,7 +87,7 @@
                         </li>
                     @endcan
                     <!-- Study Program -->
-                    {{-- @can('view study program') --}}
+                    @can('view study program')
                         <li>
                             <a href="{{ route('master.studyprogram.index') }}"
                                 @click="selected = (selected === 'StudyProgram' ? '':'StudyProgram')"
@@ -104,7 +104,7 @@
                                 </span>
                             </a>
                         </li>
-                    {{-- @endcan --}}
+                    @endcan
                 </ul>
             </div>
         </nav>

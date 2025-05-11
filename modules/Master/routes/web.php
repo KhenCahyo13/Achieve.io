@@ -16,7 +16,7 @@ Route::middleware(['check-auth'])->prefix('master')->group(function () {
     // Study Program Controller
     Route::prefix('studyprograms')->group(function () {
         Route::controller(StudyProgramController::class)->group(function () {
-            Route::get('', 'index')->name('master.studyprogram.index');
+            Route::get('', 'index')->name('master.studyprogram.index')->middleware('can:view study program');
         });
     });
 });

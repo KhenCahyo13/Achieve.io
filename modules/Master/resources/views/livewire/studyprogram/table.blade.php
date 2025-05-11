@@ -23,18 +23,20 @@
             <span class="text-gray-800 dark:text-white/90">entires</span>
         </div>
         {{-- Table Filter --}}
-        <div class="flex flex-col gap-y-2 md:flex-row md:gap-y-0 md:gap-x-2 lg:w-1/2">
+        <div class="flex flex-col gap-y-2 md:flex-row md:justify-end md:gap-y-0 md:gap-x-2 lg:w-1/2">
             {{-- Search --}}
-            <input type="text" placeholder="Search study program..." class="text-input"
+            <input type="text" placeholder="Search study program..." class="text-input w-64"
                 wire:model.live.debounce.300ms="search" />
             {{-- Create Data Button --}}
-            <button class="btn-icon-primary" @click="isCreateModalOpen = true">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                <span class="text-nowrap">Add New</span>
-            </button>
+            @can('create study program')
+                <button class="btn-icon-primary" @click="isCreateModalOpen = true">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <span class="text-nowrap">Add New</span>
+                </button>
+            @endcan
         </div>
     </div>
     {{-- Table Content --}}
@@ -135,18 +137,23 @@
                                                     d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                             </svg>
                                         </button>
-                                        <div x-show="openDropDown" x-on:studyprogram-deleted.window="openDropDown = false"
+                                        <div x-show="openDropDown"
+                                            x-on:studyprogram-deleted.window="openDropDown = false"
                                             @click.outside="openDropDown = false"
                                             class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
                                             style="display: none;">
-                                            <button wire:click="showUpdateModal('{{ $studyprogram->id }}')"
-                                                class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
-                                                Update
-                                            </button>
-                                            <button wire:click="delete('{{ $studyprogram->id }}')"
-                                                class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
-                                                Delete
-                                            </button>
+                                            @can('delete study program')
+                                                <button wire:click="delete('{{ $studyprogram->id }}')"
+                                                    class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
+                                                    Delete
+                                                </button>
+                                            @endcan
+                                            @can('update study program')
+                                                <button wire:click="showUpdateModal('{{ $studyprogram->id }}')"
+                                                    class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
+                                                    Update
+                                                </button>
+                                            @endcan
                                         </div>
                                     </div>
                                 </td>
