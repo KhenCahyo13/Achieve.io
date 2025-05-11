@@ -10,7 +10,7 @@ Route::middleware(['check-auth'])->prefix('master')->group(function () {
     // Department Controller
     Route::prefix('departments')->group(function () {
         Route::controller(DepartmentController::class)->group(function () {
-            Route::get('', 'index')->name('master.department.index');
+            Route::get('', 'index')->name('master.department.index')->middleware('can:view department');
         });
     });
     // Study Program Controller
