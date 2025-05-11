@@ -19,7 +19,7 @@
         <nav x-data="{ selected: $persist('Dashboard') }">
             <!-- Achievement Menu Group -->
             <div class="flex flex-col gap-y-4">
-                @can('view competition')
+                @if (auth()->user()->can('view competition'))
                     <h3 class="text-xs uppercase leading-[20px] text-gray-400">
                         <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">
                             ACHIEVEMENT
@@ -33,7 +33,7 @@
                                 fill="" />
                         </svg>
                     </h3>
-                @endcan
+                @endif
 
                 <ul class="flex flex-col gap-2 mb-6">
                     <!-- Competition -->
@@ -58,7 +58,7 @@
             </div>
             <!-- Master Menu Group -->
             <div class="flex flex-col gap-y-4">
-                @can('view department', 'view study program')
+                @if (auth()->user()->can('view department') || auth()->user()->can('view study program'))
                     <h3 class="text-xs uppercase leading-[20px] text-gray-400">
                         <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">
                             MASTER
@@ -72,7 +72,7 @@
                                 fill="" />
                         </svg>
                     </h3>
-                @endcan
+                @endif
                 <ul class="flex flex-col gap-2 mb-6">
                     <!-- Department -->
                     @can('view department')
