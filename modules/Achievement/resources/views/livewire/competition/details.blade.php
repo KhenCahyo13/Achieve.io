@@ -13,20 +13,23 @@
                 fill=""></path>
         </svg>
     </button>
-    @if ($competition !== null)
-        <div>
-            <h4 class="mb-7 text-title-sm font-semibold text-gray-800 dark:text-white/90">
-                {{ $competition->name }}
-            </h4>
-            <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-6 lg:gap-x-8">
-                <div class="w-full h-full">
-                    <img src="{{ $competition->getFirstMediaUrl('poster') }}" alt="Poster" class="overflow-hidden rounded-lg">
-                </div>
-                <div class="flex flex-col">
-                    {!! $competition->description !!}
-                    <button class="btn-primary w-fit mt-4 lg:mt-8">Register Now</button>
+    @can('view competition')
+        @if ($competition !== null)
+            <div>
+                <h4 class="mb-7 text-title-sm font-semibold text-gray-800 dark:text-white/90">
+                    {{ $competition->name }}
+                </h4>
+                <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-6 lg:gap-x-8">
+                    <div class="w-full h-full">
+                        <img src="{{ $competition->getFirstMediaUrl('poster') }}" alt="Poster"
+                            class="overflow-hidden rounded-lg">
+                    </div>
+                    <div class="flex flex-col">
+                        {!! $competition->description !!}
+                        <button class="btn-primary w-fit mt-4 lg:mt-8">Register Now</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endif
+        @endif
+    @endcan
 </div>
