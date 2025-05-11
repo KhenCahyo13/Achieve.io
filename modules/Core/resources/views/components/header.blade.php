@@ -67,7 +67,7 @@
                         <img src="{{ asset('images/user/owner.jpg') }}" alt="User" />
                     </span>
 
-                    <span class="text-theme-sm mr-1 block font-medium"> Khen Cahyo </span>
+                    <span class="text-theme-sm mr-1 block font-medium capitalize">{{ auth()->user()->name }}</span>
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -78,11 +78,11 @@
                 <div x-show="dropdownOpen"
                     class="shadow-theme-lg dark:bg-gray-dark absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800">
                     <div>
-                        <span class="text-theme-sm block font-medium text-gray-700 dark:text-gray-400">
-                            Khen Cahyo
+                        <span class="text-theme-sm block font-medium text-gray-700 dark:text-gray-400 capitalize">
+                            {{ auth()->user()->name }}
                         </span>
                         <span class="text-theme-xs mt-0.5 block text-gray-500 dark:text-gray-400">
-                            khencahyo02@gmail.com
+                            {{ auth()->user()->email }}
                         </span>
                     </div>
 
