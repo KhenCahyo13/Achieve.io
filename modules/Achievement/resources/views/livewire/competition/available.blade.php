@@ -102,7 +102,7 @@
     </div>
     {{-- Data List --}}
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-        @foreach ($competitions as $competition)
+        @forelse ($competitions as $competition)
             @php
                 $posterPath = $competition->getFirstMediaUrl('poster');
             @endphp
@@ -137,7 +137,11 @@
                     </button>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="py-6 col-span-full">
+                <p class="text-center leading-7 text-theme-sm text-gray-500 dark:text-gray-400">Data still empty!</p>
+            </div>
+        @endforelse
     </div>
     {{-- Pagination --}}
     <div class="mt-5">

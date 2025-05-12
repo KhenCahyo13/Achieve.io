@@ -97,7 +97,7 @@
                     </thead>
 
                     <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                        @foreach ($studyprograms as $studyprogram)
+                        @forelse ($studyprograms as $studyprogram)
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
@@ -158,7 +158,14 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="px-5 py-4 sm:px-6">
+                                    <p class="text-center leading-7 text-theme-sm text-gray-500 dark:text-gray-400">
+                                        Data still empty!</p>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
