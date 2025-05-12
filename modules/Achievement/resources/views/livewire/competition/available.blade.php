@@ -109,8 +109,8 @@
             @endphp
             <div
                 class="flex flex-col gap-5 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] sm:flex-row sm:items-center sm:gap-6">
-                <div class="w-full h-32 overflow-hidden rounded-lg md:w-36">
-                    <img src="{{ asset("$posterPath") }}" alt="Poster" class="overflow-hidden rounded-lg">
+                <div class="w-full h-32 overflow-hidden rounded-lg md:w-72 md:h-40">
+                    <img src="{{ asset("$posterPath") }}" alt="Poster" class="overflow-hidden rounded-lg w-full h-full object-cover">
                 </div>
 
                 <div>
@@ -131,11 +131,13 @@
                             {{ $startRegDate }} - {{ $endRegDate }}
                         </p>
                     </div>
-
-                    <div class="mt-4 flex flex-wrap gap-x-1">
+                    <div class="mt-4 flex flex-wrap gap-x-1 gap-y-1">
                         <livewire:core::components.badge type="light" text="{{ $competition->level }}" />
                         <livewire:core::components.badge type="light"
                             text="{{ $competition->category }} Competition" />
+                        @foreach ($competition->fields as $field)
+                            <livewire:core::components.badge type="light" text="{{ $field->name }}" />
+                        @endforeach
                     </div>
 
                     <button wire:click="showDetailsModal('{{ $competition->id }}')"

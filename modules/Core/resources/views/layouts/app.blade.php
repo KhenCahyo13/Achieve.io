@@ -50,6 +50,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     </div>
     <!-- ===== Page Wrapper End ===== -->
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

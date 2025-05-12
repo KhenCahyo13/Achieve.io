@@ -37,9 +37,24 @@ class Competition extends Model implements HasMedia
         'description',
     ];
 
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function fields()
+    {
+        return $this->belongsToMany(Field::class, 'competition_fields');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('poster')->singleFile();
+    }
+
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('createdBy')->where('name', 'like', '%'.$search.'%');
+        $query = self::with('createdBy')->where('name', 'like', '%' . $search . '%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);
@@ -50,7 +65,7 @@ class Competition extends Model implements HasMedia
 
     public static function getAvailable(int $perPage, string $search, array $sorts, array $filters)
     {
-        $query = self::where('name', 'like', '%'.$search.'%');
+        $query = self::with('fields')->where('name', 'like', '%' . $search . '%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);
@@ -63,13 +78,9 @@ class Competition extends Model implements HasMedia
         return $query->paginate($perPage);
     }
 
-    public function createdBy(): BelongsTo {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function registerMediaCollections(): void
+    public function withFields(array $fieldIds)
     {
-        $this->addMediaCollection('poster')->singleFile();
+        return $this->fields()->sync($fieldIds);
     }
 
     // protected static function newFactory(): CompetitionFactory

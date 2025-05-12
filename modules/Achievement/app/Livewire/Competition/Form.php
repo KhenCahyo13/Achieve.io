@@ -31,6 +31,7 @@ class Form extends LivewireForm
     #[Validate('after:start_reg_date', message: 'End Registration Date must be after Start Registration Date')]
     public string $end_reg_date = '';
 
-    #[Validate('required', message: 'Poster is required')]
-    public $poster;
+    #[Validate('required', message: 'Competition Field is required')]
+    #[Validate('min:1', message: 'At least one field must be selected')]
+    public array $fields = [];
 }

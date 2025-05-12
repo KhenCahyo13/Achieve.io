@@ -19,6 +19,12 @@ class Field extends Model
         'name'
     ];
 
+    public function competitions()
+    {
+        return $this->belongsToMany(Competition::class, 'competition_fields');
+    }
+
+
     // protected static function newFactory(): FieldFactory
     // {
     //     // return FieldFactory::new();
