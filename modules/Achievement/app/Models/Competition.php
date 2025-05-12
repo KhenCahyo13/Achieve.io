@@ -27,6 +27,8 @@ class Competition extends Model implements HasMedia
         'description',
         'level',
         'category',
+        'start_reg_date',
+        'end_reg_date',
         'verification_status',
         'created_by',
     ];

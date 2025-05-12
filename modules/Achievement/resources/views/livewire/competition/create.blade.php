@@ -120,6 +120,30 @@
                         </span>
                     @enderror
                 </div>
+                {{-- Start Reg Date --}}
+                <div class="form-groups">
+                    <label class="form-label">
+                        Start Registration Date <span class="text-red-500">*</span>
+                    </label>
+                    <input type="date" class="date-input" wire:model="form.start_reg_date">
+                    @error('form.start_reg_date')
+                        <span class="text-theme-xs text-error-500">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+                {{-- End Reg Date --}}
+                <div class="form-groups">
+                    <label class="form-label">
+                        End Registration Date <span class="text-red-500">*</span>
+                    </label>
+                    <input type="date" class="date-input" wire:model="form.end_reg_date">
+                    @error('form.end_reg_date')
+                        <span class="text-theme-xs text-error-500">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
                 <div class="mt-5 col-span-full flex justify-end gap-x-3">
                     <a href="{{ route('achievement.competition.index') }}" class="btn-outline-danger">
                         Cancel

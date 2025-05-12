@@ -22,6 +22,12 @@ class Form extends LivewireForm
     #[Validate('in:Team,Individual', message: 'Category must be one of the predefined values')]
     public string $category = '';
 
+    #[Validate('required', message: 'Start Registration Date is required')]
+    public string $start_reg_date;
+
+    #[Validate('required', message: 'End Registration Date is required')]
+    public string $end_reg_date;
+
     #[Validate('required', message: 'Poster is required')]
     public $poster;
 }

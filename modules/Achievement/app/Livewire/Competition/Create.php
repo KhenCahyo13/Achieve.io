@@ -27,6 +27,8 @@ class Create extends Component
             'description' => $this->form->description,
             'level' => $this->form->level,
             'category' => $this->form->category,
+            'start_reg_date' => $this->form->start_reg_date,
+            'end_reg_date' => $this->form->end_reg_date,
             'created_by' => Auth::user()->id ?? null,
         ]);
         $createdCompetition->addMedia($this->form->poster->getRealPath())->toMediaCollection('poster');
