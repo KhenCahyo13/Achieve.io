@@ -34,7 +34,8 @@
                 wire:model.live.debounce.300ms="search" />
             {{-- Filter --}}
             <div x-data="{ openDropDown: false }" class="relative inline-block">
-                <button @click.prevent="openDropDown = !openDropDown" class="btn-outline-primary" :class="openDropDown ? 'bg-brand-600 text-white' : ''">
+                <button @click.prevent="openDropDown = !openDropDown" class="btn-outline-primary"
+                    :class="openDropDown ? 'bg-brand-600 text-white' : ''">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -116,6 +117,20 @@
                     <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90">
                         {{ $competition->name }}
                     </h4>
+                    @php
+                        $startRegDate = \Carbon\Carbon::parse($competition->start_reg_date)->translatedFormat('d F Y');
+                        $endRegDate = \Carbon\Carbon::parse($competition->end_reg_date)->translatedFormat('d F Y');
+                    @endphp
+                    <div class="flex items-center gap-x-2">
+                        @if (\Carbon\Carbon::parse($competition->end_reg_date)->lt(now()))
+                            <livewire:core::components.badge type="error" text="Closed" />
+                        @else
+                            <livewire:core::components.badge type="success" text="Open" />
+                        @endif
+                        <p class="text-sm text-gray-400">
+                            {{ $startRegDate }} - {{ $endRegDate }}
+                        </p>
+                    </div>
 
                     <div class="mt-4 flex flex-wrap gap-x-1">
                         <livewire:core::components.badge type="light" text="{{ $competition->level }}" />

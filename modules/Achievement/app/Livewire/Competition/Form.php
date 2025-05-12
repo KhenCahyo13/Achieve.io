@@ -23,10 +23,13 @@ class Form extends LivewireForm
     public string $category = '';
 
     #[Validate('required', message: 'Start Registration Date is required')]
-    public string $start_reg_date;
+    #[Validate('date', message: 'Start Registration Date must be a valid date')]
+    public string $start_reg_date = '';
 
     #[Validate('required', message: 'End Registration Date is required')]
-    public string $end_reg_date;
+    #[Validate('date', message: 'End Registration Date must be a valid date')]
+    #[Validate('after:start_reg_date', message: 'End Registration Date must be after Start Registration Date')]
+    public string $end_reg_date = '';
 
     #[Validate('required', message: 'Poster is required')]
     public $poster;

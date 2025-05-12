@@ -2,6 +2,7 @@
 
 namespace Modules\Achievement\Livewire\Competition;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Modules\Achievement\Models\Competition;
 use Modules\Core\Abstracts\DataTable;
@@ -23,5 +24,11 @@ class Available extends DataTable
     public function showDetailsModal(string $id)
     {
         $this->dispatch('competition-show-details-modal', id: $id);
+    }
+
+    #[On('competition-deleted')]
+    public function onAction()
+    {
+        $this->resetPage();
     }
 }
