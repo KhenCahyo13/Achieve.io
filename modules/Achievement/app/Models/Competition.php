@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
 use Modules\Master\Models\User;
 use Spatie\MediaLibrary\HasMedia;
@@ -43,7 +44,7 @@ class Competition extends Model implements HasMedia
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function fields()
+    public function fields(): BelongsToMany
     {
         return $this->belongsToMany(Field::class, 'competition_fields');
     }

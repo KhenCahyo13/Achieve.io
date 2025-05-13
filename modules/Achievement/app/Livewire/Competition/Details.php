@@ -44,6 +44,11 @@ class Details extends Component
         }
     }
 
+    public function showRegisterModal(string $competitionId)
+    {
+        $this->dispatch('competition-show-register-modal', competitionId: $competitionId);
+    }
+
     #[On('competition-show-details-modal')]
     public function setupData(string $id)
     {

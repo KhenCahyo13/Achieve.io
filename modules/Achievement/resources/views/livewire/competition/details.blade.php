@@ -26,19 +26,25 @@
                     </div>
                     <div class="flex flex-col">
                         {!! $competition->description !!}
-                        <div class="flex items-center justify-between mt-4 lg:mt-8">
-                            <button class="btn-primary w-fit">Register Now</button>
-                            @can('approve competition')
-                                @if ($competition->verification_status === 'On Process')
-                                    <div class="flex items-center gap-x-2">
-                                        <button class="btn-outline-danger w-fit"
-                                            wire:click="approveCompetition('Rejected', '{{ $competition->created_by }}')">Reject</button>
-                                        <button class="btn-success w-fit"
-                                            wire:click="approveCompetition('Approved', '{{ $competition->created_by }}')">Approve</button>
-                                    </div>
+                        @if (\Carbon\Carbon::parse($competition->end_reg_date)->lt(now()))
+                        <p class="text-error-500 mt-4 lg:mt-8">Competition closed!</p>
+                        @else
+                            <div class="flex items-center justify-between mt-4 lg:mt-8">
+                                @if ($competition->verification_status === 'Approved')
+                                    <button class="btn-primary w-fit" type="button" wire:click="showRegisterModal('{{ $competition->id }}')">Register Now</button>
                                 @endif
-                            @endcan
-                        </div>
+                                @can('approve competition')
+                                    @if ($competition->verification_status === 'On Process')
+                                        <div class="flex items-center gap-x-2">
+                                            <button class="btn-outline-danger w-fit"
+                                                wire:click="approveCompetition('Rejected', '{{ $competition->created_by }}')">Reject</button>
+                                            <button class="btn-success w-fit"
+                                                wire:click="approveCompetition('Approved', '{{ $competition->created_by }}')">Approve</button>
+                                        </div>
+                                    @endif
+                                @endcan
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
