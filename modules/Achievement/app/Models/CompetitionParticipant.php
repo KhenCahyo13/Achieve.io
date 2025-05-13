@@ -2,6 +2,7 @@
 
 namespace Modules\Achievement\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,7 +12,7 @@ use Modules\Master\Models\User;
 
 class CompetitionParticipant extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,7 @@ class CompetitionParticipant extends Model
     protected $table = 'competition_participants';
     protected $fillable = [
         'leader_id',
+        'lecturer_id',
         'competition_id',
         'team_name',
         'topic_title'
@@ -26,12 +28,23 @@ class CompetitionParticipant extends Model
 
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'participant_members');
+        return $this->belongsToMany(
+            User::class,
+            'participant_members',
+            'participant_id',
+            'user_id'
+        )->withTimestamps();
     }
 
     public function withMembers(array $memberIds)
     {
         return $this->members()->sync($memberIds);
+    }
+
+    public static function getRegisteredUsers(string $competitionId) {
+        return self::with('members')
+            ->where('competition_id', $competitionId)
+            ->get();
     }
 
     // protected static function newFactory(): CompetitionParticipantFactory

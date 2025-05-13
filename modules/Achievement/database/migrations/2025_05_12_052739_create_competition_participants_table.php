@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('competition_participants', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('leader_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignUuid('lecturer_id')->nullable()->references('id')->on('users')->onDelete('set null')->onUpdate('set null');
             $table->foreignUuid('competition_id')->references('id')->on('competitions')->onDelete('cascade')->onUpdate('cascade');
             $table->string('team_name', 100);
             $table->string('topic_title');

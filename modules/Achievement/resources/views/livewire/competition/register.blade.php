@@ -85,6 +85,34 @@
                             </span>
                         @enderror
                     </div>
+                    {{-- Supervisor --}}
+                    <div class="form-groups col-span-full">
+                        <label class="form-label">
+                            Supervisor <span class="text-red-500">*</span>
+                        </label>
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true" wire:model="lecturerId">
+                                <option value="">- Select supervisor -</option>
+                                @foreach ($lecturerUsers as $supervisor)
+                                    <option value="{{ $supervisor->id }}" class="capitalize">{{ $supervisor->name }}</option>
+                                @endforeach
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </div>
+                        @error('lecturerId')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
                     {{-- Members --}}
                     @if ($competition->category === 'Team')
                         <div class="form-groups col-span-full">

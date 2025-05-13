@@ -46,7 +46,7 @@ class Competition extends Model implements HasMedia
 
     public function fields(): BelongsToMany
     {
-        return $this->belongsToMany(Field::class, 'competition_fields');
+        return $this->belongsToMany(Field::class, 'competition_fields')->withTimestamps();
     }
 
     public function registerMediaCollections(): void

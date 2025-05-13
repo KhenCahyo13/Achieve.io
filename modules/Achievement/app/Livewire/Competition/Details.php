@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Modules\Achievement\Models\Competition;
+use Modules\Achievement\Models\CompetitionParticipant;
 use Modules\Achievement\Notifications\CompetitionApproval;
 use Modules\Master\Models\User;
 
@@ -18,8 +19,9 @@ class Details extends Component
     public function render()
     {
         $competition = Competition::find($this->id);
+        $registeredUsers = CompetitionParticipant::getRegisteredUsers($this->id);
 
-        return view('achievement::livewire.competition.details', compact('competition'));
+        return view('achievement::livewire.competition.details', compact('competition', 'registeredUsers'));
     }
 
     public function approveCompetition(string $value, string $createdBy)
