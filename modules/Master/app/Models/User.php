@@ -51,4 +51,9 @@ class User extends Authenticatable implements HasMedia
             'password' => 'hashed',
         ];
     }
+
+    public function scopeWithRole($query, $role)
+    {
+        return $query->whereHas('roles', fn($q) => $q->where('name', $role));
+    }
 }

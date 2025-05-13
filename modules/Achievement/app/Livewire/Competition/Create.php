@@ -6,11 +6,14 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Achievement\Models\Competition;
 use Modules\Achievement\Models\Field;
+use Modules\Achievement\Notifications\CompetitionCreated;
+use Modules\Master\Models\User;
 
 class Create extends Component
 {
@@ -35,6 +38,7 @@ class Create extends Component
 
         try {
             DB::beginTransaction();
+            $adminUsers = User::withRole('Admin')->get();
             $createdCompetition = Competition::create([
                 'name' => $this->form->name,
                 'description' => $this->form->description,
@@ -46,6 +50,8 @@ class Create extends Component
             ]);
             $createdCompetition->withFields($this->form->fields);
             $createdCompetition->addMedia($this->poster->getRealPath())->toMediaCollection('poster');
+
+            Notification::send($adminUsers, new CompetitionCreated($createdCompetition));
 
             $this->poster = null;
             $this->form->reset();
