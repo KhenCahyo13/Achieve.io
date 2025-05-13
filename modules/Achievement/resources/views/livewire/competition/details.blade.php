@@ -32,9 +32,9 @@
                                 @if ($competition->verification_status === 'On Process')
                                     <div class="flex items-center gap-x-2">
                                         <button class="btn-outline-danger w-fit"
-                                            wire:click="approveCompetition('Rejected')">Reject</button>
+                                            wire:click="approveCompetition('Rejected', '{{ $competition->created_by }}')">Reject</button>
                                         <button class="btn-success w-fit"
-                                            wire:click="approveCompetition('Approved')">Approve</button>
+                                            wire:click="approveCompetition('Approved', '{{ $competition->created_by }}')">Approve</button>
                                     </div>
                                 @endif
                             @endcan
