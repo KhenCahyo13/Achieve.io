@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Modules\Master\Models\User;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -60,12 +61,16 @@ class Competition extends Model implements HasMedia
             $query->orderBy($field, $direction);
         }
 
+        if (Auth::user()->hasRole(['Student', 'Supervisor'])) {
+            $query->where('created_by', Auth::user()->id);
+        }
+
         return $query->paginate($perPage);
     }
 
     public static function getAvailable(int $perPage, string $search, array $sorts, array $filters)
     {
-        $query = self::with('fields')->where('name', 'like', '%' . $search . '%');
+        $query = self::with('fields')->where('name', 'like', '%' . $search . '%')->where('verification_status', 'Approved');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);

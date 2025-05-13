@@ -38,7 +38,7 @@ return new class extends Migration
 
         // Assign only competition permissions to Student & Supervisor
         $competitionPermissions = collect($allPermissions)
-            ->filter(fn($_, $key) => str_contains($key, 'competition'))
+            ->filter(fn($_, $key) => str_contains($key, 'competition') && $key !== 'approve competition')
             ->values();
 
         $roles['Student']->givePermissionTo($competitionPermissions);

@@ -189,5 +189,14 @@
         document.addEventListener('trix-change', function(event) {
             $wire.$set('form.description', event.target.value);
         });
+
+        $wire.on('competition-created', function() {
+            console.log('Loaded event');
+            const trixEditor = document.querySelector('trix-editor');
+            if (trixEditor && trixEditor.editor) {
+                console.log('Editor found');
+                trixEditor.editor.loadHTML('');
+            }
+        });
     </script>
 @endscript
