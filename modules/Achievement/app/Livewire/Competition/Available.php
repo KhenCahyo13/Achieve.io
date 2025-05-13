@@ -27,6 +27,7 @@ class Available extends DataTable
     }
 
     #[On('competition-deleted')]
+    #[On('competition-approval')]
     public function onAction()
     {
         $this->resetPage();

@@ -53,6 +53,11 @@ class Competition extends Model implements HasMedia
         $this->addMediaCollection('poster')->singleFile();
     }
 
+    public function withFields(array $fieldIds)
+    {
+        return $this->fields()->sync($fieldIds);
+    }
+
     public static function getAll(int $perPage, string $search, array $sorts)
     {
         $query = self::with('createdBy')->where('name', 'like', '%' . $search . '%');
@@ -83,9 +88,14 @@ class Competition extends Model implements HasMedia
         return $query->paginate($perPage);
     }
 
-    public function withFields(array $fieldIds)
+    public static function approveCompetition(string $competitionId, string $value)
     {
-        return $this->fields()->sync($fieldIds);
+        $competition = Competition::find($competitionId);
+
+        if ($competition) {
+            $competition->verification_status = $value;
+            $competition->save();
+        }
     }
 
     // protected static function newFactory(): CompetitionFactory

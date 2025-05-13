@@ -16,7 +16,8 @@
         isShowNotification: false,
         notificationMessage: '',
     }" x-on:competition-show-details-modal.window="isDetailsModalOpen = true;"
-        x-on:competition-deleted.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);">
+        x-on:competition-deleted.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
+        x-on:competition-approval.window="isDetailsModalOpen = false; isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);">
         <livewire:core::components.breadcrumb pageName="Competition" :urls="$urls" />
         <livewire:core::components.notification type="success" />
         {{-- Competition Details --}}

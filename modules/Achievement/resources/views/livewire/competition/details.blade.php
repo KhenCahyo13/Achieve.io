@@ -26,7 +26,19 @@
                     </div>
                     <div class="flex flex-col">
                         {!! $competition->description !!}
-                        <button class="btn-primary w-fit mt-4 lg:mt-8">Register Now</button>
+                        <div class="flex items-center justify-between mt-4 lg:mt-8">
+                            <button class="btn-primary w-fit">Register Now</button>
+                            @can('approve competition')
+                                @if ($competition->verification_status === 'On Process')
+                                    <div class="flex items-center gap-x-2">
+                                        <button class="btn-outline-danger w-fit"
+                                            wire:click="approveCompetition('Rejected')">Reject</button>
+                                        <button class="btn-success w-fit"
+                                            wire:click="approveCompetition('Approved')">Approve</button>
+                                    </div>
+                                @endif
+                            @endcan
+                        </div>
                     </div>
                 </div>
             </div>
