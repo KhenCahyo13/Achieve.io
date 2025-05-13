@@ -12,7 +12,7 @@
                     <div class="mb-4" x-data="{
                         openAlert: false,
                     }" x-on:login-failed.window="openAlert = true" x-show="openAlert">
-                        <livewire:core::components.alert type="error" message="Invalid username or password!" />
+                        <livewire:core::components.alert type="error" message="Invalid email or password!" />
                     </div>
                     <div class="mb-5 sm:mb-8">
                         <h1 class="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
@@ -28,10 +28,10 @@
                                 <!-- Email -->
                                 <div>
                                     <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                                        Username <span class="text-error-500">*</span>
+                                        Email <span class="text-error-500">*</span>
                                     </label>
-                                    <input type="text" placeholder="Enter your username" class="text-input" wire:model="username" />
-                                    @error('username')
+                                    <input type="text" placeholder="Enter your email" class="text-input" wire:model="email" />
+                                    @error('email')
                                         <span class="text-theme-xs text-error-500">
                                             {{ $message }}
                                         </span>

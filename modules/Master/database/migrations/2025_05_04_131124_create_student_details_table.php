@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignUuid('study_program_id')->nullable()->references('id')->on('study_programs')->onDelete('set null')->onUpdate('set null');
-            $table->string('fullname', 150);
             $table->string('address');
             $table->string('nim', 16);
             $table->date('birth_date');
