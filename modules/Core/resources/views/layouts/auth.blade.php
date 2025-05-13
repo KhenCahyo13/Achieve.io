@@ -18,7 +18,7 @@
 </head>
 
 <body
-    x-data="{ loaded': true, 'darkMode': false, }"
+    x-data="{ loaded: true, darkMode: false, }"
     x-init="
          darkMode = JSON.parse(localStorage.getItem('darkMode'));
          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"

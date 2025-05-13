@@ -63,7 +63,7 @@
             <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
                 <a class="flex items-center text-gray-700 dark:text-gray-400" href="#"
                     @click.prevent="dropdownOpen = ! dropdownOpen">
-                    <span class="mr-3 h-11 w-11 flex items-center justify-center overflow-hidden rounded-full border">
+                    <span class="mr-3 h-11 w-11 flex items-center justify-center overflow-hidden rounded-full border border-gray-200 dark:border-gray-800">
                         <span class="uppercase">{{ auth()->user()->name[0] }}</span>
                     </span>
 
