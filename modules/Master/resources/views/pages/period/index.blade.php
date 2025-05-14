@@ -23,6 +23,7 @@
         x-on:period-show-update-modal.window="isUpdateModalOpen = true;">
         <livewire:core::components.breadcrumb pageName="Period" :urls="$urls" />
         <livewire:master::period.create />
+        <livewire:master::period.update />
         <livewire:master::period.table />
         <livewire:core::components.notification type="success" />
     </div>
