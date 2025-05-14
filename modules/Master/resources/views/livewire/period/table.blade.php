@@ -28,7 +28,7 @@
             <input type="text" placeholder="Search period..." class="text-input w-64"
                 wire:model.live.debounce.300ms="search" />
             {{-- Create Data Button --}}
-            @can('create study program')
+            @can('create period')
                 <button class="btn-icon-primary" @click="isCreateModalOpen = true">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
