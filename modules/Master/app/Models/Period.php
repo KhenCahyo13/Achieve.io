@@ -21,6 +21,17 @@ class Period extends Model
         'end_year',
     ];
 
+    public static function getAll(int $perPage, string $search, array $sorts)
+    {
+        $query = self::where('title', 'like', '%' . $search . '%');
+
+        foreach ($sorts as $field => $direction) {
+            $query->orderBy($field, $direction);
+        }
+
+        return $query->paginate($perPage);
+    }
+
     // protected static function newFactory(): PeriodFactory
     // {
     //     // return PeriodFactory::new();

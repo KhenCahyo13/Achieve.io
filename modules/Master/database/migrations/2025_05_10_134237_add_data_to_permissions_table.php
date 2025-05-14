@@ -21,6 +21,7 @@ return new class extends Migration
         $permissions = [
             'department' => ['create', 'view', 'update', 'delete'],
             'study program' => ['create', 'view', 'update', 'delete'],
+            'period' => ['create', 'view', 'update', 'delete'],
             'competition' => ['create', 'view', 'update', 'delete', 'approve'],
         ];
 
