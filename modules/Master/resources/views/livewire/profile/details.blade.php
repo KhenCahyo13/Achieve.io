@@ -3,10 +3,34 @@
         <div class="p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
             <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
                 <div class="flex flex-col items-center w-full gap-6 xl:flex-row">
-                    <div class="w-20 h-20 overflow-hidden border border-gray-200 rounded-full dark:border-gray-800">
-                        <img src="https://mastertondental.co.nz/wp-content/uploads/2022/12/team-profile-placeholder.jpg"
-                            alt="user">
+                    {{-- Profile --}}
+                    <div x-data="{
+                        hovered: false,
+                    }" @mouseenter="hovered = true" @mouseleave="hovered = false"
+                        class="w-20 h-20 relative overflow-hidden border border-gray-200 rounded-full dark:border-gray-800">
+                        <!-- Profile Picture -->
+                        @if ($profilePicture)
+                            <img src={{ $profilePicture->temporaryUrl() }} class="object-cover w-full h-full"
+                                alt="user">
+                        @else
+                            <img src={{ $userWithDetails->getFirstMediaUrl('profile-picture') ? $userWithDetails->getFirstMediaUrl('profile-picture') : 'https://mastertondental.co.nz/wp-content/uploads/2022/12/team-profile-placeholder.jpg' }}
+                                class="object-cover w-full h-full" alt="user">
+                        @endif
+
+                        <!-- Hidden File Input -->
+                        <input type="file" x-ref="input" class="hidden" wire:model.live="profilePicture" />
+
+                        <!-- Overlay Button -->
+                        <button x-show="hovered" x-transition @click="$refs.input.click()" type="button"
+                            class="flex items-center justify-center w-full h-full absolute top-0 left-0 bg-gray-800/30 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                            </svg>
+                        </button>
                     </div>
+                    {{-- Name --}}
                     <div class="order-3 xl:order-2">
                         <h4
                             class="mb-2 text-lg font-semibold text-center text-gray-800 dark:text-white/90 xl:text-left capitalize">
@@ -24,11 +48,21 @@
                                     Student of {{ $userWithDetails->student->studyProgram->name ?? '-' }}
                                 </p>
                             @elseif (auth()->user()->hasRole('Lecturer'))
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Lecturer of {{ $userWithDetails->lecturer->department->name ?? '-' }}</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Lecturer of
+                                    {{ $userWithDetails->lecturer->department->name ?? '-' }}</p>
                             @endif
                         </div>
+                        @error('profilePicture')
+                            <span class="form-error">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
+                @if ($profilePicture)
+                    <button wire:click="updateProfilePicture()"
+                        class="text-nowrap flex justify-center w-full px-4 py-3 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 sm:w-auto">
+                        Update Profile Picture
+                    </button>
+                @endif
                 @if (auth()->user()->hasRole('Admin'))
                     <button @click="isProfileInfoModal = true" class="btn-outline-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -42,6 +76,7 @@
                 @endif
             </div>
         </div>
+        {{-- Student & Lecturer Personal Information --}}
         @if (auth()->user()->hasRole(['Student', 'Supervisor']) && $userWithDetails !== null)
             <div class="p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
                 <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">

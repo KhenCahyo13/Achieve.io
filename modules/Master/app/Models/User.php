@@ -54,12 +54,19 @@ class User extends Authenticatable implements HasMedia
         ];
     }
 
-    public function student(): HasOne {
+    public function student(): HasOne
+    {
         return $this->hasOne(Student::class);
     }
 
-    public function lecturer(): HasOne {
+    public function lecturer(): HasOne
+    {
         return $this->hasOne(Lecturer::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('profile-picture')->singleFile();
     }
 
     public function scopeWithRole($query, $role)
