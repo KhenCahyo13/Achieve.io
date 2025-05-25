@@ -107,7 +107,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <ul class="custom-scrollbar flex h-auto flex-col overflow-y-auto">
+                        <ul class="custom-scrollbar flex h-auto flex-col overflow-y-auto gap-y-2">
                             @foreach (auth()->user()->notifications as $notification)
                                 <li>
                                     <a @class([
