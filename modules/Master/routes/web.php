@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Master\Http\Controllers\DepartmentController;
 use Modules\Master\Http\Controllers\MasterController;
 use Modules\Master\Http\Controllers\PeriodController;
+use Modules\Master\Http\Controllers\ProfileController;
 use Modules\Master\Http\Controllers\StudyProgramController;
 
 
@@ -19,5 +20,9 @@ Route::middleware(['check-auth'])->prefix('master')->group(function () {
     // Period Controller
     Route::controller(PeriodController::class)->prefix('periods')->group(function () {
         Route::get('', 'index')->name('master.period.index')->middleware('can:view period');
+    });
+    // Profile Controller
+    Route::controller(ProfileController::class)->prefix('profile')->group(function () {
+        Route::get('', 'index')->name('master.profile.index');
     });
 });
