@@ -144,7 +144,7 @@
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
                                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            {{ $achievement->participant->team_name ?? 'N/A' }}
+                                            {{ $achievement->participant->team_name ?? '-' }}
                                         </p>
                                     </div>
                                 </td>
@@ -152,7 +152,7 @@
                                     <td class="px-5 py-4 sm:px-6">
                                         <div class="flex items-center">
                                             <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                                {{ $achievement->student->name ?? 'N/A' }}
+                                                {{ $achievement->student->name ?? '-' }}
                                             </p>
                                         </div>
                                     </td>
@@ -160,7 +160,7 @@
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
                                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            {{ $achievement->participant->lecturer->name ?? 'N/A' }}
+                                            {{ $achievement->participant->lecturer->name ?? '-' }}
                                         </p>
                                     </div>
                                 </td>

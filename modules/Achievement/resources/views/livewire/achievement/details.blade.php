@@ -28,24 +28,24 @@
                 <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2">
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Title</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">{{ $achievement->title ?? 'N/A' }}</p>
+                        <p class="text-gray-800 text-theme-sm dark:text-white/90">{{ $achievement->title ?? '-' }}</p>
                     </div>
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Description</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->description ?? 'N/A' }}
+                            {{ $achievement->description ?? '-' }}
                         </p>
                     </div>
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Period</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->period->title ?? 'N/A' }}
+                            {{ $achievement->period->title ?? '-' }}
                         </p>
                     </div>
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Created by</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->student->name ?? 'N/A' }}
+                            {{ $achievement->student->name ?? '-' }}
                         </p>
                     </div>
                     <div class="flex flex-col gap-y-1">
@@ -69,17 +69,17 @@
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Name</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->competition->name ?? 'N/A' }}</p>
+                            {{ $achievement->participant->competition->name ?? '-' }}</p>
                     </div>
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Category</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->competition->category ?? 'N/A' }}</p>
+                            {{ $achievement->participant->competition->category ?? '-' }}</p>
                     </div>
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Level</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->competition->level ?? 'N/A' }}</p>
+                            {{ $achievement->participant->competition->level ?? '-' }}</p>
                     </div>
                 </div>
             </div>
@@ -89,29 +89,29 @@
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Team Name</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->team_name ?? 'N/A' }}</p>
+                            {{ $achievement->participant->team_name ?? '-' }}</p>
                     </div>
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Topic</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->topic_title ?? 'N/A' }}</p>
+                            {{ $achievement->participant->topic_title ?? '-' }}</p>
                     </div>
                     <div class="flex flex-col gap-y-1">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">Supervisor</p>
                         <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->lecturer->name ?? 'N/A' }}</p>
+                            {{ $achievement->participant->lecturer->name ?? '-' }}</p>
                     </div>
                     @if ($achievement->participant->competition->category === 'Team')
                         <div class="flex flex-col gap-y-1 col-span-full">
                             <p class="text-gray-500 text-theme-sm dark:text-gray-400">Members</p>
                             <ul class="list-disc list-inside space-y-1">
                                 <li class="text-gray-800 text-theme-sm dark:text-white/90">
-                                    {{ $achievement->participant->leader->name ?? 'N/A' }} - <span
+                                    {{ $achievement->participant->leader->name ?? '-' }} - <span
                                         class="text-success-500">Leader</span>
                                 </li>
                                 @foreach ($achievement->participant->members as $member)
                                     <li class="text-gray-800 text-theme-sm dark:text-white/90">
-                                        {{ $member->name ?? 'N/A' }} - <span class="text-error-500">Member</span>
+                                        {{ $member->name ?? '-' }} - <span class="text-error-500">Member</span>
                                     </li>
                                 @endforeach
                             </ul>
@@ -120,7 +120,7 @@
                         <div class="flex flex-col gap-y-1">
                             <p class="text-gray-500 text-theme-sm dark:text-gray-400">Member</p>
                             <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                                {{ $achievement->participant->leader->name ?? 'N/A' }}</p>
+                                {{ $achievement->participant->leader->name ?? '-' }}</p>
                         </div>
                     @endif
                 </div>
