@@ -19,6 +19,7 @@
         notificationMessage: '',
     }"
         x-on:achievement-created.window="isCreateModalOpen = false; isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
+        x-on:achievement-deleted.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
         x-on:achievement-show-details-modal.window="isDetailsModalOpen = true;">
         <livewire:core::components.breadcrumb pageName="Achievement" :urls="$urls" />
         <livewire:core::components.notification type="success" />

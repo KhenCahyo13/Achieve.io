@@ -24,6 +24,14 @@ class Table extends DataTable
         $this->dispatch('achievement-show-details-modal', id: $id);
     }
 
+    public function delete(string $id)
+    {
+        $achievement = Achievement::find($id);
+        $achievement->delete();
+
+        $this->dispatch('achievement-deleted', message: 'Achievement deleted successfully!');
+    }
+
     #[On('achievement-created')]
     public function onAction()
     {
