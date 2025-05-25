@@ -35,7 +35,7 @@ class CompetitionParticipant extends Model
     {
         return $this->belongsToMany(
             User::class,
-            'participant_members',
+            'competition_participant_members',
             'participant_id',
             'user_id'
         )->withTimestamps();

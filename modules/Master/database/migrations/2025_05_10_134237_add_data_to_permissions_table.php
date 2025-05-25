@@ -23,6 +23,7 @@ return new class extends Migration
             'study program' => ['create', 'view', 'update', 'delete'],
             'period' => ['create', 'view', 'update', 'delete'],
             'competition' => ['create', 'view', 'update', 'delete', 'approve'],
+            'achievement' => ['create', 'view', 'update', 'delete', 'approve'],
         ];
 
         $allPermissions = [];
@@ -41,9 +42,12 @@ return new class extends Migration
         $competitionPermissions = collect($allPermissions)
             ->filter(fn($_, $key) => str_contains($key, 'competition') && $key !== 'approve competition')
             ->values();
+        $achievementPermissions = collect($allPermissions)
+            ->filter(fn($_, $key) => str_contains($key, 'achievement') && $key !== 'approve achievement')
+            ->values();
 
-        $roles['Student']->givePermissionTo($competitionPermissions);
-        $roles['Supervisor']->givePermissionTo($competitionPermissions);
+        $roles['Student']->givePermissionTo($competitionPermissions, $achievementPermissions);
+        $roles['Supervisor']->givePermissionTo($competitionPermissions, $achievementPermissions);
     }
 
     /**

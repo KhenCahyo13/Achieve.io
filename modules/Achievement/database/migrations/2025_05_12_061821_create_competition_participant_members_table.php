@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('participant_members', function (Blueprint $table) {
+        Schema::create('competition_participant_members', function (Blueprint $table) {
             $table->foreignUuid('participant_id')->references('id')->on('competition_participants')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
