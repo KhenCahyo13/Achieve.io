@@ -2,18 +2,21 @@
 
 namespace Modules\Achievement\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Modules\Master\Models\Period;
 use Modules\Master\Models\User;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 // use Modules\Achievement\Database\Factories\AchievementFactory;
 
-class Achievement extends Model
+class Achievement extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, HasUuids, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -21,8 +24,6 @@ class Achievement extends Model
     protected $table = 'achievements';
     protected $fillable = [
         'student_id',
-        'lecturer_id',
-        'competition_id',
         'participant_id',
         'period_id',
         'title',
@@ -35,14 +36,9 @@ class Achievement extends Model
         return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function lecturer(): BelongsTo
+    public function participant(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'lecturer_id');
-    }
-
-    public function competition(): BelongsTo
-    {
-        return $this->belongsTo(Competition::class, 'competition_id');
+        return $this->belongsTo(CompetitionParticipant::class, 'participant_id');
     }
 
     public function period(): BelongsTo
@@ -50,9 +46,14 @@ class Achievement extends Model
         return $this->belongsTo(Period::class, 'period_id');
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('certificate')->singleFile();
+    }
+
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('student', 'lecturer', 'period', 'competition')->where('title', 'like', '%' . $search . '%');
+        $query = self::with('student', 'period', 'participant', 'participant.lecturer')->where('title', 'like', '%' . $search . '%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);

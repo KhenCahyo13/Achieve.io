@@ -31,6 +31,16 @@ class CompetitionParticipant extends Model
         return $this->belongsTo(Competition::class);
     }
 
+    public function leader()
+    {
+        return $this->belongsTo(User::class, 'leader_id');
+    }
+    
+    public function lecturer()
+    {
+        return $this->belongsTo(User::class, 'lecturer_id');
+    }
+
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(

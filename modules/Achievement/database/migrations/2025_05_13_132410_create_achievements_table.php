@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('achievements', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignUuid('competition_id')->nullable()->references('id')->on('competitions')->onDelete('set null')->onUpdate('set null');
             $table->foreignUuid('participant_id')->nullable()->references('id')->on('competition_participants')->onDelete('set null')->onUpdate('set null');
             $table->foreignUuid('period_id')->nullable()->references('id')->on('periods')->onDelete('set null')->onUpdate('set null');
             $table->string('title', 150);

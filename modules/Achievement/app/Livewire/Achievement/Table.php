@@ -2,6 +2,7 @@
 
 namespace Modules\Achievement\Livewire\Achievement;
 
+use Livewire\Attributes\On;
 use Modules\Achievement\Models\Achievement;
 use Modules\Core\Abstracts\DataTable;
 
@@ -16,5 +17,11 @@ class Table extends DataTable
         );
 
         return view('achievement::livewire.achievement.table', compact('achievements'));
+    }
+
+    #[On('achievement-created')]
+    public function onAction()
+    {
+        $this->resetPage();
     }
 }

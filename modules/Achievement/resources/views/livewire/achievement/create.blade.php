@@ -26,9 +26,9 @@
                 </h4>
                 {{-- Form --}}
                 <div class="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
-                    <div class="form-groups">
+                    <div class="form-groups col-span-full">
                         <label class="form-label">
-                            Title
+                            Title <span class="text-red-500">*</span>
                         </label>
                         <input type="text" placeholder="Achievement title" class="text-input" wire:model="form.title">
                         @error('form.title')
@@ -37,38 +37,11 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="form-groups">
-                        <label class="form-label">
-                            Competition <span class="text-red-500">*</span>
-                        </label>
-                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                                @change="isOptionSelected = true" wire:model="form.competition">
-                                <option value="">- Select competition</option>
-                                @foreach ($competitions as $competition)
-                                    <option value="{{ $competition }}">{{ $competition->name }}</option>
-                                @endforeach
-                            </select>
-                            <span
-                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </span>
-                        </div>
-                        @error('form.competition')
-                            <span class="text-theme-xs text-error-500">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
                     <div class="form-groups col-span-full">
                         <label class="form-label">
-                            Description
+                            Description <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" placeholder="Achievement description" class="text-input"
-                            wire:model="form.description">
+                        <textarea rows="4" class="textarea-input" placeholder="Achievement description" wire:model="form.description"></textarea>
                         @error('form.description')
                             <span class="form-error">
                                 {{ $message }}
@@ -76,15 +49,19 @@
                         @enderror
                     </div>
                     <div class="form-groups">
-                        <label class="form-label">
-                            Periods <span class="text-red-500">*</span>
-                        </label>
+                        <div class="flex flex-col">
+                            <label class="form-label">
+                                Competition <span class="text-red-500">*</span>
+                            </label>
+                            <span class="form-error text-gray-400">List of competitions you participated in</span>
+                        </div>
                         <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
                             <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                                @change="isOptionSelected = true" wire:model="form.period">
-                                <option value="">- Select period</option>
-                                @foreach ($periods as $period)
-                                    <option value="{{ $period }}">{{ $period->name }}</option>
+                                @change="isOptionSelected = true" wire:model="form.participantId">
+                                <option value="">- Select competition</option>
+                                @foreach ($competitions as $competition)
+                                    <option value="{{ $competition->id }}">{{ $competition->competition->name }} -
+                                        {{ $competition->competition->category }}</option>
                                 @endforeach
                             </select>
                             <span
@@ -95,7 +72,70 @@
                                 </svg>
                             </span>
                         </div>
-                        @error('form.competition')
+                        @error('form.participantId')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-groups">
+                        <div class="flex flex-col">
+                            <label class="form-label">
+                                Periods <span class="text-red-500">*</span>
+                            </label>
+                            <span class="form-error text-gray-400">Period when participating in the competition</span>
+                        </div>
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true" wire:model="form.periodId">
+                                <option value="">- Select period</option>
+                                @foreach ($periods as $period)
+                                    <option value="{{ $period->id }}">{{ $period->title }}</option>
+                                @endforeach
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </div>
+                        @error('form.periodId')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-groups col-span-full">
+                        <label class="form-label">
+                            Certificate <span class="text-red-500">*</span>
+                        </label>
+                        <div @class([
+                            'relative overflow-hidden p-8 flex w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white/30',
+                            'text-white/80' => $certificate,
+                        ])>
+                            @if ($certificate)
+                                <div class="absolute z-30">
+                                    <div class="absolute flex h-full w-full items-center justify-center bg-black/60"></div>
+                                    <img src="{{ $certificate->temporaryUrl() }}" alt="Certificate">
+                                </div>
+                            @endif
+                            <div class="flex flex-col items-center gap-y-2 z-40">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                                </svg>
+                                <label for="certificateFile" class="font-medium cursor-pointer hover:underline">
+                                    <input id="certificateFile" type="file" class="sr-only"
+                                        aria-describedby="validFileFormats" wire:model="certificate" />
+                                    Upload or change file here
+                                </label>
+                                <small id="validFileFormats">File Image - Max 2MB</small>
+                            </div>
+                        </div>
+                        @error('certificate')
                             <span class="text-theme-xs text-error-500">
                                 {{ $message }}
                             </span>

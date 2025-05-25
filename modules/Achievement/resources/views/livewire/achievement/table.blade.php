@@ -70,7 +70,7 @@
                             <th class="cursor-pointer px-5 py-3 sm:px-6">
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                        Student
+                                        Team Name
                                     </p>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor"
@@ -80,6 +80,21 @@
                                     </svg>
                                 </div>
                             </th>
+                            @if (auth()->user()->hasRole('Admin')) 
+                                <th class="cursor-pointer px-5 py-3 sm:px-6">
+                                    <div class="flex items-center gap-x-2">
+                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                            Student
+                                        </p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="size-5 text-gray-500 dark:text-gray-400">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
+                                    </div>
+                                </th>
+                            @endif
                             <th class="cursor-pointer px-5 py-3 sm:px-6">
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
@@ -129,15 +144,31 @@
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
                                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            {{ $achievement->student->name ?? 'N/A' }}
+                                            {{ $achievement->participant->team_name ?? 'N/A' }}
+                                        </p>
+                                    </div>
+                                </td>
+                                @if (auth()->user()->hasRole('Admin'))
+                                    <td class="px-5 py-4 sm:px-6">
+                                        <div class="flex items-center">
+                                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                                {{ $achievement->student->name ?? 'N/A' }}
+                                            </p>
+                                        </div>
+                                    </td>
+                                @endif
+                                <td class="px-5 py-4 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                            {{ $achievement->participant->lecturer->name ?? 'N/A' }}
                                         </p>
                                     </div>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            {{ $achievement->lecturer->name ?? 'N/A' }}
-                                        </p>
+                                        <livewire:core::components.badge
+                                            type="{{ $achievement->verification_status === 'On Process' ? 'info' : ($achievement->verification_status === 'Rejected' ? 'error' : 'success') }}"
+                                            text="{{ $achievement->verification_status }}" />
                                     </div>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
@@ -163,7 +194,7 @@
                                                 </button>
                                             @endcan
                                             @can('update achievement')
-                                                <a href="{{ route('achievement.achievement.edit', $achievement->id) }}"
+                                                <a href="#"
                                                     class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
                                                     Update
                                                 </a>
