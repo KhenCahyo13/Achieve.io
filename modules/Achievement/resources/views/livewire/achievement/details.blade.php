@@ -129,9 +129,9 @@
                 @if ($achievement->verification_status === 'On Process')
                     <div class="mt-8 flex items-center justify-end gap-x-2">
                         <button class="btn-outline-danger w-fit"
-                            wire:click="approveCompetition('Rejected', '{{ $achievement->id }}')">Reject</button>
+                            wire:click="approveAchievement('Rejected')">Reject</button>
                         <button class="btn-success w-fit"
-                            wire:click="approveCompetition('Approved', '{{ $achievement->id }}')">Approve</button>
+                            wire:click="approveAchievement('Approved')">Approve</button>
                     </div>
                 @endif
             @endcan

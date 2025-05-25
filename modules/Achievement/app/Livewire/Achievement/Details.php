@@ -2,9 +2,15 @@
 
 namespace Modules\Achievement\Livewire\Achievement;
 
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Modules\Achievement\Models\Achievement;
+use Modules\Achievement\Notifications\AchievementApproval;
+use Modules\Master\Models\User;
 
 class Details extends Component
 {
@@ -15,6 +21,29 @@ class Details extends Component
         $achievement = Achievement::with('student', 'period', 'participant', 'participant.competition', 'participant.lecturer', 'participant.leader', 'participant.members')->where('id', $this->id)->first();
 
         return view('achievement::livewire.achievement.details', compact('achievement'));
+    }
+
+    public function approveAchievement(string $value)
+    {
+        $achievement = Achievement::find($this->id);
+        $student = User::find($achievement->student_id);
+
+        try {
+            DB::beginTransaction();
+            Achievement::approveAchievement($this->id, $value);
+
+            if ($value === 'Approved') {
+                $this->dispatch('achievement-approval', message: 'Achievement approved successfully!');
+            } else {
+                $this->dispatch('achievement-approval', message: 'Achievement rejected successfully!');
+            }
+
+            Notification::send($student, new AchievementApproval($achievement, $value));
+            DB::commit();
+        } catch (Exception $e) {
+            Log::error('Error approving achievement: ' . $e->getMessage());
+            DB::rollBack();
+        }
     }
 
     #[On('achievement-show-details-modal')]

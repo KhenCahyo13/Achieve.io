@@ -33,6 +33,7 @@ class Table extends DataTable
     }
 
     #[On('achievement-created')]
+    #[On('achievement-approval')]
     public function onAction()
     {
         $this->resetPage();

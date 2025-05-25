@@ -4,6 +4,7 @@ namespace Modules\Achievement\Livewire\Competition;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -42,6 +43,7 @@ class Details extends Component
             Notification::send($createdByUser, new CompetitionApproval($competition, $value));
             DB::commit();
         } catch (Exception $e) {
+            Log::error('Error approving competition: ' . $e->getMessage());
             DB::rollBack();
         }
     }

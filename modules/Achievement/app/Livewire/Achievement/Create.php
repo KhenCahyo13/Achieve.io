@@ -5,11 +5,13 @@ namespace Modules\Achievement\Livewire\Achievement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Achievement\Models\Achievement;
 use Modules\Achievement\Models\CompetitionParticipant;
+use Modules\Achievement\Notifications\AchievementCreated;
 use Modules\Master\Models\Period;
 use Modules\Master\Models\User;
 
@@ -42,6 +44,7 @@ class Create extends Component
 
         try {
             DB::beginTransaction();
+            $adminUsers = User::withRole('Admin')->get();
             $createdAchievement = Achievement::create([
                 'student_id' => Auth::user()->id,
                 'participant_id' => $this->form->participantId,
@@ -51,6 +54,8 @@ class Create extends Component
                 'verification_status' => 'On Process',
             ]);
             $createdAchievement->addMedia($this->certificate->getRealPath())->toMediaCollection('certificate');
+
+            Notification::send($adminUsers, new AchievementCreated($createdAchievement));
 
             $this->certificate = null;
             $this->form->reset();

@@ -68,6 +68,16 @@ class Achievement extends Model implements HasMedia
         return $query->paginate($perPage);
     }
 
+    public static function approveAchievement(string $achievementId, string $value)
+    {
+        $achievement = self::find($achievementId);
+
+        if ($achievement) {
+            $achievement->verification_status = $value;
+            $achievement->save();
+        }
+    }
+
     // protected static function newFactory(): AchievementFactory
     // {
     //     // return AchievementFactory::new();
