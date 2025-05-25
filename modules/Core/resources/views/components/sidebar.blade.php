@@ -1,3 +1,7 @@
+@php
+    $currentRoute = request()->route()->getName();
+@endphp
+
 <aside :class="sidebarToggle ? 'translate-x-0 lg:w-[90px]' : '-translate-x-full'"
     class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 transition-all duration-300 ease-in-out dark:border-gray-800 dark:bg-black lg:static lg:translate-x-0">
     <!-- SIDEBAR HEADER -->
@@ -39,10 +43,14 @@
                     <!-- Achievement -->
                     @can('view achievement')
                         <li>
-                            <a href="{{ route('achievement.achievement.index') }}"
-                                @click="selected = (selected === 'Achievement' ? '':'Achievement')" class="menu-item group"
-                                :class="(selected === 'Achievement') ? 'menu-item-active' :
-                                'menu-item-inactive'">
+                            <a
+                                href="{{ route('achievement.achievement.index') }}"
+                                @class([
+                                    'menu-item group',
+                                    'menu-item-active' => str_contains($currentRoute, 'achievement.achievement'),
+                                    'menu-item-inactive' => str_contains($currentRoute, 'achievement.achievement') === false
+                                ])
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -57,10 +65,14 @@
                     <!-- Competition -->
                     @can('view competition')
                         <li>
-                            <a href="{{ route('achievement.competition.index') }}"
-                                @click="selected = (selected === 'Competition' ? '':'Competition')" class="menu-item group"
-                                :class="(selected === 'Competition') ? 'menu-item-active' :
-                                'menu-item-inactive'">
+                            <a
+                                href="{{ route('achievement.competition.index') }}"
+                                @class([
+                                    'menu-item group',
+                                    'menu-item-active' => str_contains($currentRoute, 'achievement.competition'),
+                                    'menu-item-inactive' => str_contains($currentRoute, 'achievement.competition') === false
+                                ])
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -95,10 +107,14 @@
                     <!-- Department -->
                     @can('view department')
                         <li>
-                            <a href="{{ route('master.department.index') }}"
-                                @click="selected = (selected === 'Department' ? '':'Department')" class="menu-item group"
-                                :class="(selected === 'Department') ? 'menu-item-active' :
-                                'menu-item-inactive'">
+                            <a
+                                href="{{ route('master.department.index') }}"
+                                @class([
+                                    'menu-item group',
+                                    'menu-item-active' => str_contains($currentRoute, 'master.department'),
+                                    'menu-item-inactive' => str_contains($currentRoute, 'master.department') === false
+                                ])
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -113,11 +129,14 @@
                     <!-- Study Program -->
                     @can('view study program')
                         <li>
-                            <a href="{{ route('master.studyprogram.index') }}"
-                                @click="selected = (selected === 'StudyProgram' ? '':'StudyProgram')"
-                                class="menu-item group"
-                                :class="(selected === 'StudyProgram') ? 'menu-item-active' :
-                                'menu-item-inactive'">
+                            <a
+                                href="{{ route('master.studyprogram.index') }}"
+                                @class([
+                                    'menu-item group',
+                                    'menu-item-active' => str_contains($currentRoute, 'master.studyprogram'),
+                                    'menu-item-inactive' => str_contains($currentRoute, 'master.studyprogram') === false
+                                ])
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -132,10 +151,14 @@
                     <!-- Period -->
                     @can('view period')
                         <li>
-                            <a href="{{ route('master.period.index') }}"
-                                @click="selected = (selected === 'Period' ? '':'Period')" class="menu-item group"
-                                :class="(selected === 'Period') ? 'menu-item-active' :
-                                'menu-item-inactive'">
+                            <a
+                                href="{{ route('master.period.index') }}"
+                                @class([
+                                    'menu-item group',
+                                    'menu-item-active' => str_contains($currentRoute, 'master.period'),
+                                    'menu-item-inactive' => str_contains($currentRoute, 'master.period') === false
+                                ])
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
