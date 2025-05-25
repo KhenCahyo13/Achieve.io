@@ -19,6 +19,11 @@ class Table extends DataTable
         return view('achievement::livewire.achievement.table', compact('achievements'));
     }
 
+    public function showDetailsModal(string $id)
+    {
+        $this->dispatch('achievement-show-details-modal', id: $id);
+    }
+
     #[On('achievement-created')]
     public function onAction()
     {
