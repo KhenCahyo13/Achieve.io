@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('nip', 16);
             $table->date('birth_date');
             $table->char('phone_number', 13);
-            $table->string('email', 150);
             $table->timestamps();
         });
     }

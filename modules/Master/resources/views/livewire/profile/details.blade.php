@@ -8,7 +8,8 @@
                             alt="user">
                     </div>
                     <div class="order-3 xl:order-2">
-                        <h4 class="mb-2 text-lg font-semibold text-center text-gray-800 dark:text-white/90 xl:text-left">
+                        <h4
+                            class="mb-2 text-lg font-semibold text-center text-gray-800 dark:text-white/90 xl:text-left capitalize">
                             {{ auth()->user()->name }}
                         </h4>
                         <div class="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
@@ -20,18 +21,16 @@
                                 <p class="text-sm text-gray-500 dark:text-gray-400">Administrator</p>
                             @elseif (auth()->user()->hasRole('Student'))
                                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                                    Student of {{ $userWithDetails->studyProgram->name ?? '-' }}
+                                    Student of {{ $userWithDetails->student->studyProgram->name ?? '-' }}
                                 </p>
                             @elseif (auth()->user()->hasRole('Lecturer'))
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Lecturer of D4 Informatics
-                                    Engineering</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Lecturer of {{ $userWithDetails->lecturer->department->name ?? '-' }}</p>
                             @endif
                         </div>
                     </div>
                 </div>
                 @if (auth()->user()->hasRole('Admin'))
-                    <button @click="isProfileInfoModal = true"
-                        class="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto">
+                    <button @click="isProfileInfoModal = true" class="btn-outline-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -56,6 +55,38 @@
                                 <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">Fullname</p>
                                 <p class="text-sm font-medium text-gray-800 dark:text-white/90">
                                     {{ auth()->user()->name }}</p>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">
+                                    @if (auth()->user()->hasRole('Student'))
+                                        NIM
+                                    @else
+                                        NIP
+                                    @endif
+                                </p>
+                                <p class="text-sm font-medium text-gray-800 dark:text-white/90">
+                                    @if (auth()->user()->hasRole('Student'))
+                                        {{ $userWithDetails->student->nim ?? '-' }}
+                                    @else
+                                        {{ $userWithDetails->lecturer->nip ?? '-' }}
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">
+                                    @if (auth()->user()->hasRole('Student'))
+                                        Study Program
+                                    @else
+                                        Department
+                                    @endif
+                                </p>
+                                <p class="text-sm font-medium text-gray-800 dark:text-white/90">
+                                    @if (auth()->user()->hasRole('Student'))
+                                        {{ $userWithDetails->student->studyProgram->name ?? '-' }}
+                                    @else
+                                        {{ $userWithDetails->lecturer->department->name ?? '-' }}
+                                    @endif
+                                </p>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">Phone Number</p>
@@ -86,49 +117,16 @@
                                 <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">Birth Date</p>
                                 <p class="text-sm font-medium text-gray-800 dark:text-white/90">
                                     @if (auth()->user()->hasRole('Student'))
-                                        {{ $userWithDetails->student->birth_date ?? '-' }}
+                                        {{ $userWithDetails->student->birth_date ? \Carbon\Carbon::parse($userWithDetails->student->birth_date)->translatedFormat('d F Y') : '-' }}
                                     @else
-                                        {{ $userWithDetails->lecturer->birth_date ?? '-' }}
-                                    @endif
-                                </p>
-                            </div>
-                            <div class="flex flex-col gap-2">
-                                <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">
-                                    @if (auth()->user()->hasRole('Student'))
-                                        NIM
-                                    @else
-                                        NIP
-                                    @endif
-                                </p>
-                                <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-                                    @if (auth()->user()->hasRole('Student'))
-                                        {{ $userWithDetails->student->nim ?? '-' }}
-                                    @else
-                                        {{ $userWithDetails->lecturer->nip ?? '-' }}
-                                    @endif
-                                </p>
-                            </div>
-                            <div class="flex flex-col gap-2">
-                                <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">
-                                    @if (auth()->user()->hasRole('Student'))
-                                        Study Program
-                                    @else
-                                        Department
-                                    @endif
-                                </p>
-                                <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-                                    @if (auth()->user()->hasRole('Student'))
-                                        {{ $userWithDetails->studyProgram->name ?? '-' }}
-                                    @else
-                                        {{ $userWithDetails->department->name ?? '-' }}
+                                        {{ $userWithDetails->lecturer->birth_date ? \Carbon\Carbon::parse($userWithDetails->lecturer->birth_date)->translatedFormat('d F Y') : '-' }}
                                     @endif
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <button @click="isProfileInfoModal = true"
-                        class="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto">
+                    <button wire:click="showUpdatePersonalInformationModal()"=true" class="btn-outline-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round"

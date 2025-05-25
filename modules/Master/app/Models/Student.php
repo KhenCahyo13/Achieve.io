@@ -2,6 +2,7 @@
 
 namespace Modules\Master\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -20,14 +21,13 @@ class Student extends Model
         'user_id',
         'study_program_id',
         'address',
-        'nip',
+        'nim',
         'birth_date',
         'phone_number',
-        'email',
     ];
 
     public function studyProgram(): BelongsTo {
-        return $this->belongsTo(StudyProgram::class, 'study_program_id');
+        return $this->belongsTo(StudyProgram::class);
     }
 
     // protected static function newFactory(): StudentFactory
