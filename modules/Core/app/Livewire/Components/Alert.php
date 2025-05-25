@@ -7,6 +7,7 @@ use Livewire\Component;
 class Alert extends Component
 {
     public string $type = '';
+
     public string $message = '';
 
     public function mount(string $type, string $message)

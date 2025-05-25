@@ -34,17 +34,17 @@ return new class extends Migration
             'Accounting' => [
                 'D3 Accounting',
                 'D4 Finance',
-                'D4 Management Accounting'
+                'D4 Management Accounting',
             ],
             'Chemical Engineering' => [
                 'D3 Chemical Engineering',
-                'D4 Chemical Engineering'
+                'D4 Chemical Engineering',
             ],
             'Business Administration' => [
                 'D3 Business Administration',
                 'D3 English',
                 'D4 Marketing Management',
-                'D4 English'
+                'D4 English',
             ],
             'Electrical Engineering' => [
                 'D3 Electronics Engineering',
@@ -52,26 +52,26 @@ return new class extends Migration
                 'D3 Electrical Engineering',
                 'D4 Digital Telecommunication Networks',
                 'D4 Power Systems',
-                'D4 Electronics Engineering'
+                'D4 Electronics Engineering',
             ],
             'Civil Engineering' => [
                 'D3 Civil Engineering',
                 'D3 Mining Engineering',
                 'D3 Road, Bridge, and Water Construction Engineering Technology',
                 'D4 Construction Engineering Management',
-                'D5 Road and Bridge Construction Engineering Technology'
+                'D5 Road and Bridge Construction Engineering Technology',
             ],
         ];
 
         foreach ($departments as $department => $studyPrograms) {
             $department = Department::create([
-                'name' => $department
+                'name' => $department,
             ]);
 
             foreach ($studyPrograms as $studyProgram) {
                 StudyProgram::create([
                     'name' => $studyProgram,
-                    'department_id' => $department->id
+                    'department_id' => $department->id,
                 ]);
             }
         }

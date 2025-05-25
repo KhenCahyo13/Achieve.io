@@ -41,7 +41,7 @@ class Update extends Component
 
             if (Auth::user()->hasRole('Student')) {
                 Student::updateOrCreate([
-                    'user_id' => Auth::id()
+                    'user_id' => Auth::id(),
                 ], [
                     'study_program_id' => $this->form->placeId,
                     'nim' => $this->form->masterNumber,
@@ -51,7 +51,7 @@ class Update extends Component
                 ]);
             } elseif (Auth::user()->hasRole('Lecturer')) {
                 Lecturer::updateOrCreate([
-                    'user_id' => Auth::id()
+                    'user_id' => Auth::id(),
                 ], [
                     'department_id' => $this->form->placeId,
                     'nip' => $this->form->masterNumber,
@@ -65,7 +65,7 @@ class Update extends Component
 
             DB::commit();
         } catch (Exception $e) {
-            Log::error('Error updating profile: ' . $e->getMessage());
+            Log::error('Error updating profile: '.$e->getMessage());
             DB::rollBack();
         }
     }

@@ -3,8 +3,8 @@
 namespace Modules\Achievement\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Modules\Master\Models\Period;
@@ -22,6 +22,7 @@ class Achievement extends Model implements HasMedia
      * The attributes that are mass assignable.
      */
     protected $table = 'achievements';
+
     protected $fillable = [
         'student_id',
         'participant_id',
@@ -53,7 +54,7 @@ class Achievement extends Model implements HasMedia
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('student', 'period', 'participant', 'participant.lecturer')->where('title', 'like', '%' . $search . '%');
+        $query = self::with('student', 'period', 'participant', 'participant.lecturer')->where('title', 'like', '%'.$search.'%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);
@@ -61,7 +62,7 @@ class Achievement extends Model implements HasMedia
 
         if (Auth::user()->hasRole('Student')) {
             $query->where('student_id', Auth::user()->id);
-        } else if (Auth::user()->hasRole('Lecturer')) {
+        } elseif (Auth::user()->hasRole('Lecturer')) {
             $query->where('lecturer_id', Auth::user()->id);
         }
 

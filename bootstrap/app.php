@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'check-auth' => CheckAuthMiddleware::class
+            'check-auth' => CheckAuthMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

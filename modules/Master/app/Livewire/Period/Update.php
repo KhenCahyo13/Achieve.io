@@ -9,6 +9,7 @@ use Modules\Master\Models\Period;
 class Update extends Component
 {
     public Form $form;
+
     public $id = '';
 
     public function render()

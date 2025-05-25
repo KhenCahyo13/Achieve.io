@@ -16,8 +16,11 @@ class Update extends Component
     use WithFileUploads;
 
     public Form $form;
+
     public string $id = '';
+
     public string $oldPoster;
+
     public $poster;
 
     public function mount(string $id)
@@ -31,6 +34,7 @@ class Update extends Component
         $fields = Field::all();
 
         $this->setupForm($this->id);
+
         return view('achievement::livewire.competition.update', compact('fields'));
     }
 
@@ -62,7 +66,7 @@ class Update extends Component
             $this->dispatch('competition-updated', message: 'Competition updated successfully!');
             DB::commit();
         } catch (Exception $e) {
-            Log::error('Error while updating competition: ' . $e);
+            Log::error('Error while updating competition: '.$e);
             DB::rollBack();
         }
     }

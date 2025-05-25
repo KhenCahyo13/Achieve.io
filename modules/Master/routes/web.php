@@ -2,11 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Master\Http\Controllers\DepartmentController;
-use Modules\Master\Http\Controllers\MasterController;
 use Modules\Master\Http\Controllers\PeriodController;
 use Modules\Master\Http\Controllers\ProfileController;
 use Modules\Master\Http\Controllers\StudyProgramController;
-
 
 Route::middleware(['check-auth'])->prefix('master')->group(function () {
     // Department Controller

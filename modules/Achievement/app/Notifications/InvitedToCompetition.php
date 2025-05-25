@@ -3,9 +3,8 @@
 namespace Modules\Achievement\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Modules\Achievement\Models\Competition;
 
@@ -18,7 +17,8 @@ class InvitedToCompetition extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(Competition $competition) {
+    public function __construct(Competition $competition)
+    {
         $this->competition = $competition;
     }
 
@@ -48,7 +48,7 @@ class InvitedToCompetition extends Notification
     {
         return [
             'title' => 'Competition Invitation',
-            'message' => ucfirst(Auth::user()->name) . ' invited you to competition ' . ucfirst($this->competition->name),
+            'message' => ucfirst(Auth::user()->name).' invited you to competition '.ucfirst($this->competition->name),
             'link' => 'achievement.competition.index',
         ];
     }

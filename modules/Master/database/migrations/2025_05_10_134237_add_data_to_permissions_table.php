@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Modules\Master\Models\Permission;
 use Modules\Master\Models\Role;
 
@@ -15,7 +13,7 @@ return new class extends Migration
     {
         // Create roles
         $roles = collect(['Admin', 'Student', 'Supervisor'])
-            ->mapWithKeys(fn($role) => [$role => Role::create(['name' => $role])]);
+            ->mapWithKeys(fn ($role) => [$role => Role::create(['name' => $role])]);
 
         // Define all permissions
         $permissions = [
@@ -40,10 +38,10 @@ return new class extends Migration
 
         // Assign only competition permissions to Student & Supervisor
         $competitionPermissions = collect($allPermissions)
-            ->filter(fn($_, $key) => str_contains($key, 'competition') && $key !== 'approve competition')
+            ->filter(fn ($_, $key) => str_contains($key, 'competition') && $key !== 'approve competition')
             ->values();
         $achievementPermissions = collect($allPermissions)
-            ->filter(fn($_, $key) => str_contains($key, 'achievement') && $key !== 'approve achievement')
+            ->filter(fn ($_, $key) => str_contains($key, 'achievement') && $key !== 'approve achievement')
             ->values();
 
         $roles['Student']->givePermissionTo($competitionPermissions, $achievementPermissions);

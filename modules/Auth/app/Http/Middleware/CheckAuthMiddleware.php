@@ -13,10 +13,10 @@ class CheckAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('auth.signin.index')->with('error', 'You must login first to continue!');
         }
-        
+
         return $next($request);
     }
 }

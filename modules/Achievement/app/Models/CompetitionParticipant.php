@@ -3,8 +3,8 @@
 namespace Modules\Achievement\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Master\Models\User;
 
@@ -18,12 +18,13 @@ class CompetitionParticipant extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'competition_participants';
+
     protected $fillable = [
         'leader_id',
         'lecturer_id',
         'competition_id',
         'team_name',
-        'topic_title'
+        'topic_title',
     ];
 
     public function competition()
@@ -35,7 +36,7 @@ class CompetitionParticipant extends Model
     {
         return $this->belongsTo(User::class, 'leader_id');
     }
-    
+
     public function lecturer()
     {
         return $this->belongsTo(User::class, 'lecturer_id');
@@ -73,7 +74,7 @@ class CompetitionParticipant extends Model
                     });
             })
             ->whereHas('competition', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->paginate($perPage);
     }

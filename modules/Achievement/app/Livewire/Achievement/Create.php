@@ -23,6 +23,7 @@ class Create extends Component
     #[Validate('mimes:png,jpg,jpeg', message: 'Only JPG, JPEG, or PNG allowed')]
     #[Validate('max:2048', message: 'Certificate size must be less than 2MB')]
     public $certificate;
+
     public Form $form;
 
     public function render()
@@ -63,7 +64,7 @@ class Create extends Component
             $this->dispatch('achievement-created', message: 'Achievement created successfully!');
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error while creating achievement: ' . $e);
+            Log::error('Error while creating achievement: '.$e);
             DB::rollBack();
         }
     }

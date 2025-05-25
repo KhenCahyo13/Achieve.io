@@ -43,7 +43,7 @@ class Details extends Component
             Notification::send($createdByUser, new CompetitionApproval($competition, $value));
             DB::commit();
         } catch (Exception $e) {
-            Log::error('Error approving competition: ' . $e->getMessage());
+            Log::error('Error approving competition: '.$e->getMessage());
             DB::rollBack();
         }
     }

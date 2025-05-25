@@ -3,8 +3,9 @@
 namespace Modules\Achievement\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 // use Modules\Achievement\Database\Factories\FieldFactory;
 
 class Field extends Model
@@ -15,6 +16,7 @@ class Field extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'fields';
+
     protected $fillable = [
         'name',
         'general_name',
@@ -24,7 +26,6 @@ class Field extends Model
     {
         return $this->belongsToMany(Competition::class, 'competition_fields');
     }
-
 
     // protected static function newFactory(): FieldFactory
     // {

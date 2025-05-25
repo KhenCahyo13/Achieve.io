@@ -3,7 +3,6 @@
 namespace Modules\Achievement\Livewire\Competition;
 
 use Livewire\Attributes\On;
-use Livewire\Component;
 use Modules\Achievement\Models\Competition;
 use Modules\Core\Abstracts\DataTable;
 

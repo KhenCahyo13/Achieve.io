@@ -17,7 +17,7 @@ use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class Competition extends Model implements HasMedia
 {
-    use HasFactory, HasUuids, HasRichText, InteractsWithMedia;
+    use HasFactory, HasRichText, HasUuids, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -61,7 +61,7 @@ class Competition extends Model implements HasMedia
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('createdBy')->where('name', 'like', '%' . $search . '%');
+        $query = self::with('createdBy')->where('name', 'like', '%'.$search.'%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);
@@ -76,7 +76,7 @@ class Competition extends Model implements HasMedia
 
     public static function getAvailable(int $perPage, string $search, array $sorts, array $filters)
     {
-        $query = self::with('fields')->where('name', 'like', '%' . $search . '%')->where('verification_status', 'Approved');
+        $query = self::with('fields')->where('name', 'like', '%'.$search.'%')->where('verification_status', 'Approved');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);

@@ -41,7 +41,7 @@ class Details extends Component
             Notification::send($student, new AchievementApproval($achievement, $value));
             DB::commit();
         } catch (Exception $e) {
-            Log::error('Error approving achievement: ' . $e->getMessage());
+            Log::error('Error approving achievement: '.$e->getMessage());
             DB::rollBack();
         }
     }

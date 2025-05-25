@@ -3,8 +3,9 @@
 namespace Modules\Master\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 // use Modules\Master\Database\Factories\PeriodFactory;
 
 class Period extends Model
@@ -15,6 +16,7 @@ class Period extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'periods';
+
     protected $fillable = [
         'title',
         'start_year',
@@ -23,7 +25,7 @@ class Period extends Model
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::where('title', 'like', '%' . $search . '%');
+        $query = self::where('title', 'like', '%'.$search.'%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);

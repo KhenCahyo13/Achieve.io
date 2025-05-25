@@ -3,9 +3,8 @@
 namespace Modules\Achievement\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Modules\Achievement\Models\Achievement;
 
@@ -14,12 +13,14 @@ class AchievementApproval extends Notification
     use Queueable;
 
     protected Achievement $achievement;
+
     protected string $value;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Achievement $achievement, string $value) {
+    public function __construct(Achievement $achievement, string $value)
+    {
         $this->achievement = $achievement;
         $this->value = $value;
     }
@@ -50,7 +51,7 @@ class AchievementApproval extends Notification
     {
         return [
             'title' => 'Achievement Approval',
-            'message' => ucfirst(Auth::user()->name) . ' ' . $this->value . ' your achievement data ' . ucfirst($this->achievement->title),
+            'message' => ucfirst(Auth::user()->name).' '.$this->value.' your achievement data '.ucfirst($this->achievement->title),
             'link' => 'achievement.achievement.index',
         ];
     }

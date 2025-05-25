@@ -3,8 +3,8 @@
 namespace Modules\Master\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 // use Modules\Master\Database\Factories\StudentFactory;
@@ -17,6 +17,7 @@ class Student extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'students';
+
     protected $fillable = [
         'user_id',
         'study_program_id',
@@ -26,7 +27,8 @@ class Student extends Model
         'phone_number',
     ];
 
-    public function studyProgram(): BelongsTo {
+    public function studyProgram(): BelongsTo
+    {
         return $this->belongsTo(StudyProgram::class);
     }
 

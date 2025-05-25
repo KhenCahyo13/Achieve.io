@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Core\Http\Controllers\CoreController;
 use Modules\Core\Http\Controllers\NotificationController;
 
 Route::middleware(['check-auth'])->group(function () {

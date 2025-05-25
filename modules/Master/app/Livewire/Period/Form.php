@@ -15,7 +15,7 @@ class Form extends LivewireForm
     #[Validate('integer', message: 'Start year must be an integer')]
     #[Validate('digits:4', message: 'Start year must be 4 digits')]
     public string $start_year = '';
-    
+
     #[Validate('required', message: 'End year is required')]
     #[Validate('integer', message: 'End year must be an integer')]
     #[Validate('digits:4', message: 'End year must be 4 digits')]

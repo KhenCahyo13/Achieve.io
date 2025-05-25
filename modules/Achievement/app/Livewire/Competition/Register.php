@@ -49,17 +49,17 @@ class Register extends Component
         $this->validate();
 
         $competition = Competition::find($this->competitionId);
-        
+
         if ($competition && $competition->category === 'Team') {
             $this->validate([
                 'members' => [
                     'required',
                     'array',
-                    'min:1'
-                ]
+                    'min:1',
+                ],
             ], [
                 'members.required' => 'Members is rqeuired',
-                'members.min' => 'At least one member is required'
+                'members.min' => 'At least one member is required',
             ]);
         }
 
@@ -68,7 +68,7 @@ class Register extends Component
             'lecturer_id' => $this->lecturerId,
             'competition_id' => $this->competitionId,
             'team_name' => $this->teamName,
-            'topic_title' => $this->topicTitle
+            'topic_title' => $this->topicTitle,
         ]);
 
         if ($competition && $competition->category === 'Team') {

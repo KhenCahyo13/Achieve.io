@@ -23,6 +23,7 @@ class Create extends Component
     #[Validate('mimes:png,jpg,jpeg', message: 'Only JPG, JPEG, or PNG allowed')]
     #[Validate('max:2048', message: 'Poster size must be less than 2MB')]
     public $poster;
+
     public Form $form;
 
     public function render()
@@ -59,7 +60,7 @@ class Create extends Component
             $this->dispatch('competition-created', message: 'Competition created successfully!');
             DB::commit();
         } catch (Exception $e) {
-            Log::error('Error while creating competition: ' . $e);
+            Log::error('Error while creating competition: '.$e);
             DB::rollBack();
         }
     }

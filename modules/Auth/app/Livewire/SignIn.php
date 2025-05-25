@@ -11,6 +11,7 @@ class SignIn extends Component
 {
     #[Validate('required', message: 'Email is required.')]
     public string $email = '';
+
     #[Validate('required', message: 'Password is required.')]
     public string $password = '';
 
@@ -19,18 +20,21 @@ class SignIn extends Component
         return view('auth::livewire.sign-in');
     }
 
-    public function login() {
+    public function login()
+    {
         $this->validate();
 
         $user = User::where('email', $this->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             $this->dispatch('login-failed');
+
             return;
         }
 
-        if (!password_verify($this->password, $user->password)) {
+        if (! password_verify($this->password, $user->password)) {
             $this->dispatch('login-failed');
+
             return;
         }
 

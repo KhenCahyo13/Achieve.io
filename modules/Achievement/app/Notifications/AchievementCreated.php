@@ -3,9 +3,8 @@
 namespace Modules\Achievement\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Modules\Achievement\Models\Achievement;
 
@@ -18,7 +17,8 @@ class AchievementCreated extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(Achievement $achievement) {
+    public function __construct(Achievement $achievement)
+    {
         $this->achievement = $achievement;
     }
 
@@ -48,7 +48,7 @@ class AchievementCreated extends Notification
     {
         return [
             'title' => 'Achievement Created',
-            'message' => ucfirst(Auth::user()->name) . ' created a new achievement ' . ucfirst($this->achievement->title),
+            'message' => ucfirst(Auth::user()->name).' created a new achievement '.ucfirst($this->achievement->title),
             'link' => 'achievement.achievement.index',
         ];
     }

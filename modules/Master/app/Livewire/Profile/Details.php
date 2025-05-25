@@ -14,6 +14,7 @@ class Details extends Component
     use WithFileUploads;
 
     public int $refreshKey = 0;
+
     #[Validate('mimes:png,jpg,jpeg', message: 'Only JPG, JPEG, or PNG allowed')]
     #[Validate('max:2048', message: 'Profile picture size must be less than 2MB')]
     public $profilePicture;
@@ -22,7 +23,7 @@ class Details extends Component
     {
         $userWithDetails = null;
 
-        if (!Auth::user()->hasRole('Admin')) {
+        if (Auth::user()->hasRole('Student')) {
             $userWithDetails = User::with('student', 'student.studyProgram')->find(Auth::id());
         } elseif (Auth::user()->hasRole('Lecturer')) {
             $userWithDetails = User::with('lecturer', 'lecturer.department')->find(Auth::id());
@@ -31,7 +32,8 @@ class Details extends Component
         return view('master::livewire.profile.details', compact('userWithDetails'));
     }
 
-    public function updateProfilePicture() {
+    public function updateProfilePicture()
+    {
         $this->validate();
         $user = User::find(Auth::id());
 

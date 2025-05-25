@@ -3,7 +3,6 @@
 namespace Modules\Achievement\Livewire\Competition;
 
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Modules\Achievement\Models\CompetitionParticipant;
 use Modules\Core\Abstracts\DataTable;
 

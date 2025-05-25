@@ -3,8 +3,9 @@
 namespace Modules\Master\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Spatie\Permission\Models\Role as SpatieRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Models\Role as SpatieRole;
+
 // use Modules\Master\Database\Factories\RoleFactory;
 
 class Role extends SpatieRole
@@ -15,6 +16,7 @@ class Role extends SpatieRole
      * The attributes that are mass assignable.
      */
     protected $primaryKey = 'uuid';
+
     protected $fillable = [];
 
     // protected static function newFactory(): RoleFactory

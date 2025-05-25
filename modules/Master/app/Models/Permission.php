@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Modules\Master\Database\Factories\PermissionFactory;
 use Spatie\Permission\Models\Permission as SpatiePermission;
 
-
 class Permission extends SpatiePermission
 {
     use HasFactory, HasUuids;
@@ -16,6 +15,7 @@ class Permission extends SpatiePermission
      * The attributes that are mass assignable.
      */
     protected $primaryKey = 'uuid';
+
     protected $fillable = [];
 
     // protected static function newFactory(): PermissionFactory
