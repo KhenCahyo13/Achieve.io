@@ -16,7 +16,8 @@ class Field extends Model
      */
     protected $table = 'fields';
     protected $fillable = [
-        'name'
+        'name',
+        'general_name',
     ];
 
     public function competitions()
