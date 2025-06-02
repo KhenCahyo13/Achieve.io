@@ -2,7 +2,6 @@
 
 namespace Modules\Core\Livewire\Dashboard;
 
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Achievement\Models\Achievement;
 
@@ -10,9 +9,9 @@ class Page extends Component
 {
     public function render()
     {
-        $countPendingAchievements = Achievement::where('verification_status', 'On Process')->count();
-        $countApprovedAchievements = Achievement::where('verification_status', 'Approved')->count();
-        $countRejectedAchievements = Achievement::where('verification_status', 'Rejected')->count();
+        $countPendingAchievements = Achievement::getTotalPendingAchievements();
+        $countApprovedAchievements = Achievement::getTotalApprovedAchievements();
+        $countRejectedAchievements = Achievement::getTotalRejectedAchievements();
         $totalAchievementsBasedOnCompetitionCategory = Achievement::getTotalAchievementsBasedOnCompetitionCategory();
         $totalAchievementsBasedOnCompetitionLevel = Achievement::getTotalAchievementsBasedOnCompetitionLevel();
 

@@ -81,19 +81,59 @@ class Achievement extends Model implements HasMedia
     }
 
     public static function getTotalAchievementsBasedOnCompetitionCategory() {
-        return self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.category')
+        $results = self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.category')
             ->join('competition_participants', 'achievements.participant_id', '=', 'competition_participants.id')
             ->join('competitions', 'competition_participants.competition_id', '=', 'competitions.id')
-            ->groupBy('competitions.category')
-            ->get();
+            ->groupBy('competitions.category');
+
+        if (Auth::user()->hasRole('Student')) {
+            $results->where('achievements.student_id', Auth::user()->id);
+        }
+
+        return $results->get();
     }
 
     public static function getTotalAchievementsBasedOnCompetitionLevel() {
-        return self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.level')
+        $results = self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.level')
             ->join('competition_participants', 'achievements.participant_id', '=', 'competition_participants.id')
             ->join('competitions', 'competition_participants.competition_id', '=', 'competitions.id')
-            ->groupBy('competitions.level')
-            ->get();
+            ->groupBy('competitions.level');
+
+        if (Auth::user()->hasRole('Student')) {
+            $results->where('achievements.student_id', Auth::user()->id);
+        }
+
+        return $results->get();
+    }
+
+    public static function getTotalPendingAchievements() {
+        $results = self::where('verification_status', 'On Process');
+        
+        if (Auth::user()->hasRole('Student')) {
+            $results->where('student_id', Auth::user()->id);
+        }
+
+        return $results->count();
+    }
+
+    public static function getTotalApprovedAchievements() {
+        $results = self::where('verification_status', 'Approved');
+
+        if (Auth::user()->hasRole('Student')) {
+            $results->where('student_id', Auth::user()->id);
+        }
+
+        return $results->count();
+    }
+
+    public static function getTotalRejectedAchievements() {
+        $results = self::where('verification_status', 'Rejected');
+
+        if (Auth::user()->hasRole('Student')) {
+            $results->where('student_id', Auth::user()->id);
+        }
+
+        return $results->count();
     }
 
     // protected static function newFactory(): AchievementFactory
