@@ -82,7 +82,6 @@ class Achievement extends Model implements HasMedia
 
     public static function getTotalAchievementsOnMonths() {
         $statuses = [
-            'On Process' => 'on_process',
             'Approved' => 'approved',
             'Rejected' => 'rejected',
         ];

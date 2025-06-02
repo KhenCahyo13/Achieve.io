@@ -15,16 +15,12 @@
         let rawChartMonthData = {{ Js::from($totalAchievementsOnMonths) }};
 
         if (rawChartMonthData.length > 0) {
-            let seriesOnProcess = rawChartMonthData.map((data) => data.on_process);
             let seriesApproved = rawChartMonthData.map((data) => data.approved);
             let seriesRejected = rawChartMonthData.map((data) => data.rejected);
             let months = rawChartMonthData.map((data) => data.month);
             
             var options = {
                 series: [{
-                    name: 'On Process',
-                    data: seriesOnProcess
-                }, {
                     name: 'Approved',
                     data: seriesApproved
                 }, {
