@@ -4,6 +4,8 @@ namespace Modules\Achievement\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\Achievement\Models\Competition;
+use Modules\Achievement\Models\CompetitionParticipant;
 
 class CompetitionController extends Controller
 {
@@ -12,7 +14,13 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        return view('achievement::pages.competition.index');
+        $countAvailableCompetitions = Competition::getTotalAvailableCompetitions();
+        $countFollowedCompetitions = CompetitionParticipant::getTotalFollowedCompetitions();
+
+        return view('achievement::pages.competition.index', compact(
+            'countAvailableCompetitions',
+            'countFollowedCompetitions'
+        ));
     }
 
     /**

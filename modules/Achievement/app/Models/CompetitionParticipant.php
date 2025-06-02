@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Auth;
 use Modules\Master\Models\User;
 
 // use Modules\Achievement\Database\Factories\CompetitionParticipantFactory;
@@ -74,9 +75,18 @@ class CompetitionParticipant extends Model
                     });
             })
             ->whereHas('competition', function ($query) use ($search) {
-                $query->where('name', 'like', '%'.$search.'%');
+                $query->where('name', 'like', '%' . $search . '%');
             })
             ->paginate($perPage);
+    }
+
+    public static function getTotalFollowedCompetitions() {
+        return self::distinct('competition_id')
+            ->where('leader_id', Auth::user()->id)
+            ->orWhereHas('members', function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })
+            ->count('competition_id');
     }
 
     // protected static function newFactory(): CompetitionParticipantFactory
