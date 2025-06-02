@@ -12,9 +12,10 @@ class Page extends Component
         $countPendingAchievements = Achievement::getTotalPendingAchievements();
         $countApprovedAchievements = Achievement::getTotalApprovedAchievements();
         $countRejectedAchievements = Achievement::getTotalRejectedAchievements();
+        $totalAchievementsOnMonths = Achievement::getTotalAchievementsOnMonths();
         $totalAchievementsBasedOnCompetitionCategory = Achievement::getTotalAchievementsBasedOnCompetitionCategory();
         $totalAchievementsBasedOnCompetitionLevel = Achievement::getTotalAchievementsBasedOnCompetitionLevel();
 
-        return view('core::livewire.dashboard.page', compact('countPendingAchievements', 'countApprovedAchievements', 'countRejectedAchievements', 'totalAchievementsBasedOnCompetitionCategory', 'totalAchievementsBasedOnCompetitionLevel'));
+        return view('core::livewire.dashboard.page', compact('countPendingAchievements', 'countApprovedAchievements', 'countRejectedAchievements', 'totalAchievementsOnMonths', 'totalAchievementsBasedOnCompetitionCategory', 'totalAchievementsBasedOnCompetitionLevel'));
     }
 }

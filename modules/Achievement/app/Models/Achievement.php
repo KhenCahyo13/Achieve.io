@@ -80,6 +80,38 @@ class Achievement extends Model implements HasMedia
         }
     }
 
+    public static function getTotalAchievementsOnMonths() {
+        $statuses = [
+            'On Process' => 'on_process',
+            'Approved' => 'approved',
+            'Rejected' => 'rejected',
+        ];
+        $results = self::select(
+                DB::raw('COUNT(achievements.id) as total_achievements'),
+                DB::raw('MONTH(achievements.created_at) as month'),
+                'verification_status'
+            )
+            ->whereIn('verification_status', array_keys($statuses))
+            ->groupBy(DB::raw('MONTH(achievements.created_at)'), 'verification_status')
+            ->get()
+            ->groupBy('verification_status')
+            ->map(function ($items) {
+                return $items->keyBy('month');
+            });
+
+        $months = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthName = date('F', mktime(0, 0, 0, $i, 10));
+            $monthData = ['month' => $monthName];
+            foreach ($statuses as $status => $key) {
+                $monthData[$key] = isset($results[$status][$i]) ? $results[$status][$i]->total_achievements : 0;
+            }
+            $months[] = $monthData;
+        }
+
+        return collect($months);
+    }
+
     public static function getTotalAchievementsBasedOnCompetitionCategory() {
         $results = self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.category')
             ->join('competition_participants', 'achievements.participant_id', '=', 'competition_participants.id')
