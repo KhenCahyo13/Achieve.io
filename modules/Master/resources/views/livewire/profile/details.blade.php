@@ -13,7 +13,7 @@
                             <img src={{ $profilePicture->temporaryUrl() }} class="object-cover w-full h-full"
                                 alt="user">
                         @else
-                            <img src={{ $userWithDetails->getFirstMediaUrl('profile-picture') ? $userWithDetails->getFirstMediaUrl('profile-picture') : 'https://mastertondental.co.nz/wp-content/uploads/2022/12/team-profile-placeholder.jpg' }}
+                            <img src="{{ $userWithDetails && $userWithDetails->getFirstMediaUrl('profile-picture') ? $userWithDetails->getFirstMediaUrl('profile-picture') : 'https://mastertondental.co.nz/wp-content/uploads/2022/12/team-profile-placeholder.jpg' }}"
                                 class="object-cover w-full h-full" alt="user">
                         @endif
 
