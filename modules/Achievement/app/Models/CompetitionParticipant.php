@@ -75,12 +75,13 @@ class CompetitionParticipant extends Model
                     });
             })
             ->whereHas('competition', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->paginate($perPage);
     }
 
-    public static function getTotalFollowedCompetitions() {
+    public static function getTotalFollowedCompetitions()
+    {
         return self::distinct('competition_id')
             ->where('leader_id', Auth::user()->id)
             ->orWhereHas('members', function ($query) {

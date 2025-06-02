@@ -80,16 +80,17 @@ class Achievement extends Model implements HasMedia
         }
     }
 
-    public static function getTotalAchievementsOnMonths() {
+    public static function getTotalAchievementsOnMonths()
+    {
         $statuses = [
             'Approved' => 'approved',
             'Rejected' => 'rejected',
         ];
         $results = self::select(
-                DB::raw('COUNT(achievements.id) as total_achievements'),
-                DB::raw('MONTH(achievements.created_at) as month'),
-                'verification_status'
-            )
+            DB::raw('COUNT(achievements.id) as total_achievements'),
+            DB::raw('MONTH(achievements.created_at) as month'),
+            'verification_status'
+        )
             ->whereIn('verification_status', array_keys($statuses))
             ->groupBy(DB::raw('MONTH(achievements.created_at)'), 'verification_status')
             ->get()
@@ -111,7 +112,8 @@ class Achievement extends Model implements HasMedia
         return collect($months);
     }
 
-    public static function getTotalAchievementsBasedOnCompetitionCategory() {
+    public static function getTotalAchievementsBasedOnCompetitionCategory()
+    {
         $results = self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.category')
             ->join('competition_participants', 'achievements.participant_id', '=', 'competition_participants.id')
             ->join('competitions', 'competition_participants.competition_id', '=', 'competitions.id')
@@ -124,7 +126,8 @@ class Achievement extends Model implements HasMedia
         return $results->get();
     }
 
-    public static function getTotalAchievementsBasedOnCompetitionLevel() {
+    public static function getTotalAchievementsBasedOnCompetitionLevel()
+    {
         $results = self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.level')
             ->join('competition_participants', 'achievements.participant_id', '=', 'competition_participants.id')
             ->join('competitions', 'competition_participants.competition_id', '=', 'competitions.id')
@@ -137,9 +140,10 @@ class Achievement extends Model implements HasMedia
         return $results->get();
     }
 
-    public static function getTotalPendingAchievements() {
+    public static function getTotalPendingAchievements()
+    {
         $results = self::where('verification_status', 'On Process');
-        
+
         if (Auth::user()->hasRole('Student')) {
             $results->where('student_id', Auth::user()->id);
         }
@@ -147,7 +151,8 @@ class Achievement extends Model implements HasMedia
         return $results->count();
     }
 
-    public static function getTotalApprovedAchievements() {
+    public static function getTotalApprovedAchievements()
+    {
         $results = self::where('verification_status', 'Approved');
 
         if (Auth::user()->hasRole('Student')) {
@@ -157,7 +162,8 @@ class Achievement extends Model implements HasMedia
         return $results->count();
     }
 
-    public static function getTotalRejectedAchievements() {
+    public static function getTotalRejectedAchievements()
+    {
         $results = self::where('verification_status', 'Rejected');
 
         if (Auth::user()->hasRole('Student')) {
