@@ -52,7 +52,9 @@ class Create extends Component
             $createdCompetition->withFields($this->form->fields);
             $createdCompetition->addMedia($this->poster->getRealPath())->toMediaCollection('poster');
 
-            Notification::send($adminUsers, new CompetitionCreated($createdCompetition));
+            if (!Auth::user()->hasRole('Admin')) {
+                Notification::send($adminUsers, new CompetitionCreated($createdCompetition));
+            }
 
             $this->poster = null;
             $this->form->reset();

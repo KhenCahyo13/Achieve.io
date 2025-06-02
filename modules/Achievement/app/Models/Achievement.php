@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Modules\Master\Models\Period;
 use Modules\Master\Models\User;
 use Spatie\MediaLibrary\HasMedia;
@@ -77,6 +78,22 @@ class Achievement extends Model implements HasMedia
             $achievement->verification_status = $value;
             $achievement->save();
         }
+    }
+
+    public static function getTotalAchievementsBasedOnCompetitionCategory() {
+        return self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.category')
+            ->join('competition_participants', 'achievements.participant_id', '=', 'competition_participants.id')
+            ->join('competitions', 'competition_participants.competition_id', '=', 'competitions.id')
+            ->groupBy('competitions.category')
+            ->get();
+    }
+
+    public static function getTotalAchievementsBasedOnCompetitionLevel() {
+        return self::select(DB::raw('COUNT(achievements.id) as total_achievements'), 'competitions.level')
+            ->join('competition_participants', 'achievements.participant_id', '=', 'competition_participants.id')
+            ->join('competitions', 'competition_participants.competition_id', '=', 'competitions.id')
+            ->groupBy('competitions.level')
+            ->get();
     }
 
     // protected static function newFactory(): AchievementFactory

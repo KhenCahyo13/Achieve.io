@@ -3,6 +3,7 @@
 namespace Modules\Achievement\Livewire\Competition;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
@@ -40,7 +41,10 @@ class Details extends Component
                 $this->dispatch('competition-approval', message: 'Competition rejected successfully!');
             }
 
-            Notification::send($createdByUser, new CompetitionApproval($competition, $value));
+            if (!Auth::user()->hasRole('Admin')) {
+                Notification::send($createdByUser, new CompetitionApproval($competition, $value));
+            }
+            
             DB::commit();
         } catch (Exception $e) {
             Log::error('Error approving competition: '.$e->getMessage());

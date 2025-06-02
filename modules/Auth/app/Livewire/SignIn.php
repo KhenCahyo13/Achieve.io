@@ -39,6 +39,6 @@ class SignIn extends Component
         }
 
         Auth::login($user);
-        $this->redirect(route('achievement.achievements.index'));
+        $this->redirect(route('core.dashboard'));
     }
 }

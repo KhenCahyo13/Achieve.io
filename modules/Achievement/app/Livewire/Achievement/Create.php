@@ -56,7 +56,9 @@ class Create extends Component
             ]);
             $createdAchievement->addMedia($this->certificate->getRealPath())->toMediaCollection('certificate');
 
-            Notification::send($adminUsers, new AchievementCreated($createdAchievement));
+            if (!Auth::user()->hasRole('Admin')) {
+                Notification::send($adminUsers, new AchievementCreated($createdAchievement));
+            }
 
             $this->certificate = null;
             $this->form->reset();
