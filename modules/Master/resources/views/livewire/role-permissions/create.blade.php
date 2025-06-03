@@ -30,6 +30,7 @@
         'delete' => 'Delete',
         'verify' => 'Verify',
         'register' => 'Register',
+        'getrecommendation' => 'Get Recommendation',
     ];
 @endphp
 
