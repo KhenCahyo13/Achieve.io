@@ -173,6 +173,14 @@ class Achievement extends Model implements HasMedia
         return $results->count();
     }
 
+    public static function getExportPdfData(string $startDate, string $endDate, string $verificationStatus)
+    {
+        return self::with('student', 'period', 'participant', 'participant.lecturer', 'participant.competition')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->where('verification_status', $verificationStatus)
+            ->get();
+    }
+
     // protected static function newFactory(): AchievementFactory
     // {
     //     // return AchievementFactory::new();

@@ -15,6 +15,7 @@
         isCreateModalOpen: false,
         isDetailsModalOpen: false,
         isUpdateModalOpen: false,
+        isExportPdfModalOpen: false,
         isShowNotification: false,
         notificationMessage: '',
     }"
@@ -28,6 +29,8 @@
         <livewire:achievement::achievement.create />
         {{-- Details Modal --}}
         <livewire:achievement::achievement.details />
+        {{-- Export PDF Modal --}}
+        <livewire:achievement::achievement.export-pdf />
         <div class="card">
             <livewire:achievement::achievement.table />
         </div>
