@@ -11,4 +11,9 @@ class RolePermissionsController extends Controller
     {
         return view('master::pages.role-permissions.index');
     }
+
+    public function create()
+    {
+        return view('master::pages.role-permissions.create');
+    }
 }
