@@ -154,7 +154,7 @@
                                     @if (auth()->user()->hasRole('Student'))
                                         {{ $userWithDetails->student->birth_date ? \Carbon\Carbon::parse($userWithDetails->student->birth_date)->translatedFormat('d F Y') : '-' }}
                                     @else
-                                        {{ $userWithDetails->lecturer->birth_date ? \Carbon\Carbon::parse($userWithDetails->lecturer->birth_date)->translatedFormat('d F Y') : '-' }}
+                                        {{ $userWithDetails->lecturer && $userWithDetails->lecturer->birth_date ? \Carbon\Carbon::parse($userWithDetails->lecturer->birth_date)->translatedFormat('d F Y') : '-' }}
                                     @endif
                                 </p>
                             </div>
