@@ -103,7 +103,7 @@ class Competition extends Model implements HasMedia
     {
         $results = self::where('verification_status', 'On Process');
 
-        if (Auth::user()->hasRole('Student')) {
+        if (!Auth::user()->hasRole('Admin')) {
             $results->where('created_by', Auth::user()->id);
         }
 
@@ -114,7 +114,7 @@ class Competition extends Model implements HasMedia
     {
         $results = self::where('verification_status', 'Approved');
 
-        if (Auth::user()->hasRole('Student')) {
+        if (!Auth::user()->hasRole('Admin')) {
             $results->where('created_by', Auth::user()->id);
         }
 
@@ -125,7 +125,7 @@ class Competition extends Model implements HasMedia
     {
         $results = self::where('verification_status', 'Rejected');
 
-        if (Auth::user()->hasRole('Student')) {
+        if (!Auth::user()->hasRole('Admin')) {
             $results->where('created_by', Auth::user()->id);
         }
 
