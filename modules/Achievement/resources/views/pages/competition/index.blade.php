@@ -63,7 +63,7 @@
                             </svg>
                             Available Competition <span class="w-6 h-6 flex items-center justify-center text-sm rounded-full bg-brand-400 text-white">{{ $countAvailableCompetitions }}</span>
                         </button>
-                        @if (!auth()->user()->hasRole('Admin'))
+                        @if (auth()->user()->hasRole('Student'))
                             <button
                                 class="inline-flex items-center gap-x-2 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                                 x-bind:class="activeTab === 'followed' ?
