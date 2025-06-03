@@ -28,5 +28,6 @@ Route::middleware(['check-auth'])->prefix('master')->group(function () {
     Route::controller(RolePermissionsController::class)->prefix('role-permissions')->group(function () {
         Route::get('', 'index')->name('master.role-permissions.index');
         Route::get('create', 'create')->name('master.role-permissions.create');
+        Route::get('edit/{id}', 'edit')->name('master.role-permissions.edit');
     });
 });

@@ -16,4 +16,9 @@ class RolePermissionsController extends Controller
     {
         return view('master::pages.role-permissions.create');
     }
+
+    public function edit($id)
+    {
+        return view('master::pages.role-permissions.edit', compact('id'));
+    }
 }

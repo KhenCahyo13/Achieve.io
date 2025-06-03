@@ -28,7 +28,8 @@
             <input type="text" placeholder="Search role..." class="text-input w-64"
                 wire:model.live.debounce.300ms="search" />
             {{-- Create Data Button --}}
-            <a href="{{ route('master.role-permissions.create') }}" class="btn-icon-primary" @click="isCreateModalOpen = true">
+            <a href="{{ route('master.role-permissions.create') }}" class="btn-icon-primary"
+                @click="isCreateModalOpen = true">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -100,17 +101,20 @@
                                         @endphp
                                         @if ($totalPermissions > 0)
                                             @foreach ($permissions as $permission)
-                                                <span class="inline-flex items-center justify-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-700 dark:bg-white/5 dark:text-white/80">
+                                                <span
+                                                    class="inline-flex items-center justify-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-700 dark:bg-white/5 dark:text-white/80">
                                                     {{ $permission->name }}
                                                 </span>
                                             @endforeach
                                             @if ($totalPermissions > 4)
-                                                <span class="inline-flex items-center justify-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-700 dark:bg-white/5 dark:text-white/80">
+                                                <span
+                                                    class="inline-flex items-center justify-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-700 dark:bg-white/5 dark:text-white/80">
                                                     {{ $totalPermissions - 4 }}+
                                                 </span>
                                             @endif
                                         @else
-                                            <span class="inline-flex items-center justify-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-700 dark:bg-white/5 dark:text-white/80">
+                                            <span
+                                                class="inline-flex items-center justify-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-700 dark:bg-white/5 dark:text-white/80">
                                                 No Permissions
                                             </span>
                                         @endif
@@ -131,10 +135,10 @@
                                             @click.outside="openDropDown = false"
                                             class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
                                             style="display: none;">
-                                            <button
+                                            <a href="{{ route('master.role-permissions.edit', $item->uuid) }}"
                                                 class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
                                                 Update
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
