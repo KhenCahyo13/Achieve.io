@@ -12,7 +12,7 @@ class AchievementController extends Controller
      */
     public function index()
     {
-        return view('achievement::index');
+        return view('achievement::pages.achievement.index');
     }
 
     /**

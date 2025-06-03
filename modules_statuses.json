@@ -2,5 +2,6 @@
     "Master": true,
     "Achievement": true,
     "Internship": true,
-    "Auth": true
+    "Auth": true,
+    "Core": true
 }
