@@ -25,7 +25,7 @@ class Details extends Component
 
         if (Auth::user()->hasRole('Student')) {
             $userWithDetails = User::with('student', 'student.studyProgram')->find(Auth::id());
-        } elseif (Auth::user()->hasRole('Lecturer')) {
+        } elseif (Auth::user()->hasRole('Supervisor')) {
             $userWithDetails = User::with('lecturer', 'lecturer.department')->find(Auth::id());
         }
 

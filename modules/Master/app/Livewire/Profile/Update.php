@@ -49,7 +49,7 @@ class Update extends Component
                     'phone_number' => $this->form->phoneNumber,
                     'birth_date' => $this->form->birthDate,
                 ]);
-            } elseif (Auth::user()->hasRole('Lecturer')) {
+            } elseif (Auth::user()->hasRole('Supervisor')) {
                 Lecturer::updateOrCreate([
                     'user_id' => Auth::id(),
                 ], [
@@ -77,7 +77,7 @@ class Update extends Component
 
         if (Auth::user()->hasRole('Student')) {
             $userWithDetails = User::with('student', 'student.studyProgram')->find(Auth::id());
-        } elseif (Auth::user()->hasRole('Lecturer')) {
+        } elseif (Auth::user()->hasRole('Supervisor')) {
             $userWithDetails = User::with('lecturer', 'lecturer.department')->find(Auth::id());
         }
 
@@ -91,7 +91,7 @@ class Update extends Component
                 $this->form->phoneNumber = $userWithDetails->student->phone_number ?? '';
                 $this->form->address = $userWithDetails->student->address ?? '';
                 $this->form->birthDate = $userWithDetails->student->birth_date ?? '';
-            } elseif (Auth::user()->hasRole('Lecturer')) {
+            } elseif (Auth::user()->hasRole('Supervisor')) {
                 $this->form->masterNumber = $userWithDetails->lecturer->nip ?? '';
                 $this->form->placeId = $userWithDetails->lecturer->department_id ?? '';
                 $this->form->phoneNumber = $userWithDetails->lecturer->phone_number ?? '';

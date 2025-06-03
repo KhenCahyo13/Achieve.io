@@ -63,8 +63,10 @@ class Achievement extends Model implements HasMedia
 
         if (Auth::user()->hasRole('Student')) {
             $query->where('student_id', Auth::user()->id);
-        } elseif (Auth::user()->hasRole('Lecturer')) {
-            $query->where('lecturer_id', Auth::user()->id);
+        } elseif (Auth::user()->hasRole('Supervisor')) {
+            $query->whereHas('participant', function ($q) {
+                $q->where('lecturer_id', Auth::user()->id);
+            });
         }
 
         return $query->paginate($perPage);

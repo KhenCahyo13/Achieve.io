@@ -47,7 +47,7 @@
                                 <p class="text-sm text-gray-500 dark:text-gray-400">
                                     Student of {{ $userWithDetails->student->studyProgram->name ?? '-' }}
                                 </p>
-                            @elseif (auth()->user()->hasRole('Lecturer'))
+                            @elseif (auth()->user()->hasRole('Supervisor'))
                                 <p class="text-sm text-gray-500 dark:text-gray-400">Lecturer of
                                     {{ $userWithDetails->lecturer->department->name ?? '-' }}</p>
                             @endif
