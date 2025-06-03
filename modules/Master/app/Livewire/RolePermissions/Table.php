@@ -17,4 +17,11 @@ class Table extends DataTable
 
         return view('master::livewire.role-permissions.table', compact('rolePermissions'));
     }
+
+    public function delete(string $id)
+    {
+        Role::destroy($id);
+
+        $this->dispatch('rolepermissions-deleted', message: 'Role & Permissions deleted successfully!');
+    }
 }
