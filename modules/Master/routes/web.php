@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Master\Http\Controllers\DepartmentController;
 use Modules\Master\Http\Controllers\PeriodController;
 use Modules\Master\Http\Controllers\ProfileController;
+use Modules\Master\Http\Controllers\RolePermissionsController;
 use Modules\Master\Http\Controllers\StudyProgramController;
 
 Route::middleware(['check-auth'])->prefix('master')->group(function () {
@@ -22,5 +23,9 @@ Route::middleware(['check-auth'])->prefix('master')->group(function () {
     // Profile Controller
     Route::controller(ProfileController::class)->prefix('profile')->group(function () {
         Route::get('', 'index')->name('master.profile.index');
+    });
+    // Role Permissions Controller
+    Route::controller(RolePermissionsController::class)->prefix('role-permissions')->group(function () {
+        Route::get('', 'index')->name('master.role-permissions.index');
     });
 });
