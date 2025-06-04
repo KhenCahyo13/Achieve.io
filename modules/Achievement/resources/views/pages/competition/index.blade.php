@@ -13,6 +13,7 @@
 @section('content')
     <div class="relative" x-data="{
         isDetailsModalOpen: false,
+        isGetRecommendationModalOpen: false,
         isRegisterModalOpen: false,
         isShowNotification: false,
         notificationMessage: '',
@@ -23,6 +24,8 @@
         x-on:competition-participant-created.window="isDetailsModalOpen = false; isRegisterModalOpen = false; isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);">
         <livewire:core::components.breadcrumb pageName="Competition" :urls="$urls" />
         <livewire:core::components.notification type="success" />
+        {{-- Get Recommendation --}}
+        <livewire:achievement::competition.recommendation-competition />
         {{-- Register Competition --}}
         <livewire:achievement::competition.register />
         {{-- Competition Details --}}
@@ -61,7 +64,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z" />
                             </svg>
-                            Available Competition <span class="w-6 h-6 flex items-center justify-center text-sm rounded-full bg-brand-400 text-white">{{ $countAvailableCompetitions }}</span>
+                            Available Competition <span
+                                class="w-6 h-6 flex items-center justify-center text-sm rounded-full bg-brand-400 text-white">{{ $countAvailableCompetitions }}</span>
                         </button>
                         @if (auth()->user()->hasRole('Student'))
                             <button
@@ -75,7 +79,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
                                 </svg>
-                                Followed Competition <span class="w-6 h-6 flex items-center justify-center text-sm rounded-full bg-brand-400 text-white">{{ $countFollowedCompetitions }}</span>
+                                Followed Competition <span
+                                    class="w-6 h-6 flex items-center justify-center text-sm rounded-full bg-brand-400 text-white">{{ $countFollowedCompetitions }}</span>
                             </button>
                         @endif
                     </nav>
