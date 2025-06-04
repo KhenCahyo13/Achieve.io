@@ -68,15 +68,16 @@
                 <!-- Dark Mode Toggler -->
 
                 {{-- Notification Area --}}
-                <div class="relative" x-data="{ dropdownOpen: false, notifying: true }" @click.outside="dropdownOpen = false">
+                <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
                     <button
                         class="hover:text-dark-900 relative flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
                         @click.prevent="dropdownOpen = ! dropdownOpen; notifying = false">
-                        <span :class="!notifying ? 'hidden' : 'flex'"
-                            class="absolute top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-red-500">
-                            <span
-                                class="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
-                        </span>
+                        @if (auth()->user()->unreadNotifications->count() > 0)
+                            <span class="flex absolute top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-red-500">
+                                <span
+                                    class="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+                            </span>
+                        @endif
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -87,18 +88,20 @@
                     <!-- Dropdown Start -->
                     <div x-show="dropdownOpen"
                         class="shadow-theme-lg dark:bg-gray-dark absolute -right-[240px] mt-[17px] flex h-[480px] w-[350px] flex-col rounded-2xl border border-gray-200 bg-white p-3 sm:w-[361px] lg:right-0 dark:border-gray-800">
-                        <div
-                            class="mb-3 flex justify-between border-b border-gray-100 pb-3 dark:border-gray-800">
+                        <div class="mb-3 flex justify-between border-b border-gray-100 pb-3 dark:border-gray-800">
                             <div class="flex flex-col">
                                 <h5 class="text-lg font-semibold text-gray-800 dark:text-white/90">
                                     Notification
                                 </h5>
                                 @if (auth()->user()->unreadNotifications->count() > 0)
-                                    <span class="text-theme-sm font-normal text-gray-500 dark:text-gray-400">{{ auth()->user()->unreadNotifications->count() }} unread</span>
+                                    <span
+                                        class="text-theme-sm font-normal text-gray-500 dark:text-gray-400">{{ auth()->user()->unreadNotifications->count() }}
+                                        unread</span>
                                 @endif
                             </div>
 
-                            <button @click="dropdownOpen = false" class="text-gray-500 dark:text-gray-400 flex items-start">
+                            <button @click="dropdownOpen = false"
+                                class="text-gray-500 dark:text-gray-400 flex items-start">
                                 <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -108,20 +111,24 @@
                             </button>
                         </div>
                         <ul class="custom-scrollbar flex h-auto flex-col overflow-y-auto gap-y-2">
-                            @foreach (auth()->user()->notifications as $notification)
+                            @forelse (auth()->user()->notifications as $notification)
                                 <li>
                                     <a @class([
                                         'flex gap-3 rounded-lg border-b border-gray-100 p-3 px-4.5 py-3 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-white/5',
-                                        'bg-brand-50 dark:bg-gray-700' => $notification->read_at === null
+                                        'bg-brand-50 dark:bg-gray-700' => $notification->read_at === null,
                                     ])
                                         href="{{ route('core.notification.mark-as-read', $notification->id) }}">
-                                        <span class="z-1 flex items-center justify-center h-11 w-full max-w-11 rounded-full border border-gray-200 dark:border-gray-800">
-                                            <span class="uppercase dark:text-gray-200">{{ $notification->data['message'][0] }}</span>
+                                        <span
+                                            class="z-1 flex items-center justify-center h-11 w-full max-w-11 rounded-full border border-gray-200 dark:border-gray-800">
+                                            <span
+                                                class="uppercase dark:text-gray-200">{{ $notification->data['message'][0] }}</span>
                                         </span>
 
                                         <span class="block">
                                             <span class="text-theme-sm mb-1.5 block text-gray-500 dark:text-gray-400">
-                                                <span class="font-medium text-gray-800 dark:text-white/90">{{ $notification->data['title'] }} -</span>
+                                                <span
+                                                    class="font-medium text-gray-800 dark:text-white/90">{{ $notification->data['title'] }}
+                                                    -</span>
                                                 {{ $notification->data['message'] }}
                                             </span>
 
@@ -132,7 +139,11 @@
                                         </span>
                                     </a>
                                 </li>
-                            @endforeach
+                            @empty
+                                <li class="text-center">
+                                    <span class="text-sm text-gray-400">Notifications not found</span>
+                                </li>
+                            @endforelse
                         </ul>
                     </div>
                 </div>
