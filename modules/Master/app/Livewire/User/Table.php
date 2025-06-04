@@ -2,6 +2,7 @@
 
 namespace Modules\Master\Livewire\User;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Modules\Core\Abstracts\DataTable;
 use Modules\Master\Models\User;
@@ -17,5 +18,11 @@ class Table extends DataTable
         );
 
         return view('master::livewire.user.table', compact('users'));
+    }
+
+    #[On('user-created')]
+    public function onAction()
+    {
+        $this->resetPage();
     }
 }
