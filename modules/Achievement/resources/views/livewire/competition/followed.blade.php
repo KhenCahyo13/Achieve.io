@@ -85,7 +85,8 @@
             </div>
         @empty
             <div class="py-6 col-span-full">
-                <p class="text-center leading-7 text-theme-sm text-gray-500 dark:text-gray-400">Data still empty!</p>
+                <img src="{{ asset('images/fallback/data-not-found.png') }}" alt="Not Found" class="w-40 mx-auto">
+                <p class="text-lg text-gray-400 text-center mt-4 font-medium">Oops! Data not found</p>
             </div>
         @endforelse
     </div>

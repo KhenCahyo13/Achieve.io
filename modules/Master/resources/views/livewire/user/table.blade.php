@@ -130,8 +130,7 @@
                                                     d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                             </svg>
                                         </button>
-                                        <div x-show="openDropDown"
-                                            x-on:user-deleted.window="openDropDown = false"
+                                        <div x-show="openDropDown" x-on:user-deleted.window="openDropDown = false"
                                             @click.outside="openDropDown = false"
                                             class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
                                             style="display: none;">
@@ -146,8 +145,10 @@
                         @empty
                             <tr>
                                 <td colspan="5" class="px-5 py-4 sm:px-6">
-                                    <p class="text-center leading-7 text-theme-sm text-gray-500 dark:text-gray-400">
-                                        Data still empty!</p>
+                                    <img src="{{ asset('images/fallback/data-not-found.png') }}" alt="Not Found"
+                                        class="w-40 mx-auto">
+                                    <p class="text-lg text-gray-400 text-center mt-4 font-medium">Oops! Data not found
+                                    </p>
                                 </td>
                             </tr>
                         @endforelse
