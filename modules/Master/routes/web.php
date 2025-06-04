@@ -6,8 +6,13 @@ use Modules\Master\Http\Controllers\PeriodController;
 use Modules\Master\Http\Controllers\ProfileController;
 use Modules\Master\Http\Controllers\RolePermissionsController;
 use Modules\Master\Http\Controllers\StudyProgramController;
+use Modules\Master\Http\Controllers\UserController;
 
 Route::middleware(['check-auth'])->prefix('master')->group(function () {
+    // User Controller
+    Route::controller(UserController::class)->prefix('users')->group(function () {
+        Route::get('', 'index')->name('master.user.index');
+    });
     // Department Controller
     Route::controller(DepartmentController::class)->prefix('departments')->group(function () {
         Route::get('', 'index')->name('master.department.index')->middleware('can:view department');
