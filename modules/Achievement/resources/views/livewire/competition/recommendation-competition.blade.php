@@ -154,8 +154,8 @@
                     <div
                         class="flex flex-col gap-5 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] sm:flex-row sm:items-center sm:gap-6">
                         <div class="w-full h-32 overflow-hidden rounded-lg md:w-72 md:h-40">
-                            <img src="{{ asset($competition->competition->getFirstMediaUrl('poster')) }}" alt="Poster"
-                                class="overflow-hidden rounded-lg w-full h-full object-cover">
+                            <img src="{{ asset($competition->competition->getFirstMediaUrl('poster')) }}"
+                                alt="Poster" class="overflow-hidden rounded-lg w-full h-full object-cover">
                         </div>
 
                         <div>
@@ -205,7 +205,12 @@
                     </div>
                 @empty
                     <div class="col-span-full">
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">Fill the form to get recommendation</p>
+                        <img src="{{ asset('images/fallback/data-not-found.png') }}" alt="Not Found"
+                            class="w-40 mx-auto">
+                            <div class="flex flex-col mt-4">
+                                <p class="text-lg text-gray-400 text-center font-medium">Oops! Data not found</p>
+                                <p class="text-lg text-gray-400 text-center text-sm">Fill the form first to get recommendation</p>
+                            </div>
                     </div>
                 @endforelse
             </div>
