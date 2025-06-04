@@ -63,17 +63,6 @@
                         Update Profile Picture
                     </button>
                 @endif
-                @if (auth()->user()->hasRole('Admin'))
-                    <button @click="isProfileInfoModal = true" class="btn-outline-secondary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                        </svg>
-
-                        Edit
-                    </button>
-                @endif
             </div>
         </div>
         {{-- Student & Lecturer Personal Information --}}
@@ -81,7 +70,7 @@
             <div class="p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
                 <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                     <div>
-                        <h4 class="text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6">
+                        <h4 class="mb-4 text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6">
                             Personal Information
                         </h4>
 
@@ -173,5 +162,7 @@
                 </div>
             </div>
         @endif
+        {{-- Security --}}
+        <livewire:master::profile.security />
     </div>
 </div>
