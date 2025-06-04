@@ -114,8 +114,10 @@
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
-                                        <livewire:core::components.badge type="info"
-                                            text="{{ $user->roles[0]->name }}" />
+                                        <span
+                                            class="inline-flex items-center justify-center gap-1 rounded-full bg-blue-light-50 px-2.5 py-0.5 text-sm font-medium text-blue-light-500 dark:bg-blue-light-500/15 dark:text-blue-light-500">
+                                            {{ $user->roles[0]->name }}
+                                        </span>
                                     </div>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
