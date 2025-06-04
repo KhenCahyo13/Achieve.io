@@ -131,7 +131,7 @@
                                             </svg>
                                         </button>
                                         <div x-show="openDropDown"
-                                            x-on:studyprogram-deleted.window="openDropDown = false"
+                                            x-on:user-deleted.window="openDropDown = false"
                                             @click.outside="openDropDown = false"
                                             class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
                                             style="display: none;">

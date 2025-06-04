@@ -20,7 +20,15 @@ class Table extends DataTable
         return view('master::livewire.user.table', compact('users'));
     }
 
+    public function delete(string $id)
+    {
+        User::destroy($id);
+
+        $this->dispatch('user-deleted', message: 'User deleted successfully!');
+    }
+
     #[On('user-created')]
+    #[On('user-deleted')]
     public function onAction()
     {
         $this->resetPage();

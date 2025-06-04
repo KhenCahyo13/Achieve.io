@@ -16,7 +16,8 @@
         isCreateModalOpen: false,
         notificationMessage: '',
     }" class="relative"
-        x-on:user-created.window="isShowNotification = true; isCreateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);">
+        x-on:user-created.window="isShowNotification = true; isCreateModalOpen = false; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);"
+        x-on:user-deleted.window="isShowNotification = true; notificationMessage = $event.detail.message; setTimeout(() => isShowNotification = false, 3000);">
         <livewire:core::components.breadcrumb pageName="User" :urls="$urls" />
         <livewire:master::user.create />
         <livewire:master::user.table />
