@@ -11,7 +11,7 @@ use Modules\Master\Http\Controllers\UserController;
 Route::middleware(['check-auth'])->prefix('master')->group(function () {
     // User Controller
     Route::controller(UserController::class)->prefix('users')->group(function () {
-        Route::get('', 'index')->name('master.user.index');
+        Route::get('', 'index')->name('master.user.index')->middleware('can:view user');
     });
     // Department Controller
     Route::controller(DepartmentController::class)->prefix('departments')->group(function () {
@@ -31,8 +31,8 @@ Route::middleware(['check-auth'])->prefix('master')->group(function () {
     });
     // Role Permissions Controller
     Route::controller(RolePermissionsController::class)->prefix('role-permissions')->group(function () {
-        Route::get('', 'index')->name('master.role-permissions.index');
-        Route::get('create', 'create')->name('master.role-permissions.create');
-        Route::get('edit/{id}', 'edit')->name('master.role-permissions.edit');
+        Route::get('', 'index')->name('master.role-permissions.index')->middleware('can:view role permissions');
+        Route::get('create', 'create')->name('master.role-permissions.create')->middleware('can:create role permissions');
+        Route::get('edit/{id}', 'edit')->name('master.role-permissions.edit')->middleware('can:update role permissions');
     });
 });

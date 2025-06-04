@@ -22,7 +22,7 @@ return new class extends Migration
             'period' => ['create', 'view', 'update', 'delete'],
             'competition' => ['create', 'view', 'verify'],
             'achievement' => ['view', 'verify'],
-            'rolepermissions' => ['view', 'create', 'update', 'delete'],
+            'role permissions' => ['view', 'create', 'update', 'delete'],
             'user' => ['view', 'create'],
         ];
 

@@ -28,13 +28,15 @@
             <input type="text" placeholder="Search user..." class="text-input w-64"
                 wire:model.live.debounce.300ms="search" />
             {{-- Create Data Button --}}
-            <button class="btn-icon-primary" @click="isCreateModalOpen = true">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                <span class="text-nowrap">Add New</span>
-            </button>
+            @can('create user')
+                <button class="btn-icon-primary" @click="isCreateModalOpen = true">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <span class="text-nowrap">Add New</span>
+                </button>
+            @endcan
         </div>
     </div>
     {{-- Table Content --}}
@@ -130,15 +132,17 @@
                                                     d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                             </svg>
                                         </button>
-                                        <div x-show="openDropDown" x-on:user-deleted.window="openDropDown = false"
-                                            @click.outside="openDropDown = false"
-                                            class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
-                                            style="display: none;">
-                                            <button wire:click="delete('{{ $user->id }}')"
-                                                class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
-                                                Delete
-                                            </button>
-                                        </div>
+                                        @can('delete user')
+                                            <div x-show="openDropDown" x-on:user-deleted.window="openDropDown = false"
+                                                @click.outside="openDropDown = false"
+                                                class="shadow-theme-lg dark:bg-gray-dark absolute top-full right-0 z-40 w-40 space-y-1 rounded-2xl border border-gray-200 bg-white p-2 dark:border-gray-800"
+                                                style="display: none;">
+                                                <button wire:click="delete('{{ $user->id }}')"
+                                                    class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

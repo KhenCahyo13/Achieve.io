@@ -44,10 +44,12 @@
                                 <p class="text-error-500 mt-4 lg:mt-8">Competition closed!</p>
                             @else
                                 <div class="flex items-center justify-between mt-4 lg:mt-8">
-                                    @if ($competition->verification_status === 'Approved')
-                                        <button class="btn-primary w-fit" type="button"
-                                            wire:click="showRegisterModal('{{ $competition->id }}')">Register Now</button>
-                                    @endif
+                                    @can('register competition')
+                                        @if ($competition->verification_status === 'Approved')
+                                            <button class="btn-primary w-fit" type="button"
+                                                wire:click="showRegisterModal('{{ $competition->id }}')">Register Now</button>
+                                        @endif
+                                    @endcan
                                     @can('approve competition')
                                         @if ($competition->verification_status === 'On Process')
                                             <div class="flex items-center gap-x-2">

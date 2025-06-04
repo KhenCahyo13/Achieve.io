@@ -18,202 +18,205 @@
         <h4 class="mb-7 text-title-sm font-semibold text-gray-800 dark:text-white/90">
             Get Recommendation Competitions
         </h4>
-        <form action="" class="pb-8 border-b border-gray-100 dark:border-gray-800">
-            <div class="grid grid-cols-1 gap-y-5 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">
-                {{-- Department --}}
-                <div class="form-groups">
-                    <label class="form-label">
-                        Department <span class="text-red-500">*</span>
-                    </label>
-                    <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                        <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                            @change="isOptionSelected = true" wire:model="department">
-                            <option value="">- Select department</option>
-                        </select>
-                        <span
-                            class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </span>
-                    </div>
-                    @error('department')
-                        <span class="text-theme-xs text-error-500">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                {{-- Interest Field --}}
-                <div class="form-groups">
-                    <label class="form-label">
-                        Interest Field <span class="text-red-500">*</span>
-                    </label>
-                    <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                        <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                            @change="isOptionSelected = true" wire:model="interestField">
-                            <option value="">- Select field</option>
-                        </select>
-                        <span
-                            class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </span>
-                    </div>
-                    @error('interestField')
-                        <span class="text-theme-xs text-error-500">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                {{-- Skill Level --}}
-                <div class="form-groups">
-                    <label class="form-label">
-                        Skill Level <span class="text-red-500">*</span>
-                    </label>
-                    <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                        <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                            @change="isOptionSelected = true" wire:model="skillLevel">
-                            <option value="">- Select level</option>
-                        </select>
-                        <span
-                            class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </span>
-                    </div>
-                    @error('skillLevel')
-                        <span class="text-theme-xs text-error-500">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                {{-- Skill Level --}}
-                <div class="form-groups">
-                    <label class="form-label">
-                        Like Teamworks <span class="text-red-500">*</span>
-                    </label>
-                    <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                        <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                            @change="isOptionSelected = true" wire:model="likeTeamworks">
-                            <option value="">- Select option</option>
-                        </select>
-                        <span
-                            class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </span>
-                    </div>
-                    @error('likeTeamworks')
-                        <span class="text-theme-xs text-error-500">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                {{-- Number of Participants --}}
-                <div class="form-groups">
-                    <label class="form-label">
-                        Number of Participants <span class="text-red-500">*</span>
-                    </label>
-                    <input type="number" placeholder="Number of Participants" class="text-input"
-                        wire:model="numberOfParticipants">
-                    @error('numberOfParticipants')
-                        <span class="text-theme-xs text-error-500">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                {{-- Number of Championships --}}
-                <div class="form-groups">
-                    <label class="form-label">
-                        Number of Championships <span class="text-red-500">*</span>
-                    </label>
-                    <input type="number" placeholder="Number of Championships" class="text-input"
-                        wire:model="numberOfChampionships">
-                    @error('numberOfChampionships')
-                        <span class="text-theme-xs text-error-500">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-            </div>
-            <div class="mt-6">
-                <button type="submit" class="btn-primary">Get Recommendation</button>
-            </div>
-        </form>
-        <div class="pt-8 flex flex-col gap-y-4">
-            <p class="text-gray-800 dark:text-white/90 text-lg font-medium">Recommendation Results</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                @forelse ($competitions as $competition)
-                    <div
-                        class="flex flex-col gap-5 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] sm:flex-row sm:items-center sm:gap-6">
-                        <div class="w-full h-32 overflow-hidden rounded-lg md:w-72 md:h-40">
-                            <img src="{{ asset($competition->competition->getFirstMediaUrl('poster')) }}"
-                                alt="Poster" class="overflow-hidden rounded-lg w-full h-full object-cover">
-                        </div>
-
-                        <div>
-                            <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90">
-                                {{ $competition->name }}
-                            </h4>
-                            @php
-                                $startRegDate = \Carbon\Carbon::parse($competition->start_reg_date)->translatedFormat(
-                                    'd F Y',
-                                );
-                                $endRegDate = \Carbon\Carbon::parse($competition->end_reg_date)->translatedFormat(
-                                    'd F Y',
-                                );
-                            @endphp
-                            <div class="flex items-center gap-x-2">
-                                @if (\Carbon\Carbon::parse($competition->end_reg_date)->lt(now()))
-                                    <livewire:core::components.badge type="error" text="Closed" />
-                                @else
-                                    <livewire:core::components.badge type="success" text="Open" />
-                                @endif
-                                <p class="text-sm text-gray-400">
-                                    {{ $startRegDate }} - {{ $endRegDate }}
-                                </p>
-                            </div>
-                            <div class="mt-4 flex flex-wrap gap-x-1 gap-y-1">
-                                <livewire:core::components.badge type="light" text="{{ $competition->level }}" />
-                                <livewire:core::components.badge type="light"
-                                    text="{{ $competition->category }} Competition" />
-                                @foreach ($competition->fields as $field)
-                                    <livewire:core::components.badge type="light" text="{{ $field->name }}" />
-                                @endforeach
-                            </div>
-
-                            <button wire:click="showDetailsModal('{{ $competition->id }}')"
-                                class="mt-4 btn-icon-primary-transparent cursor-pointer">
+        @can('get recommendation competition')
+            <form action="" class="pb-8 border-b border-gray-100 dark:border-gray-800">
+                <div class="grid grid-cols-1 gap-y-5 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">
+                    {{-- Department --}}
+                    <div class="form-groups">
+                        <label class="form-label">
+                            Department <span class="text-red-500">*</span>
+                        </label>
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true" wire:model="department">
+                                <option value="">- Select department</option>
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
-
-                                See Details
-                            </button>
+                            </span>
                         </div>
+                        @error('department')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
-                @empty
-                    <div class="col-span-full">
-                        <img src="{{ asset('images/fallback/data-not-found.png') }}" alt="Not Found"
-                            class="w-40 mx-auto">
+                    {{-- Interest Field --}}
+                    <div class="form-groups">
+                        <label class="form-label">
+                            Interest Field <span class="text-red-500">*</span>
+                        </label>
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true" wire:model="interestField">
+                                <option value="">- Select field</option>
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </div>
+                        @error('interestField')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    {{-- Skill Level --}}
+                    <div class="form-groups">
+                        <label class="form-label">
+                            Skill Level <span class="text-red-500">*</span>
+                        </label>
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true" wire:model="skillLevel">
+                                <option value="">- Select level</option>
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </div>
+                        @error('skillLevel')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    {{-- Skill Level --}}
+                    <div class="form-groups">
+                        <label class="form-label">
+                            Like Teamworks <span class="text-red-500">*</span>
+                        </label>
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true" wire:model="likeTeamworks">
+                                <option value="">- Select option</option>
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </div>
+                        @error('likeTeamworks')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    {{-- Number of Participants --}}
+                    <div class="form-groups">
+                        <label class="form-label">
+                            Number of Participants <span class="text-red-500">*</span>
+                        </label>
+                        <input type="number" placeholder="Number of Participants" class="text-input"
+                            wire:model="numberOfParticipants">
+                        @error('numberOfParticipants')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    {{-- Number of Championships --}}
+                    <div class="form-groups">
+                        <label class="form-label">
+                            Number of Championships <span class="text-red-500">*</span>
+                        </label>
+                        <input type="number" placeholder="Number of Championships" class="text-input"
+                            wire:model="numberOfChampionships">
+                        @error('numberOfChampionships')
+                            <span class="text-theme-xs text-error-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="btn-primary">Get Recommendation</button>
+                </div>
+            </form>
+            <div class="pt-8 flex flex-col gap-y-4">
+                <p class="text-gray-800 dark:text-white/90 text-lg font-medium">Recommendation Results</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    @forelse ($competitions as $competition)
+                        <div
+                            class="flex flex-col gap-5 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] sm:flex-row sm:items-center sm:gap-6">
+                            <div class="w-full h-32 overflow-hidden rounded-lg md:w-72 md:h-40">
+                                <img src="{{ asset($competition->competition->getFirstMediaUrl('poster')) }}"
+                                    alt="Poster" class="overflow-hidden rounded-lg w-full h-full object-cover">
+                            </div>
+
+                            <div>
+                                <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90">
+                                    {{ $competition->name }}
+                                </h4>
+                                @php
+                                    $startRegDate = \Carbon\Carbon::parse(
+                                        $competition->start_reg_date,
+                                    )->translatedFormat('d F Y');
+                                    $endRegDate = \Carbon\Carbon::parse($competition->end_reg_date)->translatedFormat(
+                                        'd F Y',
+                                    );
+                                @endphp
+                                <div class="flex items-center gap-x-2">
+                                    @if (\Carbon\Carbon::parse($competition->end_reg_date)->lt(now()))
+                                        <livewire:core::components.badge type="error" text="Closed" />
+                                    @else
+                                        <livewire:core::components.badge type="success" text="Open" />
+                                    @endif
+                                    <p class="text-sm text-gray-400">
+                                        {{ $startRegDate }} - {{ $endRegDate }}
+                                    </p>
+                                </div>
+                                <div class="mt-4 flex flex-wrap gap-x-1 gap-y-1">
+                                    <livewire:core::components.badge type="light" text="{{ $competition->level }}" />
+                                    <livewire:core::components.badge type="light"
+                                        text="{{ $competition->category }} Competition" />
+                                    @foreach ($competition->fields as $field)
+                                        <livewire:core::components.badge type="light" text="{{ $field->name }}" />
+                                    @endforeach
+                                </div>
+
+                                <button wire:click="showDetailsModal('{{ $competition->id }}')"
+                                    class="mt-4 btn-icon-primary-transparent cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+
+                                    See Details
+                                </button>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-span-full">
+                            <img src="{{ asset('images/fallback/data-not-found.png') }}" alt="Not Found"
+                                class="w-40 mx-auto">
                             <div class="flex flex-col mt-4">
                                 <p class="text-lg text-gray-400 text-center font-medium">Oops! Data not found</p>
-                                <p class="text-lg text-gray-400 text-center text-sm">Fill the form first to get recommendation</p>
+                                <p class="text-lg text-gray-400 text-center text-sm">Fill the form first to get
+                                    recommendation</p>
                             </div>
-                    </div>
-                @endforelse
+                        </div>
+                    @endforelse
+                </div>
             </div>
-        </div>
+        @endcan
     </div>
 </div>

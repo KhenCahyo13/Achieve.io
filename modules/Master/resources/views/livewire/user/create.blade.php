@@ -19,7 +19,7 @@
             </svg>
         </button>
 
-        @can('create period')
+        @can('create user')
             <form wire:submit="save">
                 <h4 class="mb-6 text-lg font-medium text-gray-800 dark:text-white/90">
                     Add New User
