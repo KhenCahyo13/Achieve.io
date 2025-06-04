@@ -66,6 +66,13 @@
                                     </svg>
                                 </div>
                             </th>
+                            <th class="px-5 py-3 sm:px-6">
+                                <div class="flex items-center">
+                                    <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                        Description
+                                    </p>
+                                </div>
+                            </th>
                             <th class="cursor-pointer px-5 py-3 sm:px-6">
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
@@ -95,8 +102,15 @@
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
+                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                            {{ $item->description ?? '-' }}
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <div class="flex items-center">
                                         @php
-                                            $permissions = $item->permissions->take(4);
+                                            $permissions = $item->permissions->take(3);
                                             $totalPermissions = $item->permissions->count();
                                         @endphp
                                         @if ($totalPermissions > 0)
@@ -106,10 +120,10 @@
                                                     {{ $permission->name }}
                                                 </span>
                                             @endforeach
-                                            @if ($totalPermissions > 4)
+                                            @if ($totalPermissions > 3)
                                                 <span
                                                     class="inline-flex items-center justify-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-700 dark:bg-white/5 dark:text-white/80">
-                                                    {{ $totalPermissions - 4 }}+
+                                                    {{ $totalPermissions - 3 }}+
                                                 </span>
                                             @endif
                                         @else

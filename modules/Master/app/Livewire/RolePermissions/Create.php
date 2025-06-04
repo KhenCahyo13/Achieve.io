@@ -36,6 +36,7 @@ class Create extends Component
             // Create Role
             $createdRole = Role::create([
                 'name' => $this->form->name,
+                'description' => $this->form->description,
             ]);
             $createdRole->givePermissionTo($this->form->permissions);
 

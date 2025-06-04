@@ -46,6 +46,7 @@ class Update extends Component
             $role = Role::find($this->id);
             $role->update([
                 'name' => $this->form->name,
+                'description' => $this->form->description,
             ]);
             $role->syncPermissions($this->form->permissions);
 
@@ -64,6 +65,7 @@ class Update extends Component
         $role = Role::with('permissions')->find($id);
 
         $this->form->name = $role->name;
+        $this->form->description = $role->description ?? '';
         $this->form->permissions = $role->permissions->pluck('name')->toArray();
     }
 }
