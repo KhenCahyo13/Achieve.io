@@ -42,6 +42,11 @@ class RecommendationCompetition extends Component
         return view('achievement::livewire.competition.recommendation-competition', compact('departments', 'fields'));
     }
 
+    public function showDetailsModal(string $id)
+    {
+        $this->dispatch('competition-show-details-modal', id: $id);
+    }
+
     public function getRecommendation()
     {
         $this->validate();
@@ -69,7 +74,7 @@ class RecommendationCompetition extends Component
                 $splittedRecommendationField[1],
                 $formattedLevel
             );
-            
+
             if (count($recommendedCompetitions) === 0) {
                 $this->fallbackMessage = 'No competitions found for the given criteria.';
             } else {
