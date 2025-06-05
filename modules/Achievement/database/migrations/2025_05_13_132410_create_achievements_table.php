@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title', 150);
             $table->string('description');
             $table->enum('verification_status', ['On Process', 'Approved', 'Rejected'])->default('On Process');
+            $table->text('reasons')->nullable();
             $table->timestamps();
         });
     }

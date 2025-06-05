@@ -19,6 +19,17 @@ class Role extends SpatieRole
 
     protected $fillable = [];
 
+    public static function getAll(int $perPage, string $search, array $sorts)
+    {
+        $query = self::with('permissions')->where('name', 'like', '%' . $search . '%');
+
+        foreach ($sorts as $field => $direction) {
+            $query->orderBy($field, $direction);
+        }
+
+        return $query->paginate($perPage);
+    }
+
     // protected static function newFactory(): RoleFactory
     // {
     //     // return RoleFactory::new();

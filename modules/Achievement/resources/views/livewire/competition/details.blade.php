@@ -24,12 +24,12 @@
                     $isMember = $participant->members->contains('id', auth()->user()->id);
                 }
             @endphp
-            <div>
+            <div class="w-full">
                 <h4 class="mb-7 text-title-sm font-semibold text-gray-800 dark:text-white/90">
                     {{ $competition->name }}
                 </h4>
                 <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-6 lg:gap-x-8">
-                    <div class="w-full h-full">
+                    <div class="w-full md:w-96 lg:w-1/2">
                         <img src="{{ $competition->getFirstMediaUrl('poster') }}" alt="Poster"
                             class="overflow-hidden rounded-lg">
                     </div>
@@ -44,11 +44,13 @@
                                 <p class="text-error-500 mt-4 lg:mt-8">Competition closed!</p>
                             @else
                                 <div class="flex items-center justify-between mt-4 lg:mt-8">
-                                    @if ($competition->verification_status === 'Approved')
-                                        <button class="btn-primary w-fit" type="button"
-                                            wire:click="showRegisterModal('{{ $competition->id }}')">Register Now</button>
-                                    @endif
-                                    @can('approve competition')
+                                    @can('register competition')
+                                        @if ($competition->verification_status === 'Approved')
+                                            <button class="btn-primary w-fit" type="button"
+                                                wire:click="showRegisterModal('{{ $competition->id }}')">Register Now</button>
+                                        @endif
+                                    @endcan
+                                    @can('verify competition')
                                         @if ($competition->verification_status === 'On Process')
                                             <div class="flex items-center gap-x-2">
                                                 <button class="btn-outline-danger w-fit"

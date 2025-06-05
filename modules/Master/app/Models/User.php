@@ -70,6 +70,17 @@ class User extends Authenticatable implements HasMedia
 
     public function scopeWithRole($query, $role)
     {
-        return $query->whereHas('roles', fn ($q) => $q->where('name', $role));
+        return $query->whereHas('roles', fn($q) => $q->where('name', $role));
+    }
+
+    public static function getAll(int $perPage, string $search, array $sorts)
+    {
+        $query = self::with('roles')->where('name', 'like', '%' . $search . '%');
+
+        foreach ($sorts as $field => $direction) {
+            $query->orderBy($field, $direction);
+        }
+
+        return $query->paginate($perPage);
     }
 }

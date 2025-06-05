@@ -13,6 +13,6 @@ Route::middleware(['check-auth'])->prefix('achievement')->group(function () {
     });
     // Achievement Controller
     Route::controller(AchievementController::class)->prefix('achievements')->group(function () {
-        Route::get('', 'index')->name('achievement.achievement.index');
+        Route::get('', 'index')->name('achievement.achievement.index')->middleware('can:view achievement');
     });
 });

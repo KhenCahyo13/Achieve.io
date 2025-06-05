@@ -20,8 +20,10 @@ return new class extends Migration
             'department' => ['create', 'view', 'update', 'delete'],
             'study program' => ['create', 'view', 'update', 'delete'],
             'period' => ['create', 'view', 'update', 'delete'],
-            'competition' => ['create', 'view', 'update', 'delete', 'approve'],
-            'achievement' => ['create', 'view', 'update', 'delete', 'approve'],
+            'competition' => ['create', 'view', 'verify'],
+            'achievement' => ['view', 'verify'],
+            'role permissions' => ['view', 'create', 'update', 'delete'],
+            'user' => ['view', 'create'],
         ];
 
         $allPermissions = [];
@@ -35,17 +37,6 @@ return new class extends Migration
 
         // Assign all to Admin
         $roles['Admin']->givePermissionTo($allPermissions);
-
-        // Assign only competition permissions to Student & Supervisor
-        $competitionPermissions = collect($allPermissions)
-            ->filter(fn ($_, $key) => str_contains($key, 'competition') && $key !== 'approve competition')
-            ->values();
-        $achievementPermissions = collect($allPermissions)
-            ->filter(fn ($_, $key) => str_contains($key, 'achievement') && $key !== 'approve achievement')
-            ->values();
-
-        $roles['Student']->givePermissionTo($competitionPermissions, $achievementPermissions);
-        $roles['Supervisor']->givePermissionTo($competitionPermissions, $achievementPermissions);
     }
 
     /**

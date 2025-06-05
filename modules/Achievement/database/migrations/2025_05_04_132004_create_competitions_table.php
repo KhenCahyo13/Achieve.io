@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('end_reg_date');
             $table->enum('verification_status', ['On Process', 'Approved', 'Rejected'])->default('On Process');
             $table->foreignUuid('created_by')->nullable()->references('id')->on('users')->onDelete('set null')->onUpdate('set null');
+            $table->text('reasons')->nullable();
             $table->timestamps();
         });
     }

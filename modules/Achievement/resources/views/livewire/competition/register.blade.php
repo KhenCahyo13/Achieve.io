@@ -19,114 +19,55 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
         </button>
-
-        @if ($competition !== null)
-            <form wire:submit="save">
-                <h4 class="mb-6 text-lg font-medium text-gray-800 dark:text-white/90">
-                    Competition Registration
-                </h4>
-                {{-- Form --}}
-                <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
-                    {{-- Team Name --}}
-                    <div class="form-groups">
-                        <label class="form-label">
-                            Team Name <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text" placeholder="Team name" class="text-input" wire:model="teamName">
-                        @error('teamName')
-                            <span class="text-theme-xs text-error-500">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    {{-- Topic Title --}}
-                    <div class="form-groups">
-                        <label class="form-label">
-                            Topic Title <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text" placeholder="Topic title that used in competition" class="text-input"
-                            wire:model="topicTitle">
-                        @error('topicTitle')
-                            <span class="text-theme-xs text-error-500">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    {{-- Leader --}}
-                    <div class="form-groups col-span-full">
-                        <div class="flex flex-col">
+        @can('register competition')
+            @if ($competition !== null)
+                <form wire:submit="save">
+                    <h4 class="mb-6 text-lg font-medium text-gray-800 dark:text-white/90">
+                        Competition Registration
+                    </h4>
+                    {{-- Form --}}
+                    <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+                        {{-- Team Name --}}
+                        <div class="form-groups">
                             <label class="form-label">
-                                Leader <span class="text-red-500">*</span>
+                                Team Name <span class="text-red-500">*</span>
                             </label>
-                            <span class="text-theme-xs text-gray-400">
-                                If it's Individual competition, select yourself as a leader.
-                            </span>
+                            <input type="text" placeholder="Team name" class="text-input" wire:model="teamName">
+                            @error('teamName')
+                                <span class="text-theme-xs text-error-500">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
-                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                                @change="isOptionSelected = true" wire:model="leaderId">
-                                <option value="">- Select leader -</option>
-                                @foreach ($studentUsers as $student)
-                                    <option value="{{ $student->id }}" class="capitalize">{{ $student->name }}</option>
-                                @endforeach
-                            </select>
-                            <span
-                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </span>
+                        {{-- Topic Title --}}
+                        <div class="form-groups">
+                            <label class="form-label">
+                                Topic Title <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" placeholder="Topic title that used in competition" class="text-input"
+                                wire:model="topicTitle">
+                            @error('topicTitle')
+                                <span class="text-theme-xs text-error-500">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
-                        @error('leaderId')
-                            <span class="text-theme-xs text-error-500">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    {{-- Supervisor --}}
-                    <div class="form-groups col-span-full">
-                        <label class="form-label">
-                            Supervisor <span class="text-red-500">*</span>
-                        </label>
-                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                            <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                                @change="isOptionSelected = true" wire:model="lecturerId">
-                                <option value="">- Select supervisor -</option>
-                                @foreach ($lecturerUsers as $supervisor)
-                                    <option value="{{ $supervisor->id }}" class="capitalize">{{ $supervisor->name }}</option>
-                                @endforeach
-                            </select>
-                            <span
-                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </span>
-                        </div>
-                        @error('lecturerId')
-                            <span class="text-theme-xs text-error-500">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                    {{-- Members --}}
-                    @if ($competition->category === 'Team')
+                        {{-- Leader --}}
                         <div class="form-groups col-span-full">
-                            <label class="form-label">
-                                Members
-                            </label>
+                            <div class="flex flex-col">
+                                <label class="form-label">
+                                    Leader <span class="text-red-500">*</span>
+                                </label>
+                                <span class="text-theme-xs text-gray-400">
+                                    If it's Individual competition, select yourself as a leader.
+                                </span>
+                            </div>
                             <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
-                                <select class="select-input"
-                                    :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                                    @change="isOptionSelected = true" wire:model="members" multiple>
-                                    <option value="">- Select members -</option>
+                                <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                    @change="isOptionSelected = true" wire:model="leaderId">
+                                    <option value="">- Select leader -</option>
                                     @foreach ($studentUsers as $student)
-                                        <option value="{{ $student->id }}" class="capitalize">{{ $student->name }}
-                                        </option>
+                                        <option value="{{ $student->id }}" class="capitalize">{{ $student->name }}</option>
                                     @endforeach
                                 </select>
                                 <span
@@ -138,26 +79,86 @@
                                     </svg>
                                 </span>
                             </div>
-                            @error('members')
+                            @error('leaderId')
                                 <span class="text-theme-xs text-error-500">
                                     {{ $message }}
                                 </span>
                             @enderror
                         </div>
-                    @endif
-                </div>
-                {{-- Actions Button --}}
-                <div class="flex items-center justify-end w-full gap-3 mt-6">
-                    <button @click="isRegisterModalOpen = false; isDetailsModalOpen = true;" type="button"
-                        class="flex w-full justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs transition-colors hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 sm:w-auto">
-                        Close
-                    </button>
-                    <button type="submit"
-                        class="flex justify-center w-full px-4 py-3 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 sm:w-auto">
-                        Save
-                    </button>
-                </div>
-            </form>
-        @endif
+                        {{-- Supervisor --}}
+                        <div class="form-groups col-span-full">
+                            <label class="form-label">
+                                Supervisor <span class="text-red-500">*</span>
+                            </label>
+                            <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                                <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                    @change="isOptionSelected = true" wire:model="lecturerId">
+                                    <option value="">- Select supervisor -</option>
+                                    @foreach ($lecturerUsers as $supervisor)
+                                        <option value="{{ $supervisor->id }}" class="capitalize">{{ $supervisor->name }}</option>
+                                    @endforeach
+                                </select>
+                                <span
+                                    class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </span>
+                            </div>
+                            @error('lecturerId')
+                                <span class="text-theme-xs text-error-500">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                        {{-- Members --}}
+                        @if ($competition->category === 'Team')
+                            <div class="form-groups col-span-full">
+                                <label class="form-label">
+                                    Members
+                                </label>
+                                <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                                    <select class="select-input"
+                                        :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                        @change="isOptionSelected = true" wire:model="members" multiple>
+                                        <option value="">- Select members -</option>
+                                        @foreach ($studentUsers as $student)
+                                            <option value="{{ $student->id }}" class="capitalize">{{ $student->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <span
+                                        class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                @error('members')
+                                    <span class="text-theme-xs text-error-500">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+                        @endif
+                    </div>
+                    {{-- Actions Button --}}
+                    <div class="flex items-center justify-end w-full gap-3 mt-6">
+                        <button @click="isRegisterModalOpen = false; isDetailsModalOpen = true;" type="button"
+                            class="flex w-full justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs transition-colors hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 sm:w-auto">
+                            Close
+                        </button>
+                        <button type="submit"
+                            class="flex justify-center w-full px-4 py-3 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 sm:w-auto">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            @endif
+        @endcan
     </div>
 </div>
