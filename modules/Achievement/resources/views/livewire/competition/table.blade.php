@@ -115,9 +115,22 @@
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
-                                        <livewire:core::components.badge
-                                            type="{{ $competition->verification_status === 'On Process' ? 'info' : ($competition->verification_status === 'Rejected' ? 'error' : 'success') }}"
-                                            text="{{ $competition->verification_status }}" />
+                                        @if ($competition->verification_status === 'On Process')
+                                            <span
+                                                class="inline-flex items-center justify-center gap-1 rounded-full bg-blue-50 px-2.5 py-0.5 text-sm font-medium text-blue-600 dark:bg-blue-500/15 dark:text-blue-500">
+                                                On Process
+                                            </span>
+                                        @elseif ($competition->verification_status === 'Rejected')
+                                            <span
+                                                class="inline-flex items-center justify-center gap-1 rounded-full bg-red-50 px-2.5 py-0.5 text-sm font-medium text-red-600 dark:bg-red-500/15 dark:text-red-500">
+                                                Rejected
+                                            </span>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center justify-center gap-1 rounded-full bg-green-50 px-2.5 py-0.5 text-sm font-medium text-green-600 dark:bg-green-500/15 dark:text-green-500">
+                                                Approved
+                                            </span>
+                                        @endif
                                     </div>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
