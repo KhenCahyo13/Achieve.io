@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-y-6">
     @include('core::livewire.dashboard.components.achievements-count-overview')
 
-    @if (Auth::user()->hasRole('Admin'))
+    @if (auth()->user()->hasRole('Admin'))
         @include('core::livewire.dashboard.components.charts.total-achievements-on-months')
     @endif
     
