@@ -50,7 +50,7 @@
                                                 wire:click="showRegisterModal('{{ $competition->id }}')">Register Now</button>
                                         @endif
                                     @endcan
-                                    @can('approve competition')
+                                    @can('verify competition')
                                         @if ($competition->verification_status === 'On Process')
                                             <div class="flex items-center gap-x-2">
                                                 <button class="btn-outline-danger w-fit"
