@@ -29,7 +29,7 @@
                     {{ $competition->name }}
                 </h4>
                 <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-6 lg:gap-x-8">
-                    <div class="w-96">
+                    <div class="w-full md:w-96 lg:w-1/2">
                         <img src="{{ $competition->getFirstMediaUrl('poster') }}" alt="Poster"
                             class="overflow-hidden rounded-lg">
                     </div>

@@ -19,7 +19,7 @@
             Get Recommendation Competitions
         </h4>
         @can('get recommendation competition')
-            <form action="" class="pb-8 border-b border-gray-100 dark:border-gray-800">
+            <form wire:submit="getRecommendation" class="pb-8 border-b border-gray-100 dark:border-gray-800">
                 <div class="grid grid-cols-1 gap-y-5 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">
                     {{-- Department --}}
                     <div class="form-groups">
@@ -30,6 +30,9 @@
                             <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
                                 @change="isOptionSelected = true" wire:model="department">
                                 <option value="">- Select department</option>
+                                @foreach ($departments as $index => $item)
+                                    <option value="{{ $index }}">{{ $item }}</option>
+                                @endforeach
                             </select>
                             <span
                                 class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
@@ -54,6 +57,9 @@
                             <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
                                 @change="isOptionSelected = true" wire:model="interestField">
                                 <option value="">- Select field</option>
+                                @foreach ($fields as $index => $item)
+                                    <option value="{{ $index }}">{{ $item }}</option>
+                                @endforeach
                             </select>
                             <span
                                 class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
@@ -78,6 +84,9 @@
                             <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
                                 @change="isOptionSelected = true" wire:model="skillLevel">
                                 <option value="">- Select level</option>
+                                <option value="0">Beginner</option>
+                                <option value="1">Intermediate</option>
+                                <option value="2">Advanced</option>
                             </select>
                             <span
                                 class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
@@ -102,6 +111,8 @@
                             <select class="select-input" :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
                                 @change="isOptionSelected = true" wire:model="likeTeamworks">
                                 <option value="">- Select option</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
                             </select>
                             <span
                                 class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
@@ -150,12 +161,12 @@
             </form>
             <div class="pt-8 flex flex-col gap-y-4">
                 <p class="text-gray-800 dark:text-white/90 text-lg font-medium">Recommendation Results</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                     @forelse ($competitions as $competition)
                         <div
                             class="flex flex-col gap-5 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03] sm:flex-row sm:items-center sm:gap-6">
                             <div class="w-full h-32 overflow-hidden rounded-lg md:w-72 md:h-40">
-                                <img src="{{ asset($competition->competition->getFirstMediaUrl('poster')) }}"
+                                <img src="{{ $competition->getFirstMediaUrl('poster') }}"
                                     alt="Poster" class="overflow-hidden rounded-lg w-full h-full object-cover">
                             </div>
 
@@ -210,8 +221,7 @@
                                 class="w-40 mx-auto">
                             <div class="flex flex-col mt-4">
                                 <p class="text-lg text-gray-400 text-center font-medium">Oops! Data not found</p>
-                                <p class="text-lg text-gray-400 text-center text-sm">Fill the form first to get
-                                    recommendation</p>
+                                <p class="text-lg text-gray-400 text-center text-sm">{{ $fallbackMessage }}</p>
                             </div>
                         </div>
                     @endforelse

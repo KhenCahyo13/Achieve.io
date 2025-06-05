@@ -61,7 +61,7 @@ class Competition extends Model implements HasMedia
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('createdBy')->where('name', 'like', '%'.$search.'%');
+        $query = self::with('createdBy')->where('name', 'like', '%' . $search . '%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);
@@ -76,7 +76,7 @@ class Competition extends Model implements HasMedia
 
     public static function getAvailable(int $perPage, string $search, array $sorts, array $filters)
     {
-        $query = self::with('fields')->where('name', 'like', '%'.$search.'%')->where('verification_status', 'Approved');
+        $query = self::with('fields')->where('name', 'like', '%' . $search . '%')->where('verification_status', 'Approved');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);
@@ -135,6 +135,16 @@ class Competition extends Model implements HasMedia
     public static function getTotalAvailableCompetitions()
     {
         return self::where('verification_status', 'Approved')->count();
+    }
+
+    public static function getRecommendedCompetitions(string $generalName, string $category, string $level)
+    {
+        return self::whereHas('fields', function ($query) use ($generalName) {
+            $query->where('general_name', $generalName);
+        })->where('category', $category)
+          ->where('level', $level)
+          ->where('verification_status', 'Approved')
+          ->get();
     }
 
     // protected static function newFactory(): CompetitionFactory
