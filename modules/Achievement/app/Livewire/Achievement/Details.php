@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Modules\Achievement\Models\Achievement;
 use Modules\Achievement\Notifications\AchievementApproval;
@@ -14,6 +15,9 @@ use Modules\Master\Models\User;
 
 class Details extends Component
 {
+    #[Validate('required', message: 'Please provide a reason for rejection.')]
+    public string $rejectedReason = '';
+
     public string $id = '';
 
     public function render()
@@ -30,11 +34,14 @@ class Details extends Component
 
         try {
             DB::beginTransaction();
-            Achievement::approveAchievement($this->id, $value);
 
             if ($value === 'Approved') {
+                Achievement::approveAchievement($this->id, $value);
                 $this->dispatch('achievement-approval', message: 'Achievement approved successfully!');
             } else {
+                $this->validate();
+
+                Achievement::approveAchievement($this->id, $value, $this->rejectedReason);
                 $this->dispatch('achievement-approval', message: 'Achievement rejected successfully!');
             }
 

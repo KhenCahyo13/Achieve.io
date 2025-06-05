@@ -24,6 +24,12 @@
         </h4>
         @if ($achievement)
             <div class="h-96 overflow-y-auto">
+                @if ($achievement->verification_status === 'Rejected')
+                    <div class="bg-red-100 rounded-lg px-4 py-4 mb-4 dark:bg-gray-400">
+                        <p class="font-medium text-red-500 dark:text-white/90">Rejected Reason</p>
+                        <p class="text-sm text-red-500 dark:text-white/90 mt-1">{{ $achievement->reasons }}</p>
+                    </div>
+                @endif
                 <div class="flex flex-col gap-y-4">
                     <p class="font-medium text-base text-gray-800 dark:text-white/90">Achievement Information</p>
                     <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2">
@@ -127,6 +133,20 @@
                         @endif
                     </div>
                 </div>
+                @if ($achievement->verification_status === 'On Process')
+                    <div class="flex flex-col gap-y-4 mt-8">
+                        <div class="flex flex-col gap-y-0.5">
+                            <p class="font-medium text-base text-gray-800 dark:text-white/90">Rejected Reason</p>
+                            <p class="text-gray-500 text-sm dark:text-gray-400">Fill this field if you want to reject this achievement</p>
+                        </div>
+                        <div class="flex flex-col gap-y-2">
+                            <textarea class="textarea-input" wire:model="rejectedReason" rows="4"></textarea>
+                            @error('rejectedReason')
+                                <span class="form-error">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                @endif
             </div>
             @can('verify achievement')
                 @if ($achievement->verification_status === 'On Process')
