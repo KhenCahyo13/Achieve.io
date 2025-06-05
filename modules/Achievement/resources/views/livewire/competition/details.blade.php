@@ -24,12 +24,12 @@
                     $isMember = $participant->members->contains('id', auth()->user()->id);
                 }
             @endphp
-            <div>
+            <div class="w-full">
                 <h4 class="mb-7 text-title-sm font-semibold text-gray-800 dark:text-white/90">
                     {{ $competition->name }}
                 </h4>
                 <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-6 lg:gap-x-8">
-                    <div class="w-full h-full">
+                    <div class="w-96">
                         <img src="{{ $competition->getFirstMediaUrl('poster') }}" alt="Poster"
                             class="overflow-hidden rounded-lg">
                     </div>
