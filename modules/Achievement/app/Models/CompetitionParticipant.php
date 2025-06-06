@@ -116,6 +116,10 @@ class CompetitionParticipant extends Model
             ->count('competition_id');
     }
 
+    public static function getMembers(string $participantId) {
+        return self::find($participantId)->members;
+    }
+
     // protected static function newFactory(): CompetitionParticipantFactory
     // {
     //     // return CompetitionParticipantFactory::new();

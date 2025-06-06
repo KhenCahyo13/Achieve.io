@@ -55,21 +55,26 @@ class Achievement extends Model implements HasMedia
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('student', 'period', 'participant', 'participant.lecturer')->where('title', 'like', '%'.$search.'%');
+        $results = self::with('student', 'period', 'participant', 'participant.members', 'participant.lecturer')->where('title', 'like', '%' . $search . '%');
 
         foreach ($sorts as $field => $direction) {
-            $query->orderBy($field, $direction);
+            $results->orderBy($field, $direction);
         }
 
         if (Auth::user()->hasRole('Student')) {
-            $query->where('student_id', Auth::user()->id);
+            $results->where(function ($query) {
+                $query->where('student_id', Auth::user()->id)
+                    ->orWhereHas('participant.members', function ($subquery) {
+                        $subquery->where('user_id', Auth::user()->id);
+                    });
+            });
         } elseif (Auth::user()->hasRole('Supervisor')) {
-            $query->whereHas('participant', function ($q) {
+            $results->whereHas('participant', function ($q) {
                 $q->where('lecturer_id', Auth::user()->id);
             });
         }
 
-        return $query->paginate($perPage);
+        return $results->paginate($perPage);
     }
 
     public static function approveAchievement(string $achievementId, string $value, string | null $rejectedReasons = null)
@@ -124,7 +129,12 @@ class Achievement extends Model implements HasMedia
             ->groupBy('competitions.category');
 
         if (Auth::user()->hasRole('Student')) {
-            $results->where('achievements.student_id', Auth::user()->id);
+            $results->where(function ($query) {
+            $query->where('achievements.student_id', Auth::user()->id)
+                ->orWhereHas('participant.members', function ($subquery) {
+                $subquery->where('user_id', Auth::user()->id);
+                });
+            });
         } else if (Auth::user()->hasRole('Supervisor')) {
             $results->whereHas('participant', function ($query) {
                 $query->where('lecturer_id', Auth::user()->id);
@@ -142,7 +152,12 @@ class Achievement extends Model implements HasMedia
             ->groupBy('competitions.level');
 
         if (Auth::user()->hasRole('Student')) {
-            $results->where('achievements.student_id', Auth::user()->id);
+            $results->where(function ($query) {
+            $query->where('achievements.student_id', Auth::user()->id)
+                ->orWhereHas('participant.members', function ($subquery) {
+                $subquery->where('user_id', Auth::user()->id);
+                });
+            });
         } else if (Auth::user()->hasRole('Supervisor')) {
             $results->whereHas('participant', function ($query) {
                 $query->where('lecturer_id', Auth::user()->id);
@@ -157,7 +172,12 @@ class Achievement extends Model implements HasMedia
         $results = self::where('verification_status', 'On Process');
 
         if (Auth::user()->hasRole('Student')) {
-            $results->where('student_id', Auth::user()->id);
+            $results->where(function ($query) {
+                $query->where('student_id', Auth::user()->id)
+                    ->orWhereHas('participant.members', function ($subquery) {
+                        $subquery->where('user_id', Auth::user()->id);
+                    });
+            });
         }
 
         return $results->count();
@@ -168,7 +188,12 @@ class Achievement extends Model implements HasMedia
         $results = self::where('verification_status', 'Approved');
 
         if (Auth::user()->hasRole('Student')) {
-            $results->where('student_id', Auth::user()->id);
+            $results->where(function ($query) {
+                $query->where('student_id', Auth::user()->id)
+                    ->orWhereHas('participant.members', function ($subquery) {
+                        $subquery->where('user_id', Auth::user()->id);
+                    });
+            });
         }
 
         return $results->count();
@@ -179,13 +204,19 @@ class Achievement extends Model implements HasMedia
         $results = self::where('verification_status', 'Rejected');
 
         if (Auth::user()->hasRole('Student')) {
-            $results->where('student_id', Auth::user()->id);
+            $results->where(function ($query) {
+                $query->where('student_id', Auth::user()->id)
+                    ->orWhereHas('participant.members', function ($subquery) {
+                        $subquery->where('user_id', Auth::user()->id);
+                    });
+            });
         }
 
         return $results->count();
     }
 
-    public static function getTotalSupervisedAchievements() {
+    public static function getTotalSupervisedAchievements()
+    {
         return self::whereHas('participant', function ($query) {
             $query->where('lecturer_id', Auth::user()->id);
         })->where('verification_status', 'Approved')->count();
