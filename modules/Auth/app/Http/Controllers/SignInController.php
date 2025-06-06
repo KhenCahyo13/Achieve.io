@@ -13,6 +13,6 @@ class SignInController extends Controller
             return redirect()->route('core.dashboard');
         }
 
-        return view('auth::pages.signin');
+        return view('auth::pages.signin.index');
     }
 }
