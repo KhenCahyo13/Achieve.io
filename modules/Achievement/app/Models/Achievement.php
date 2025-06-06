@@ -72,14 +72,16 @@ class Achievement extends Model implements HasMedia
         return $query->paginate($perPage);
     }
 
-    public static function approveAchievement(string $achievementId, string $value)
+    public static function approveAchievement(string $achievementId, string $value, string | null $rejectedReasons = null)
     {
         $achievement = self::find($achievementId);
 
-        if ($achievement) {
-            $achievement->verification_status = $value;
-            $achievement->save();
+        $achievement->verification_status = $value;
+        if ($value === 'Rejected') {
+            $achievement->reasons = $rejectedReasons;
         }
+
+        $achievement->save();
     }
 
     public static function getTotalAchievementsOnMonths()
@@ -123,6 +125,10 @@ class Achievement extends Model implements HasMedia
 
         if (Auth::user()->hasRole('Student')) {
             $results->where('achievements.student_id', Auth::user()->id);
+        } else if (Auth::user()->hasRole('Supervisor')) {
+            $results->whereHas('participant', function ($query) {
+                $query->where('lecturer_id', Auth::user()->id);
+            });
         }
 
         return $results->get();
@@ -137,6 +143,10 @@ class Achievement extends Model implements HasMedia
 
         if (Auth::user()->hasRole('Student')) {
             $results->where('achievements.student_id', Auth::user()->id);
+        } else if (Auth::user()->hasRole('Supervisor')) {
+            $results->whereHas('participant', function ($query) {
+                $query->where('lecturer_id', Auth::user()->id);
+            });
         }
 
         return $results->get();
@@ -173,6 +183,12 @@ class Achievement extends Model implements HasMedia
         }
 
         return $results->count();
+    }
+
+    public static function getTotalSupervisedAchievements() {
+        return self::whereHas('participant', function ($query) {
+            $query->where('lecturer_id', Auth::user()->id);
+        })->where('verification_status', 'Approved')->count();
     }
 
     public static function getExportPdfData(string $startDate, string $endDate, string $verificationStatus)

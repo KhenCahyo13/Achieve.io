@@ -1,5 +1,6 @@
 @php
     $entityList = [
+        'user' => 'User',
         'achievement' => 'Achievement',
         'competition' => 'Competition',
         'department' => 'Department',

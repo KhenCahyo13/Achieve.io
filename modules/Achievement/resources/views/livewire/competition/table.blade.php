@@ -163,10 +163,12 @@
                                                 </button>
                                             @endcan
                                             @can('update competition')
-                                                <a href="{{ route('achievement.competition.edit', $competition->id) }}"
-                                                    class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
-                                                    Update
-                                                </a>
+                                                @if ($competition->verification_status === 'On Process')
+                                                    <a href="{{ route('achievement.competition.edit', $competition->id) }}"
+                                                        class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
+                                                        Update
+                                                    </a>
+                                                @endif
                                             @endcan
                                             @can('delete competition')
                                                 <button wire:click="delete('{{ $competition->id }}')"
@@ -181,8 +183,10 @@
                         @empty
                             <tr>
                                 <td colspan="5" class="px-5 py-4 sm:px-6">
-                                    <img src="{{ asset('images/fallback/data-not-found.png') }}" alt="Not Found" class="w-40 mx-auto">
-                                    <p class="text-lg text-gray-400 text-center mt-4 font-medium">Oops! Data not found</p>
+                                    <img src="{{ asset('images/fallback/data-not-found.png') }}" alt="Not Found"
+                                        class="w-40 mx-auto">
+                                    <p class="text-lg text-gray-400 text-center mt-4 font-medium">Oops! Data not found
+                                    </p>
                                 </td>
                             </tr>
                         @endforelse

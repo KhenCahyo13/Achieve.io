@@ -3,5 +3,5 @@
 @section('title', 'Sign In')
 
 @section('content')
-    <livewire:auth::sign-in />
+    <livewire:auth::sign-in.login />
 @endsection

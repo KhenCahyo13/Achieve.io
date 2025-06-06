@@ -10,7 +10,7 @@
 
         <div class="mt-4 flex items-end justify-between">
             <div>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Competitions Waiting Verification</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">Competitions to be Verified</span>
                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
                     {{ $countPendingCompetitions }}</h4>
             </div>

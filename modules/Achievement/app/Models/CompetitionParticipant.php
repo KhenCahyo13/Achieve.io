@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Modules\Master\Models\User;
 
 // use Modules\Achievement\Database\Factories\CompetitionParticipantFactory;
@@ -87,6 +88,31 @@ class CompetitionParticipant extends Model
             ->orWhereHas('members', function ($query) {
                 $query->where('user_id', Auth::user()->id);
             })
+            ->count('competition_id');
+    }
+
+    public static function getTotalSupervisedStudents()
+    {
+        $participantLeaders = self::where('lecturer_id', Auth::user()->id)
+            ->pluck('leader_id')
+            ->unique();
+
+        $participantIds = self::where('lecturer_id', Auth::user()->id)
+            ->pluck('id');
+
+        $memberIds = DB::table('competition_participant_members')
+            ->whereIn('participant_id', $participantIds)
+            ->pluck('user_id')
+            ->unique();
+
+        $allUserIds = $participantLeaders->merge($memberIds)->unique();
+
+        return $allUserIds->count();
+    }
+
+    public static function getTotalSupervisedCompetitions() {
+        return self::where('lecturer_id', Auth::user()->id)
+            ->distinct('competition_id')
             ->count('competition_id');
     }
 

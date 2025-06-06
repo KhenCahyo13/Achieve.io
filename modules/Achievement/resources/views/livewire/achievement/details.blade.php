@@ -23,115 +23,136 @@
             Achievement Details
         </h4>
         @if ($achievement)
-            <div class="flex flex-col gap-y-4">
-                <p class="font-medium text-base text-gray-800 dark:text-white/90">Achievement Information</p>
-                <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2">
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Title</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">{{ $achievement->title ?? '-' }}</p>
+            <div class="h-96 overflow-y-auto">
+                @if ($achievement->verification_status === 'Rejected')
+                    <div class="bg-red-100 rounded-lg px-4 py-4 mb-4 dark:bg-gray-400">
+                        <p class="font-medium text-red-500 dark:text-white/90">Rejected Reason</p>
+                        <p class="text-sm text-red-500 dark:text-white/90 mt-1">{{ $achievement->reasons }}</p>
                     </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Description</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->description ?? '-' }}
-                        </p>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Period</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->period->title ?? '-' }}
-                        </p>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Created by</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->student->name ?? '-' }}
-                        </p>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Certificate File</p>
-                        <a href="{{ $achievement->getFirstMediaUrl('certificate') }}" target="_blank"
-                            class="text-gray-800 text-theme-sm dark:text-white/90 underline">
-                            Show Certificate
-                        </a>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Verification Status</p>
-                        <livewire:core::components.badge
-                            type="{{ $achievement->verification_status === 'On Process' ? 'info' : ($achievement->verification_status === 'Rejected' ? 'error' : 'success') }}"
-                            text="{{ $achievement->verification_status }}" />
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col gap-y-4 mt-8">
-                <p class="font-medium text-base text-gray-800 dark:text-white/90">Followed Competition</p>
-                <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Name</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->competition->name ?? '-' }}</p>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Category</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->competition->category ?? '-' }}</p>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Level</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->competition->level ?? '-' }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col gap-y-4 mt-8">
-                <p class="font-medium text-base text-gray-800 dark:text-white/90">Participant Information</p>
-                <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Team Name</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->team_name ?? '-' }}</p>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Topic</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->topic_title ?? '-' }}</p>
-                    </div>
-                    <div class="flex flex-col gap-y-1">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">Supervisor</p>
-                        <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                            {{ $achievement->participant->lecturer->name ?? '-' }}</p>
-                    </div>
-                    @if ($achievement->participant->competition->category === 'Team')
-                        <div class="flex flex-col gap-y-1 col-span-full">
-                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Members</p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li class="text-gray-800 text-theme-sm dark:text-white/90">
-                                    {{ $achievement->participant->leader->name ?? '-' }} - <span
-                                        class="text-success-500">Leader</span>
-                                </li>
-                                @foreach ($achievement->participant->members as $member)
-                                    <li class="text-gray-800 text-theme-sm dark:text-white/90">
-                                        {{ $member->name ?? '-' }} - <span class="text-error-500">Member</span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @else
+                @endif
+                <div class="flex flex-col gap-y-4">
+                    <p class="font-medium text-base text-gray-800 dark:text-white/90">Achievement Information</p>
+                    <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2">
                         <div class="flex flex-col gap-y-1">
-                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Member</p>
-                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
-                                {{ $achievement->participant->leader->name ?? '-' }}</p>
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Title</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">{{ $achievement->title ?? '-' }}
+                            </p>
                         </div>
-                    @endif
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Description</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->description ?? '-' }}
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Period</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->period->title ?? '-' }}
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Created by</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->student->name ?? '-' }}
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Certificate File</p>
+                            <a href="{{ $achievement->getFirstMediaUrl('certificate') }}" target="_blank"
+                                class="text-gray-800 text-theme-sm dark:text-white/90 underline">
+                                Show Certificate
+                            </a>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Verification Status</p>
+                            <livewire:core::components.badge
+                                type="{{ $achievement->verification_status === 'On Process' ? 'info' : ($achievement->verification_status === 'Rejected' ? 'error' : 'success') }}"
+                                text="{{ $achievement->verification_status }}" />
+                        </div>
+                    </div>
                 </div>
+                <div class="flex flex-col gap-y-4 mt-8">
+                    <p class="font-medium text-base text-gray-800 dark:text-white/90">Followed Competition</p>
+                    <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Name</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->participant->competition->name ?? '-' }}</p>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Category</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->participant->competition->category ?? '-' }}</p>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Level</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->participant->competition->level ?? '-' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-y-4 mt-8">
+                    <p class="font-medium text-base text-gray-800 dark:text-white/90">Participant Information</p>
+                    <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Team Name</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->participant->team_name ?? '-' }}</p>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Topic</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->participant->topic_title ?? '-' }}</p>
+                        </div>
+                        <div class="flex flex-col gap-y-1">
+                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">Supervisor</p>
+                            <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                {{ $achievement->participant->lecturer->name ?? '-' }}</p>
+                        </div>
+                        @if ($achievement->participant->competition->category === 'Team')
+                            <div class="flex flex-col gap-y-1 col-span-full">
+                                <p class="text-gray-500 text-theme-sm dark:text-gray-400">Members</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li class="text-gray-800 text-theme-sm dark:text-white/90">
+                                        {{ $achievement->participant->leader->name ?? '-' }} - <span
+                                            class="text-success-500">Leader</span>
+                                    </li>
+                                    @foreach ($achievement->participant->members as $member)
+                                        <li class="text-gray-800 text-theme-sm dark:text-white/90">
+                                            {{ $member->name ?? '-' }} - <span class="text-error-500">Member</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @else
+                            <div class="flex flex-col gap-y-1">
+                                <p class="text-gray-500 text-theme-sm dark:text-gray-400">Member</p>
+                                <p class="text-gray-800 text-theme-sm dark:text-white/90">
+                                    {{ $achievement->participant->leader->name ?? '-' }}</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                @if ($achievement->verification_status === 'On Process')
+                    <div class="flex flex-col gap-y-4 mt-8">
+                        <div class="flex flex-col gap-y-0.5">
+                            <p class="font-medium text-base text-gray-800 dark:text-white/90">Rejected Reason</p>
+                            <p class="text-gray-500 text-sm dark:text-gray-400">Fill this field if you want to reject this achievement</p>
+                        </div>
+                        <div class="flex flex-col gap-y-2">
+                            <textarea class="textarea-input" wire:model="rejectedReason" rows="4"></textarea>
+                            @error('rejectedReason')
+                                <span class="form-error">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                @endif
             </div>
-            @can('approve achievement')
+            @can('verify achievement')
                 @if ($achievement->verification_status === 'On Process')
                     <div class="mt-8 flex items-center justify-end gap-x-2">
-                        <button class="btn-outline-danger w-fit"
-                            wire:click="approveAchievement('Rejected')">Reject</button>
-                        <button class="btn-success w-fit"
-                            wire:click="approveAchievement('Approved')">Approve</button>
+                        <button class="btn-outline-danger w-fit" wire:click="approveAchievement('Rejected')">Reject</button>
+                        <button class="btn-success w-fit" wire:click="approveAchievement('Approved')">Approve</button>
                     </div>
                 @endif
             @endcan
