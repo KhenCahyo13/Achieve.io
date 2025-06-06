@@ -29,6 +29,7 @@ class Register extends Component
                 'email' => $this->form->email,
                 'password' => bcrypt($this->form->password),
             ]);
+            $createdUser->assignRole('Student');
 
             $mailData = [
                 'fullname' => $this->form->fullname,
