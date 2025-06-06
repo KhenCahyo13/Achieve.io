@@ -33,7 +33,7 @@ class Register extends Component
             $mailData = [
                 'fullname' => $this->form->fullname,
                 'email' => $this->form->email,
-                'link' => config('app.url') . '/auth/signup/verify/' . $createdUser->id,
+                'link' => config('app.url') . '/auth/verification/email/' . $createdUser->id,
             ];
             Mail::to($this->form->email)
                 ->send(new SignUpMail($mailData));

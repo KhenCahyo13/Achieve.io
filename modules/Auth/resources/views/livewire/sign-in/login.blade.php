@@ -9,6 +9,10 @@
                         <div class="mb-4">
                             <livewire:core::components.alert type="error" message="{{ session('error') }}" />
                         </div>
+                    @elseif (session('success'))
+                        <div class="mb-4">
+                            <livewire:core::components.alert type="success" message="{{ session('success') }}" />
+                        </div>
                     @endif
                     <div class="rounded-xl mb-4 border border-error-500 bg-error-50 p-4 dark:border-error-500/30 dark:bg-error-500/15"
                         x-data="{
