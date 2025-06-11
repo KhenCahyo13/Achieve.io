@@ -12,6 +12,7 @@ use Livewire\WithFileUploads;
 use Modules\Achievement\Models\Achievement;
 use Modules\Achievement\Models\CompetitionParticipant;
 use Modules\Achievement\Notifications\AchievementCreated;
+use Modules\Achievement\Notifications\InvitedToAchievement;
 use Modules\Master\Models\Period;
 use Modules\Master\Models\User;
 
@@ -59,6 +60,9 @@ class Create extends Component
             if (! Auth::user()->hasRole('Admin')) {
                 Notification::send($adminUsers, new AchievementCreated($createdAchievement));
             }
+
+            $participantMembers = CompetitionParticipant::getMembers($this->form->participantId);
+            Notification::send($participantMembers, new InvitedToAchievement($createdAchievement));
 
             $this->certificate = null;
             $this->form->reset();

@@ -133,7 +133,7 @@
                         @endif
                     </div>
                 </div>
-                @if ($achievement->verification_status === 'On Process')
+                @if ($achievement->verification_status === 'On Process' && auth()->user()->can('verify achievement'))
                     <div class="flex flex-col gap-y-4 mt-8">
                         <div class="flex flex-col gap-y-0.5">
                             <p class="font-medium text-base text-gray-800 dark:text-white/90">Rejected Reason</p>
