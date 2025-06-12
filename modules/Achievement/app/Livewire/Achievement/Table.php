@@ -38,6 +38,7 @@ class Table extends DataTable
     }
 
     #[On('achievement-created')]
+    #[On('achievement-updated')]
     #[On('achievement-approval')]
     public function onAction()
     {
