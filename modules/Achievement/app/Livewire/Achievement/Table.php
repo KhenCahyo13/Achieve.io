@@ -32,6 +32,11 @@ class Table extends DataTable
         $this->dispatch('achievement-deleted', message: 'Achievement deleted successfully!');
     }
 
+    public function showUpdateModal(string $id)
+    {
+        $this->dispatch('achievement-show-update-modal', id: $id);
+    }
+
     #[On('achievement-created')]
     #[On('achievement-approval')]
     public function onAction()
