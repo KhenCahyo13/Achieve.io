@@ -20,7 +20,7 @@
             </svg>
         </button>
 
-        @can('create achievement')
+        @can('export data achievement')
             <form wire:submit="export">
                 <h4 class="mb-6 text-lg font-medium text-gray-800 dark:text-white/90">
                     Export Achievements Data as PDF
