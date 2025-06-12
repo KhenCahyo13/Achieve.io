@@ -141,7 +141,7 @@
                                 <p class="text-xs leading-normal text-gray-500 dark:text-gray-400">Birth Date</p>
                                 <p class="text-sm font-medium text-gray-800 dark:text-white/90">
                                     @if (auth()->user()->hasRole('Student'))
-                                        {{ $userWithDetails->student->birth_date ? \Carbon\Carbon::parse($userWithDetails->student->birth_date)->translatedFormat('d F Y') : '-' }}
+                                        {{ $userWithDetails->student && $userWithDetails->student->birth_date ? \Carbon\Carbon::parse($userWithDetails->student->birth_date)->translatedFormat('d F Y') : '-' }}
                                     @else
                                         {{ $userWithDetails->lecturer && $userWithDetails->lecturer->birth_date ? \Carbon\Carbon::parse($userWithDetails->lecturer->birth_date)->translatedFormat('d F Y') : '-' }}
                                     @endif
