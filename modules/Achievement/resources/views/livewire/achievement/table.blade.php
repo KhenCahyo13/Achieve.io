@@ -175,9 +175,22 @@
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <div class="flex items-center">
-                                        <livewire:core::components.badge
-                                            type="{{ $achievement->verification_status === 'On Process' ? 'info' : ($achievement->verification_status === 'Rejected' ? 'error' : 'success') }}"
-                                            text="{{ $achievement->verification_status }}" />
+                                        @if ($achievement->verification_status === 'On Process')
+                                            <span
+                                                class="inline-flex items-center justify-center gap-1 rounded-full bg-blue-50 px-2.5 py-0.5 text-sm font-medium text-blue-600 dark:bg-blue-500/15 dark:text-blue-500">
+                                                On Process
+                                            </span>
+                                        @elseif ($achievement->verification_status === 'Rejected')
+                                            <span
+                                                class="inline-flex items-center justify-center gap-1 rounded-full bg-red-50 px-2.5 py-0.5 text-sm font-medium text-red-600 dark:bg-red-500/15 dark:text-red-500">
+                                                Rejected
+                                            </span>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center justify-center gap-1 rounded-full bg-green-50 px-2.5 py-0.5 text-sm font-medium text-green-600 dark:bg-green-500/15 dark:text-green-500">
+                                                Approved
+                                            </span>
+                                        @endif
                                     </div>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
@@ -204,10 +217,10 @@
                                             @endcan
                                             @can('update achievement')
                                                 @if ($achievement->verification_status === 'On Process')
-                                                    <a href="#"
+                                                    <button wire:click="showUpdateModal('{{ $achievement->id }}')"
                                                         class="text-theme-xs flex w-full rounded-lg px-3 py-2 text-left font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
                                                         Update
-                                                    </a>
+                                                    </button>
                                                 @endif
                                             @endcan
                                             @can('delete achievement')
