@@ -8,6 +8,8 @@ use Modules\Core\Abstracts\DataTable;
 
 class Available extends DataTable
 {
+    public int $refreshKey = 0;
+
     public function render()
     {
         $competitions = Competition::getAvailable(
@@ -30,5 +32,11 @@ class Available extends DataTable
     public function onAction()
     {
         $this->resetPage();
+    }
+
+    #[On('competition-approval')]
+    public function increaseRefreshKey()
+    {
+        $this->refreshKey++;
     }
 }
