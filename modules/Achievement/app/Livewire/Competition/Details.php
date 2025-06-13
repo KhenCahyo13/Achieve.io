@@ -41,9 +41,7 @@ class Details extends Component
                 $this->dispatch('competition-approval', message: 'Competition rejected successfully!');
             }
 
-            if (! Auth::user()->hasRole('Admin')) {
-                Notification::send($createdByUser, new CompetitionApproval($competition, $value));
-            }
+            Notification::send($createdByUser, new CompetitionApproval($competition, $value));
 
             DB::commit();
         } catch (Exception $e) {
