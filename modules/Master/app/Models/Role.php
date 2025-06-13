@@ -21,7 +21,7 @@ class Role extends SpatieRole
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $query = self::with('permissions')->where('name', 'like', '%' . $search . '%');
+        $query = self::with('permissions')->where('name', 'like', '%'.$search.'%');
 
         foreach ($sorts as $field => $direction) {
             $query->orderBy($field, $direction);

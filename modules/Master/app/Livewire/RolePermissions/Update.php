@@ -12,6 +12,7 @@ use Modules\Master\Models\Role;
 class Update extends Component
 {
     public string $id = '';
+
     public Form $form;
 
     public function mount(string $id)
@@ -56,7 +57,7 @@ class Update extends Component
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error updating role permissions: ' . $e->getMessage());
+            Log::error('Error updating role permissions: '.$e->getMessage());
         }
     }
 

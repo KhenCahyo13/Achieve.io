@@ -9,6 +9,7 @@ use Modules\Master\Models\User;
 class Login extends Component
 {
     public Form $form;
+
     public string $errorMessage = '';
 
     public function render()

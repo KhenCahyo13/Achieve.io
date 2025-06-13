@@ -55,7 +55,7 @@ class Achievement extends Model implements HasMedia
 
     public static function getAll(int $perPage, string $search, array $sorts)
     {
-        $results = self::with('student', 'period', 'participant', 'participant.members', 'participant.lecturer')->where('title', 'like', '%' . $search . '%');
+        $results = self::with('student', 'period', 'participant', 'participant.members', 'participant.lecturer')->where('title', 'like', '%'.$search.'%');
 
         foreach ($sorts as $field => $direction) {
             $results->orderBy($field, $direction);
@@ -77,7 +77,7 @@ class Achievement extends Model implements HasMedia
         return $results->paginate($perPage);
     }
 
-    public static function approveAchievement(string $achievementId, string $value, string | null $rejectedReasons = null)
+    public static function approveAchievement(string $achievementId, string $value, ?string $rejectedReasons = null)
     {
         $achievement = self::find($achievementId);
 
@@ -130,12 +130,12 @@ class Achievement extends Model implements HasMedia
 
         if (Auth::user()->hasRole('Student')) {
             $results->where(function ($query) {
-            $query->where('achievements.student_id', Auth::user()->id)
-                ->orWhereHas('participant.members', function ($subquery) {
-                $subquery->where('user_id', Auth::user()->id);
-                });
+                $query->where('achievements.student_id', Auth::user()->id)
+                    ->orWhereHas('participant.members', function ($subquery) {
+                        $subquery->where('user_id', Auth::user()->id);
+                    });
             });
-        } else if (Auth::user()->hasRole('Supervisor')) {
+        } elseif (Auth::user()->hasRole('Supervisor')) {
             $results->whereHas('participant', function ($query) {
                 $query->where('lecturer_id', Auth::user()->id);
             });
@@ -153,12 +153,12 @@ class Achievement extends Model implements HasMedia
 
         if (Auth::user()->hasRole('Student')) {
             $results->where(function ($query) {
-            $query->where('achievements.student_id', Auth::user()->id)
-                ->orWhereHas('participant.members', function ($subquery) {
-                $subquery->where('user_id', Auth::user()->id);
-                });
+                $query->where('achievements.student_id', Auth::user()->id)
+                    ->orWhereHas('participant.members', function ($subquery) {
+                        $subquery->where('user_id', Auth::user()->id);
+                    });
             });
-        } else if (Auth::user()->hasRole('Supervisor')) {
+        } elseif (Auth::user()->hasRole('Supervisor')) {
             $results->whereHas('participant', function ($query) {
                 $query->where('lecturer_id', Auth::user()->id);
             });

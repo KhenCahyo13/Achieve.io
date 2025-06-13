@@ -3,7 +3,6 @@
 namespace Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller
 {
@@ -12,7 +11,8 @@ class ForgotPasswordController extends Controller
         return view('auth::pages.forgot-password.index');
     }
 
-    public function resetPage(string $id) {
+    public function resetPage(string $id)
+    {
         return view('auth::pages.forgot-password.reset', compact('id'));
     }
 }

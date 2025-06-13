@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Modules\Achievement\Models\Achievement;
@@ -17,8 +16,11 @@ use Modules\Master\Models\User;
 class Update extends Component
 {
     public $certificate;
+
     public string $oldCertificate;
+
     public Form $form;
+
     public string $id;
 
     public function render()
@@ -60,7 +62,7 @@ class Update extends Component
             $this->dispatch('achievement-updated', message: 'Achievement updated successfully!');
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error while updating achievement: ' . $e);
+            Log::error('Error while updating achievement: '.$e);
             DB::rollBack();
         }
     }

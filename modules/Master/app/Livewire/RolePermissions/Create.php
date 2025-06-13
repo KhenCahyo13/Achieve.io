@@ -46,7 +46,7 @@ class Create extends Component
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error creating role permissions: ' . $e->getMessage());
+            Log::error('Error creating role permissions: '.$e->getMessage());
         }
     }
 }

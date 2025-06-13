@@ -32,6 +32,7 @@ class RecommendationCompetition extends Component
     public string $numberOfParticipants = '';
 
     public $competitions = [];
+
     public $fallbackMessage = 'Fill the form first to get competition recommendations';
 
     public function render()
@@ -58,10 +59,10 @@ class RecommendationCompetition extends Component
                 $this->skillLevel,
                 $this->likeTeamworks,
                 $this->numberOfChampionships,
-                $this->numberOfParticipants
+                $this->numberOfParticipants,
             ];
             $request = Http::post('http://localhost:8000/predict/competition-recommendation', [
-                'features' => $payload
+                'features' => $payload,
             ]);
 
             $receivedResponse = $request->json();
@@ -81,7 +82,7 @@ class RecommendationCompetition extends Component
                 $this->competitions = $recommendedCompetitions;
             }
         } catch (Exception $e) {
-            Log::error('Error fetching recommendations: ' . $e->getMessage());
+            Log::error('Error fetching recommendations: '.$e->getMessage());
         }
     }
 }

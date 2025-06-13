@@ -110,13 +110,15 @@ class CompetitionParticipant extends Model
         return $allUserIds->count();
     }
 
-    public static function getTotalSupervisedCompetitions() {
+    public static function getTotalSupervisedCompetitions()
+    {
         return self::where('lecturer_id', Auth::user()->id)
             ->distinct('competition_id')
             ->count('competition_id');
     }
 
-    public static function getMembers(string $participantId) {
+    public static function getMembers(string $participantId)
+    {
         return self::find($participantId)->members;
     }
 

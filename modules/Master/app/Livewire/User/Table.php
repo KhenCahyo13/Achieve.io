@@ -3,7 +3,6 @@
 namespace Modules\Master\Livewire\User;
 
 use Livewire\Attributes\On;
-use Livewire\Component;
 use Modules\Core\Abstracts\DataTable;
 use Modules\Master\Models\User;
 

@@ -24,7 +24,7 @@ class Register extends Component
         try {
             $createdUser = User::updateOrCreate([
                 'email' => $this->form->email,
-            ],[
+            ], [
                 'name' => $this->form->fullname,
                 'email' => $this->form->email,
                 'password' => bcrypt($this->form->password),
@@ -34,7 +34,7 @@ class Register extends Component
             $mailData = [
                 'fullname' => $this->form->fullname,
                 'email' => $this->form->email,
-                'link' => config('app.url') . '/auth/verification/email/' . $createdUser->id,
+                'link' => config('app.url').'/auth/verification/email/'.$createdUser->id,
             ];
             Mail::to($this->form->email)
                 ->send(new SignUpMail($mailData));
@@ -42,7 +42,7 @@ class Register extends Component
             $this->form->reset();
             $this->dispatch('registration-success');
         } catch (\Exception $e) {
-            Log::error('Registration error: ' . $e->getMessage());
+            Log::error('Registration error: '.$e->getMessage());
         }
     }
 }

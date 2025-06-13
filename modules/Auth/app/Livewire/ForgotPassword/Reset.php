@@ -18,7 +18,8 @@ class Reset extends Component
 
     public string $id = '';
 
-    public function mount(string $id) {
+    public function mount(string $id)
+    {
         $this->id = $id;
     }
 
@@ -27,7 +28,8 @@ class Reset extends Component
         return view('auth::livewire.forgot-password.reset');
     }
 
-    public function resetPassword() {
+    public function resetPassword()
+    {
         $this->validate();
 
         $user = User::find($this->id);
