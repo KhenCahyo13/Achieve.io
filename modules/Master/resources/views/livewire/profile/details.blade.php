@@ -17,6 +17,8 @@
                                 class="object-cover w-full h-full" alt="user">
                         @endif
 
+                        
+
                         <!-- Hidden File Input -->
                         <input type="file" x-ref="input" class="hidden" wire:model.live="profilePicture" />
 
