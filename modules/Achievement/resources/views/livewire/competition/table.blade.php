@@ -93,6 +93,19 @@
                                     </svg>
                                 </div>
                             </th>
+                            <th wire:click="sortBy('created_at')" class="cursor-pointer px-5 py-3 sm:px-6">
+                                <div class="flex items-center gap-x-2">
+                                    <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                        Created at
+                                    </p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="size-5 text-gray-500 dark:text-gray-400">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
 
@@ -137,6 +150,13 @@
                                     <div class="flex items-center">
                                         <p class="text-gray-500 text-theme-sm dark:text-gray-400 capitalize">
                                             {{ $competition->createdBy->name ?? '-' }}
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                            {{ $competition->created_at->locale('id')->translatedFormat('d F Y H:i') }}
                                         </p>
                                     </div>
                                 </td>
